@@ -1,12 +1,74 @@
   /* General CSS */
   .device {
-    margin:auto; 
+    margin: auto; 
     width: 640px;
     height: 960px;
     overflow: hidden;
     background-color: #ebebeb;
     position: relative;
+    font-family: 'Helvetica', 'Arial', sans-serif;
   }
+
+  
+  /* Profile icon and side panel CSS */
+  .profile-icon {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+  }
+
+  .profile-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 960px;
+    width: 500px;
+    background-color: #b0b0b0;
+  }
+
+  .profile-panel a {
+    position: absolute;
+    width: 500px;
+    height: 75px;
+  }
+
+  .panel-images {
+    position: absolute;
+    height:50px;
+    top: 12px;
+    left:20px
+  }
+
+  .profile-panel b {
+    position: absolute;
+    top: 20px;
+    left: 100px;
+    font-size: 30px;
+    color: black;
+  }
+
+  .profile-heading .user-name {
+    position: absolute;
+    top: 15px;
+    left: 150px;
+    font-size: 40px;
+    color: black;
+  }
+
+  .profile-panel small {
+    position: absolute;
+    top: 65px;
+    left: 150px;
+    color: black;
+    font-size: 20px;
+  }
+
+  .profile-panel .close-icon {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+  }
+
 
   /* Nav Bar CSS */
   .icon-bar {
