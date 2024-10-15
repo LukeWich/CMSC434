@@ -94,3 +94,11 @@
   .active {
     background-color: #87ad81;
   }
+ /* Temporary until a uniform format is agreed on*/
+  h1 {
+    font-size: 54px;
+    font-family: Helvetica;
+    text-align: center;
+    top: 15px;
+
+  }
