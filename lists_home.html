@@ -3,26 +3,27 @@
     <head>
         <meta charset="UTF-8">
         <title>Food Lists</title>
+        <link href="./resources/css/lists_home.css" type="text/css" rel="stylesheet">
         <link href="./resources/css/lists.css" type="text/css" rel="stylesheet">
         <link href="./resources/css/styles.css" type="text/css" rel="stylesheet">
     </head>
     
     <body>
         <div class="device">
-            <div id = "header-food-list">Shopping List</div>
+            <div id = "header-food-list">Shopping Lists</div>
+            <img class="upper-right-icon" onclick="createListPopup()" height="65" src="resources/images/plus_icon.png">
             <div id = "item-background">
-                <div id="item-list">
-                    <input type="text" id="input-item" placeholder="Add a new food item...">
-                    <button id="add-button" onclick="addTask()">Add</button>
-                </div>
-    
-                <ul id="food-list"></ul>
+                <ul id="list-of-lists"></ul>
 
-                <!-- <div id="new-list-section">
-                    <input type="text" id="new-list-name" placeholder="List name">
-                    <button onclick="createNewList()">Create New List</button>
-                </div> -->
             </div>
+
+            <!-- Create new list pop-up -->
+             <div id="add-list-background" style="display: none">
+                <h1 id="Create List" style="text-align: center">Give your list a name</h1>
+                <img class="upper-right-icon" onclick="closeNewList()" height="50" src="resources/images/close_icon.png">
+                <input type="text" id="input-list-name" placeholder="List name...">
+                <button id="create-list-button" onclick="createNewList()">Create List</button>
+             </div>
 
             <!-- Profile icon and page -->
             <img class='profile-icon' onclick="toggleSidePanel()" height="75" src="resources/images/profile_icon.png">
@@ -74,6 +75,29 @@
     </body>
 
     <script>
+        function addItemToList(item) {
+            var li = document.createElement("li");
+            var list = document.getElementById('list-of-lists')
+            li.setAttribute('id', item)
+            li.innerHTML = item + " <span class='close' onClick=removeItem(this)>x</span>"
+            li.onclick = function() {
+                li.classList.toggle('done');
+            };
+            
+            list.appendChild(li);
+        }
+
+        function removeItem(button) {
+            var li = button.parentNode;
+            li.parentNode.removeChild(li);
+        }
+        
+        let data = ["Ram", "Shyam", "Sita", "Gita"];
+        let list = document.getElementById("list-of-lists");
+        for (i = 0; i < data.length; i++) {
+            addItemToList(data[i])
+        }
+        
         function toggleSidePanel() {
             var x = document.getElementById('profile-panel');
             if (x.style.display === "none") {
@@ -95,7 +119,7 @@
             var taskList = document.getElementById('food-list');
 
             var li = document.createElement('li');
-            li.innerHTML = taskText + " <span class='close' onClick=deleteTask(this)>x</span>";
+            li.innerHTML = taskText + ' <button class="delete-btn" onclick="deleteTask(this)">Delete</button>';
             li.onclick = function() {
                 li.classList.toggle('done');
             };
@@ -108,8 +132,28 @@
             var li = button.parentNode;
             li.parentNode.removeChild(li);
         }
+
+        // Add list functionality
+        function createListPopup() {
+            document.getElementById('add-list-background').style.display = 'block';
+        }
+
+        function closeNewList() {
+            document.getElementById('add-list-background').style.display = 'none';
+        }
+
+        function createNewList() {
+            var listNameInput = document.getElementById('input-list-name');
+            var listName = listNameInput.value.trim();
+            let list = document.getElementById("list-of-lists");
+
+            if (listName === "" || data.includes(listName)) {
+                alert("Please enter a different name.");
+                return;
+            }
+
+            data.push(listName)
+            addItemToList(listName)
+        }
     </script>
-
-
-
 </html>

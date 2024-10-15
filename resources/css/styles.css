@@ -9,7 +9,13 @@
     font-family: 'Helvetica', 'Arial', sans-serif;
   }
 
-  
+  /* basic css for any image in the upper right */
+  .upper-right-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+
   /* Profile icon and side panel CSS */
   .profile-icon {
     position: absolute;
