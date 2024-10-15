@@ -9,6 +9,21 @@
     
     <body>
         <div class="device">
+            <div id = "header-food-list">Shopping List</div>
+            <div id = "item-background">
+                <div id="item-list">
+                    <input type="text" id="input-item" placeholder="Add a new food item...">
+                    <button id="add-button" onclick="addTask()">Add</button>
+                </div>
+    
+                <ul id="food-list"></ul>
+
+                <!-- <div id="new-list-section">
+                    <input type="text" id="new-list-name" placeholder="List name">
+                    <button onclick="createNewList()">Create New List</button>
+                </div> -->
+            </div>
+
             <!-- Profile icon and page -->
             <img class='profile-icon' onclick="toggleSidePanel()" height="75" src="resources/images/profile_icon.png">
             <div class="profile-panel" id="profile-panel" style="display: none">
@@ -41,22 +56,6 @@
                 <img class="close-icon" onclick="toggleSidePanel()" height="50" src="resources/images/close_icon.png">
             </div>
             <!--- End Profile side panel -->
-
-
-            <div id = "header-food-list">Shopping List</div>
-            <div id = "item-background">
-                <div id="item-list">
-                    <input type="text" id="input-item" placeholder="Add a new food item...">
-                    <button id="add-button" onclick="addTask()">Add</button>
-                </div>
-    
-                <ul id="food-list"></ul>
-
-                <!-- <div id="new-list-section">
-                    <input type="text" id="new-list-name" placeholder="List name">
-                    <button onclick="createNewList()">Create New List</button>
-                </div> -->
-            </div>
 
             <!-- Nav Bar html -->
             <div class="icon-bar">
