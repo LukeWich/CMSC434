@@ -3,40 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>Kitchen</title>
-    <link href="./resources/css/kitchen.css" type="text/css" rel="stylesheet">
+    <link href="./resources/css/lists.css" type="text/css" rel="stylesheet">
     <link href="./resources/css/styles.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
     <div class="device">
-        <!-- Profile icon and page -->
-        <img class='profile-icon' onclick="toggleSidePanel()" height="75" src="resources/images/profile_icon.png">
-        <div class="profile-panel" id="profile-panel" style="display: none">
-            <!-- Profile options -->
-        </div>
-
-        <script>
-            function toggleSidePanel() {
-                var x = document.getElementById('profile-panel');
-                x.style.display = (x.style.display === "none") ? 'block' : 'none';
-            }
-        </script>
-        <!--- End Profile side panel -->
-
-        <!-- Kitchen Header (similar to Shopping List) -->
-        <div id="header-food-list">Kitchen!</div>
+        <!-- Kitchen Header -->
+        <div id="header-food-list">Kitchen</div>
         
         <!-- Kitchen List Section -->
         <div id="item-background">
             <div id="item-list">
                 <input type="text" id="input-item" placeholder="Add a new kitchen item...">
                 <button id="add-button" onclick="addKitchenItem()">Add</button>
-                <button id="add-button" onclick="sortKitchenItems()">Sort</button>
             </div>
     
-            <ul id="kitchen-list"></ul>
+            <ul id="food-list"></ul>
         </div>
+<!-- Profile icon and page -->
+<img class='profile-icon' onclick="toggleSidePanel()" height="75" src="resources/images/profile_icon.png">
+<div class="profile-panel" id="profile-panel" style="display: none">
+    <a class="profile-heading" href="profile.html" style="top: 10px">
+        <img style="position:absolute; height:100px; left:20px" src="resources/images/profile_icon.png">
+        <b class="user-name">User's Name</b>
+        <small>View Profile</small>
+    </a>
 
+    <a href="settings.html" style="top: 150px">
+        <img class="panel-images" src="resources/images/settings_icon.png">
+        <b>Settings</b>
+    </a>
+
+    <a href="" style="top: 225px">
+        <img class="panel-images" src="resources/images/plus_icon.png">
+        <b>Add Users</b>
+    </a>
+
+    <a href="help.html" style="top: 300px">
+        <img class="panel-images" src="resources/images/question_icon.png">
+        <b>Help</b>
+    </a>
+
+    <a href="" style="top: 375px">
+        <img class="panel-images" src="resources/images/logout_icon.png">
+        <b>Log Out</b>
+    </a>
+
+    <img class="close-icon" onclick="toggleSidePanel()" height="50" src="resources/images/close_icon.png">
+</div>
+<!--- End Profile side panel -->
         <!-- Nav Bar html -->
         <div class="icon-bar">
             <a href="kitchen.html" class="active">
@@ -53,7 +69,7 @@
     </div>
 
     <script>
-        // Function to add items to the kitchen list
+        // Function to add items to the kitchen list with quantity and remove button
         function addKitchenItem() {
             var itemInput = document.getElementById('input-item');
             var itemText = itemInput.value.trim();
@@ -63,15 +79,15 @@
                 return;
             }
 
-            var kitchenList = document.getElementById('kitchen-list');
+            var kitchenList = document.getElementById('food-list');
 
             var li = document.createElement('li');
             li.innerHTML = `
                 ${itemText} 
                 <button class="increase-btn" onclick="increaseQuantity(this)">+</button> 
-                <button class="decrease-btn" onclick="decreaseQuantity(this)">-</button> 
-                <span class="quantity">1</span> 
-                <button class="remove-btn" onclick="removeKitchenItem(this)">Remove</button>
+                <span class="quantity">1</span>
+                <button class="decrease-btn" onclick="decreaseQuantity(this)">-</button>
+                <span class="close" onclick="removeKitchenItem(this)">x</span>
             `;
             kitchenList.appendChild(li);
 
@@ -102,32 +118,6 @@
                 quantitySpan.textContent = quantity - 1;
             } else {
                 li.parentNode.removeChild(li); // Remove the item if quantity is 0
-            }
-        }
-
-        // Function to sort items alphabetically
-        function sortKitchenItems() {
-            var list, i, switching, b, shouldSwitch;
-            list = document.getElementById("kitchen-list");
-            switching = true;
-
-            while (switching) {
-                switching = false;
-                b = list.getElementsByTagName("li");
-
-                for (i = 0; i < (b.length - 1); i++) {
-                    shouldSwitch = false;
-
-                    if (b[i].innerText.toLowerCase() > b[i + 1].innerText.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                }
-
-                if (shouldSwitch) {
-                    b[i].parentNode.insertBefore(b[i + 1], b[i]);
-                    switching = true;
-                }
             }
         }
     </script>
