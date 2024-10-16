@@ -1,73 +1,135 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
-        <link href="./resources/css/kitchen.css" type="text/css" rel="stylesheet">
-        <link href="./resources/css/styles.css" type="text/css" rel="stylesheet">
-    </head>
-    
-    <body>
-        <div class="device">
-            <!-- Profile icon and page -->
-            <img class='profile-icon' onclick="toggleSidePanel()" height="75" src="resources/images/profile_icon.png">
-            <div class="profile-panel" id="profile-panel" style="display: none">
-                <a class="profile-heading" href="profile.html" style="top: 10px">
-                    <img style="position:absolute; height:100px; left:20px" src="resources/images/profile_icon.png">
-                    <b class="user-name">User's Name</b>
-                    <small>View Profile</small>
-                </a>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kitchen</title>
+    <link href="./resources/css/kitchen.css" type="text/css" rel="stylesheet">
+    <link href="./resources/css/styles.css" type="text/css" rel="stylesheet">
+</head>
 
-                <a href="settings.html" style="top: 150px">
-                    <img class="panel-images" src="resources/images/settings_icon.png">
-                    <b>Settings</b>
-                </a>
+<body>
+    <div class="device">
+        <!-- Profile icon and page -->
+        <img class='profile-icon' onclick="toggleSidePanel()" height="75" src="resources/images/profile_icon.png">
+        <div class="profile-panel" id="profile-panel" style="display: none">
+            <!-- Profile options -->
+        </div>
 
-                <a href="" style="top: 225px">
-                    <img class="panel-images" src="resources/images/plus_icon.png">
-                    <b>Add Users</b>
-                </a>
+        <script>
+            function toggleSidePanel() {
+                var x = document.getElementById('profile-panel');
+                x.style.display = (x.style.display === "none") ? 'block' : 'none';
+            }
+        </script>
+        <!--- End Profile side panel -->
 
-                <a href="help.html" style="top: 300px">
-                    <img class="panel-images" src="resources/images/question_icon.png">
-                    <b>Help</b>
-                </a>
-
-                <a href="" style="top: 375px">
-                    <img class="panel-images" src="resources/images/logout_icon.png">
-                    <b>Log Out</b>
-                </a>
-
-                <img class="close-icon" onclick="toggleSidePanel()" height="50" src="resources/images/close_icon.png">
+        <!-- Kitchen Header (similar to Shopping List) -->
+        <div id="header-food-list">Kitchen!</div>
+        
+        <!-- Kitchen List Section -->
+        <div id="item-background">
+            <div id="item-list">
+                <input type="text" id="input-item" placeholder="Add a new kitchen item...">
+                <button id="add-button" onclick="addKitchenItem()">Add</button>
+                <button id="add-button" onclick="sortKitchenItems()">Sort</button>
             </div>
-            <script>
-                function toggleSidePanel() {
-                    var x = document.getElementById('profile-panel');
-                    if (x.style.display === "none") {
-                        x.style.display = 'block';
-                    } else {
-                        x.style.display = 'none';
+    
+            <ul id="kitchen-list"></ul>
+        </div>
+
+        <!-- Nav Bar html -->
+        <div class="icon-bar">
+            <a href="kitchen.html" class="active">
+                <img src="resources/images/kitchen_icon.png" height="75">
+            </a>
+            <a href="lists.html">
+                <img src="resources/images/lists_icon.png" height="75">
+            </a>
+            <a href="recipies.html">
+                <img src="resources/images/recipies_icon.png" height="75">
+            </a>
+        </div>
+        <!-- End Nav Bar html -->
+    </div>
+
+    <script>
+        // Function to add items to the kitchen list
+        function addKitchenItem() {
+            var itemInput = document.getElementById('input-item');
+            var itemText = itemInput.value.trim();
+
+            if (itemText === "") {
+                alert("Please enter a kitchen item.");
+                return;
+            }
+
+            var kitchenList = document.getElementById('kitchen-list');
+
+            var li = document.createElement('li');
+            li.innerHTML = `
+                ${itemText} 
+                <button class="increase-btn" onclick="increaseQuantity(this)">+</button> 
+                <button class="decrease-btn" onclick="decreaseQuantity(this)">-</button> 
+                <span class="quantity">1</span> 
+                <button class="remove-btn" onclick="removeKitchenItem(this)">Remove</button>
+            `;
+            kitchenList.appendChild(li);
+
+            itemInput.value = "";
+        }
+
+        // Function to remove items from the kitchen list
+        function removeKitchenItem(button) {
+            var li = button.parentNode;
+            li.parentNode.removeChild(li);
+        }
+
+        // Function to increase the quantity of an item
+        function increaseQuantity(button) {
+            var li = button.parentNode;
+            var quantitySpan = li.querySelector(".quantity");
+            var quantity = parseInt(quantitySpan.textContent);
+            quantitySpan.textContent = quantity + 1;
+        }
+
+        // Function to decrease the quantity of an item
+        function decreaseQuantity(button) {
+            var li = button.parentNode;
+            var quantitySpan = li.querySelector(".quantity");
+            var quantity = parseInt(quantitySpan.textContent);
+
+            if (quantity > 1) {
+                quantitySpan.textContent = quantity - 1;
+            } else {
+                li.parentNode.removeChild(li); // Remove the item if quantity is 0
+            }
+        }
+
+        // Function to sort items alphabetically
+        function sortKitchenItems() {
+            var list, i, switching, b, shouldSwitch;
+            list = document.getElementById("kitchen-list");
+            switching = true;
+
+            while (switching) {
+                switching = false;
+                b = list.getElementsByTagName("li");
+
+                for (i = 0; i < (b.length - 1); i++) {
+                    shouldSwitch = false;
+
+                    if (b[i].innerText.toLowerCase() > b[i + 1].innerText.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
                     }
                 }
-            </script>
-            <!--- End Profile side panel -->
-            
-            <div>Kitchen!</div>
 
-
-            <!-- Nav Bar html -->
-            <div class="icon-bar">
-                <a href="kitchen.html" class="active">
-                    <img src="resources/images/kitchen_icon.png" height="75">
-                </a>
-                <a href="lists.html">
-                    <img src="resources/images/lists_icon.png" height="75">
-                </a>
-                <a href="recipies.html">
-                    <img src="resources/images/recipies_icon.png" height="75">
-                </a>
-            </div>
-            <!-- End Nav Bar html -->
-        </div>
-    </body>
+                if (shouldSwitch) {
+                    b[i].parentNode.insertBefore(b[i + 1], b[i]);
+                    switching = true;
+                }
+            }
+        }
+    </script>
+</body>
 </html>

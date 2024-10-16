@@ -1,0 +1,54 @@
+#item-background {
+    position: absolute;
+    background-color: #fafafa;
+    padding: 15px;
+    border: 2px solid #a2a2a2;
+    border-radius: 8px;
+    height: 615px;
+    margin-top: 10px;
+    margin-left: 30px;
+    margin-right: 30px;
+    width: 545px;
+}
+
+#header-food-list {
+    padding: 25px;
+    color: black;
+    font-size: 35pt;
+    text-align: center;
+}
+
+#item-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#input-item {
+    width: 300px; 
+    height: 40px; 
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    margin-right: 10px; 
+}
+
+/* Style for the add button */
+#add-button {
+    height: 60px; 
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #07ff41;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px; 
+}
+
+/* Button hover effect */
+#add-button:hover {
+    background-color: #0b6a1f;
+}
