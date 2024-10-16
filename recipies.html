@@ -10,6 +10,15 @@
     
     <body>
         <div class="device">
+            <!-- Beginning of the Recipe page Body -->
+            <h1>Recipes</h1>
+            <div id="inputContainer">
+            <label for="recipeName"><p>Enter Recipe Name:</p></label>
+            <input type="text" id="recipeName" placeholder="e.g. Banana Cake"><button id="searchButton">Search</button>
+            </div>
+
+            <div id="recipeDisplay"></div>
+
             <!-- Profile icon and page -->
             <img class='profile-icon' onclick="toggleSidePanel()" height="75" src="resources/images/profile_icon.png">
             <div class="profile-panel" id="profile-panel" style="display: none">
@@ -78,14 +87,6 @@
             </div>
             <!-- End Nav Bar html -->
 
-            <!-- Beginning of the Recipe page Body -->
-            <h1>Recipes</h1>
-            <div id="inputContainer">
-            <label for="recipeName"><p>Enter Recipe Name:</p></label>
-            <input type="text" id="recipeName" placeholder="e.g. Banana Cake"><button id="searchButton">Search</button>
-            </div>
-        
-            <div id="recipeDisplay"></div>
             <script>
                 let recipeDictionary = {};
 

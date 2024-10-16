@@ -19,7 +19,7 @@
 
             <!-- Create new list pop-up -->
              <div id="add-list-background" style="display: none">
-                <h1 id="Create List" style="text-align: center">Give your list a name</h1>
+                <h2 id="Create List" style="text-align: center">Give your list a name</h1>
                 <img class="upper-right-icon" onclick="closeNewList()" height="50" src="resources/images/close_icon.png">
                 <input type="text" id="input-list-name" placeholder="List name...">
                 <button id="create-list-button" onclick="createNewList()">Create List</button>
@@ -81,21 +81,15 @@
             li.setAttribute('id', item)
             li.innerHTML = item + " <span class='close' onClick=removeItem(this)>x</span>"
             li.onclick = function() {
-                li.classList.toggle('done');
+                window.location = 'lists.html'
             };
-            
+
             list.appendChild(li);
         }
 
         function removeItem(button) {
             var li = button.parentNode;
             li.parentNode.removeChild(li);
-        }
-        
-        let data = ["Ram", "Shyam", "Sita", "Gita"];
-        let list = document.getElementById("list-of-lists");
-        for (i = 0; i < data.length; i++) {
-            addItemToList(data[i])
         }
         
         function toggleSidePanel() {
@@ -105,32 +99,6 @@
             } else {
                 x.style.display = 'none';
             }
-        }
-
-        function addTask() {
-            var taskInput = document.getElementById('input-item');
-            var taskText = taskInput.value.trim();
-
-            if (taskText === "") {
-                alert("Please enter a food item.");
-                return;
-            }
-
-            var taskList = document.getElementById('food-list');
-
-            var li = document.createElement('li');
-            li.innerHTML = taskText + ' <button class="delete-btn" onclick="deleteTask(this)">Delete</button>';
-            li.onclick = function() {
-                li.classList.toggle('done');
-            };
-
-            taskList.appendChild(li);
-            taskInput.value = "";
-        }
-
-        function deleteTask(button) {
-            var li = button.parentNode;
-            li.parentNode.removeChild(li);
         }
 
         // Add list functionality
@@ -147,12 +115,11 @@
             var listName = listNameInput.value.trim();
             let list = document.getElementById("list-of-lists");
 
-            if (listName === "" || data.includes(listName)) {
+            if (listName === "") {
                 alert("Please enter a different name.");
                 return;
             }
 
-            data.push(listName)
             addItemToList(listName)
         }
     </script>
