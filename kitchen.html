@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Kitchen</title>
-    <link href="./resources/css/lists.css" type="text/css" rel="stylesheet">
+    <link href="./resources/css/kitchen.css" type="text/css" rel="stylesheet">
     <link href="./resources/css/styles.css" type="text/css" rel="stylesheet">
+    <link href="./resources/css/MultiSelect.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
@@ -17,42 +18,74 @@
             <div id="item-list">
                 <input type="text" id="input-item" placeholder="Add a new kitchen item...">
                 <button id="add-button" onclick="addKitchenItem()">Add</button>
+                <button onclick="addItemPopup()">Add Item</button>
             </div>
     
             <ul id="food-list"></ul>
         </div>
-<!-- Profile icon and page -->
-<img class='profile-icon' onclick="toggleSidePanel()" height="75" src="resources/images/profile_icon.png">
-<div class="profile-panel" id="profile-panel" style="display: none">
-    <a class="profile-heading" href="profile.html" style="top: 10px">
-        <img style="position:absolute; height:100px; left:20px" src="resources/images/profile_icon.png">
-        <b class="user-name">User's Name</b>
-        <small>View Profile</small>
-    </a>
 
-    <a href="settings.html" style="top: 150px">
-        <img class="panel-images" src="resources/images/settings_icon.png">
-        <b>Settings</b>
-    </a>
+        <div id="add-item-background" style="display: none">
+            <h2 id="create-item" style="text-align: center">Create Item</h1>
+            <img class="upper-right-icon" onclick="closeNewItem()" height="50" src="resources/images/close_icon.png">
+            <form>
+                <!--<label for="input-item-name">Item Name</label> -->
+                <input type="text" id="input-item-name" placeholder="Item name...">
+            
+                <!--<label for="item-tags">Item Tags</label> -->
+                <select id="item-tags" name="item-tags" data-placeholder="Select Tags" data-select-all='false' multiple data-multi-select>
+                    <option value="Produce">Produce</option>
+                    <option value="Dairy">Dairy</option>
+                    <option value="Meats">Meats</option>
+                    <option value="Seasoning">Seasoning</option>
+                    <option value="Cooking-Baking">Cooking/Baking</option>
+                    <option value="Condiments">Condiments</option>
+                    <option value="Snacks">Snacks</option>
+                </select>
+    
+                <!--<label for="item-amount">Amount</label>-->
+                <input type="number" id="item-amount" name="item-amount">
+    
+                <!--<label for="item-unit">Unit</label>-->
+                <select id="item-unit" name="item-unit" data-placeholder="Select Unit" data-select-all='false' dropdownwidth="200px" data-multi-select>
+                    <option value="Cans">Cans</option>
+                    <option value="Fluid Ounces">Fluid Ounces</option>
+                </select>
+            </form>
+        </div>
 
-    <a href="" style="top: 225px">
-        <img class="panel-images" src="resources/images/plus_icon.png">
-        <b>Add Users</b>
-    </a>
+        <!-- Profile icon and page -->
+        <img class='profile-icon' onclick="toggleSidePanel()" height="75" src="resources/images/profile_icon.png">
+        <div class="profile-panel" id="profile-panel" style="display: none">
+            <a class="profile-heading" href="profile.html" style="top: 10px">
+                <img style="position:absolute; height:100px; left:20px" src="resources/images/profile_icon.png">
+                <b class="user-name">User's Name</b>
+                <small>View Profile</small>
+            </a>
 
-    <a href="help.html" style="top: 300px">
-        <img class="panel-images" src="resources/images/question_icon.png">
-        <b>Help</b>
-    </a>
+            <a href="settings.html" style="top: 150px">
+                <img class="panel-images" src="resources/images/settings_icon.png">
+                <b>Settings</b>
+            </a>
 
-    <a href="" style="top: 375px">
-        <img class="panel-images" src="resources/images/logout_icon.png">
-        <b>Log Out</b>
-    </a>
+            <a href="" style="top: 225px">
+                <img class="panel-images" src="resources/images/plus_icon.png">
+                <b>Add Users</b>
+            </a>
 
-    <img class="close-icon" onclick="toggleSidePanel()" height="50" src="resources/images/close_icon.png">
-</div>
-<!--- End Profile side panel -->
+            <a href="help.html" style="top: 300px">
+                <img class="panel-images" src="resources/images/question_icon.png">
+                <b>Help</b>
+            </a>
+
+            <a href="" style="top: 375px">
+                <img class="panel-images" src="resources/images/logout_icon.png">
+                <b>Log Out</b>
+            </a>
+
+            <img class="close-icon" onclick="toggleSidePanel()" height="50" src="resources/images/close_icon.png">
+        </div>
+        <!--- End Profile side panel -->
+        
         <!-- Nav Bar html -->
         <div class="icon-bar">
             <a href="kitchen.html" class="active">
@@ -68,7 +101,18 @@
         <!-- End Nav Bar html -->
     </div>
 
+    <script src="MultiSelect.js"></script>
     <script>
+        // Functions to open and close the pop-ups
+        function addItemPopup() {
+            document.getElementById('add-item-background').style.display = 'block';
+        }
+
+        function closeNewItem() {
+            document.getElementById('add-item-background').style.display = 'none';
+        }
+
+
         // Function to add items to the kitchen list with quantity and remove button
         function addKitchenItem() {
             var itemInput = document.getElementById('input-item');

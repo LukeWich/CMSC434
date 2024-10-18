@@ -29,6 +29,7 @@
     bottom: 50px;
     left: 150px;
     font-size: 22px;
+    font-weight: bold;
     text-align: center;
     border: 2px solid #000000;
     border-radius: 5px;
@@ -38,4 +39,3 @@
 #create-list-button:hover {
     background-color: #87ad81;
 }
-

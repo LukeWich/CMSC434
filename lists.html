@@ -15,14 +15,13 @@
                     <input type="text" id="input-item" placeholder="Add a new food item...">
                     <button id="add-button" onclick="addTask()">Add</button>
                 </div>
-    
-                <ul id="food-list"></ul>
 
-                <!-- <div id="new-list-section">
-                    <input type="text" id="new-list-name" placeholder="List name">
-                    <button onclick="createNewList()">Create New List</button>
-                </div> -->
+                <div id="list-container">
+                    <ul id="food-list"></ul>
+                </div>
             </div>
+
+            <button id="add-to-kitchen-button" onclick="addListToKitchen()">Add checked items to kitchen</button>
 
             <!-- Profile icon and page -->
             <a href="lists_home.html">
