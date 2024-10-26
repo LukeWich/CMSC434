@@ -12,7 +12,7 @@
             <div id = "header-food-list">Shopping List</div>
             <div id = "item-background">
                 <div id="item-list">
-                    <input type="text" id="input-item" placeholder="Add a new food item...">
+                    <input type="text" id="input-item" placeholder="Add a new item...">
                     <button id="add-button" onclick="addTask()">Add</button>
                 </div>
 
@@ -33,7 +33,7 @@
                 <a href="kitchen.html">
                     <img src="resources/images/kitchen_icon.png" height="75">
                 </a>
-                <a href="lists.html" class="active">
+                <a href="lists_home.html" class="active">
                     <img src="resources/images/lists_icon.png" height="75">
                 </a>
                 <a href="recipies.html">
@@ -45,6 +45,38 @@
     </body>
 
     <script>
+        // Dict where each key corresponds to a different shopping list, values are list of items
+        listContents = {
+            "Greg's Birthday": ["Cake", "Candles", "Hamburgers", "Hamburger Buns", "Balloons"],
+            "Weekly Shopping": ["Bread", "Ground Beef", "Milk", "Grapes", "Broccoli", "Pasta"]
+        };
+
+        var url_string = window.location;
+        var url = new URL(url_string);
+        var listName = url.searchParams.get("list");
+        
+        if (listName in listContents) {
+            for (let i=0; i<listContents[listName].length; i++) {
+                addItem(listContents[listName][i]);
+            }
+
+            var listTitle = document.getElementById('header-food-list')
+            listTitle.innerHTML = listName + ' List'
+        }
+
+        function addItem(item) {
+            var taskList = document.getElementById('food-list');
+
+            var li = document.createElement('li');
+            li.innerHTML = item + " <span class='close' onClick=deleteTask(this)>x</span>";
+            li.onclick = function() {
+                li.classList.toggle('done');
+            };
+
+            taskList.appendChild(li);
+        }
+
+
         function addTask() {
             var taskInput = document.getElementById('input-item');
             var taskText = taskInput.value.trim();
@@ -54,15 +86,8 @@
                 return;
             }
 
-            var taskList = document.getElementById('food-list');
+            addItem(taskText);
 
-            var li = document.createElement('li');
-            li.innerHTML = taskText + " <span class='close' onClick=deleteTask(this)>x</span>";
-            li.onclick = function() {
-                li.classList.toggle('done');
-            };
-
-            taskList.appendChild(li);
             taskInput.value = "";
         }
 

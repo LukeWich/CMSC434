@@ -62,7 +62,7 @@
                 <a href="kitchen.html">
                     <img src="resources/images/kitchen_icon.png" height="75">
                 </a>
-                <a href="lists.html" class="active">
+                <a href="lists_home.html" class="active">
                     <img src="resources/images/lists_icon.png" height="75">
                 </a>
                 <a href="recipies.html">
@@ -74,13 +74,20 @@
     </body>
 
     <script>
+        const listNames = ["Weekly Shopping", "Greg's Birthday"]
+
+        for (let i=0; i<listNames.length; i++) {
+            addItemToList(listNames[i])
+        }
+
+
         function addItemToList(item) {
             var li = document.createElement("li");
             var list = document.getElementById('list-of-lists')
             li.setAttribute('id', item)
             li.innerHTML = item + " <span class='close' onClick=removeItem(this)>x</span>"
             li.onclick = function() {
-                window.location = 'lists.html'
+                window.location = 'lists.html?list=' + item
             };
 
             list.appendChild(li);
@@ -120,6 +127,7 @@
             }
 
             addItemToList(listName)
+            window.location = 'lists.html?list=' + listName
         }
     </script>
 </html>
