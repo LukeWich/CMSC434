@@ -11,13 +11,6 @@
     width: 545px;
 }
 
-#header-food-list {
-    padding: 25px;
-    color: black;
-    font-size: 35pt;
-    text-align: center;
-}
-
 #item-list{
     display: flex;
     justify-content: center;
@@ -40,7 +33,7 @@
     height: 60px; 
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #07ff41;
+    background-color: #3eff6b;;
     color: rgb(0, 0, 0);
     border: none;
     border-radius: 5px;

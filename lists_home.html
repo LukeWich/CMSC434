@@ -2,7 +2,7 @@
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Food Lists</title>
+        <title>Lists Tab</title>
         <link href="./resources/css/lists_home.css" type="text/css" rel="stylesheet">
         <link href="./resources/css/lists.css" type="text/css" rel="stylesheet">
         <link href="./resources/css/styles.css" type="text/css" rel="stylesheet">
@@ -10,8 +10,11 @@
     
     <body>
         <div class="device">
-            <div id = "header-food-list">Shopping Lists</div>
+
+            <div id = "header">Shopping Lists</div>
+
             <img class="upper-right-icon" onclick="createListPopup()" height="65" src="resources/images/plus_icon.png">
+            
             <div id = "item-background">
                 <ul id="list-of-lists"></ul>
             </div>
@@ -73,6 +76,7 @@
         </div>
     </body>
 
+    
     <script>
         const listNames = ["Weekly Shopping", "Greg's Birthday"]
 

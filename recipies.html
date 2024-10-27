@@ -2,22 +2,26 @@
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Title</title>
+        <title>Recipes Tab</title>
         <link href="./resources/css/recipies.css" type="text/css" rel="stylesheet">
         <link href="./resources/css/styles.css" type="text/css" rel="stylesheet">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+        <!-- cant access internet so dont use -->
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script> -->
     </head>
     
     <body>
         <div class="device">
             <!-- Beginning of the Recipe page Body -->
-            <h1>Recipes</h1>
-            <div id="inputContainer">
-            <label for="recipeName"><p>Enter Recipe Name:</p></label>
-            <input type="text" id="recipeName" placeholder="e.g. Banana Cake"><button id="searchButton">Search</button>
-            </div>
+            <div id = "header">Recipes</div>
 
-            <div id="recipeDisplay"></div>
+            <div id = "item-background">
+                <div id="input-container">
+                    <p id = secondary-text>Recipe Name:</p>
+                    <input type="text" id="recipeName" placeholder="e.g. Banana Cake"><button id="searchButton" onclick="getRecipe()">Search</button>
+                </div>
+        
+                <div id="recipeDisplay"></div>
+            </div>
 
             <!-- Profile icon and page -->
             <img class='profile-icon' onclick="toggleSidePanel()" height="75" src="resources/images/profile_icon.png">
@@ -50,27 +54,6 @@
 
                 <img class="close-icon" onclick="toggleSidePanel()" height="50" src="resources/images/close_icon.png">
             </div>
-            <script>
-                function toggleSidePanel() {
-                    var x = document.getElementById('profile-panel');
-                    var recipeInput = document.getElementById('recipeName');
-                    var searchButton = document.getElementById('searchButton');
-                    var recipeLabel = document.querySelector('label[for="recipeName"]');
-                    if (x.style.display === "none") {
-                        x.style.display = 'block';
-                        // Hide recipe input elements
-                        recipeInput.style.display = 'none';
-                        searchButton.style.display = 'none';
-                        recipeLabel.style.display = 'none';
-                    } else {
-                        x.style.display = 'none';
-                        // Show recipe input elements
-                        recipeInput.style.display = 'block';
-                        searchButton.style.display = 'block';
-                        recipeLabel.style.display = 'block'
-                    }
-                }
-            </script>
             <!--- End Profile side panel -->
             
             <!-- Nav Bar html -->
@@ -86,93 +69,177 @@
                 </a>
             </div>
             <!-- End Nav Bar html -->
+        </div>
+    </body>
 
-            <script>
-                let recipeDictionary = {};
+    <script>
+        // hard code for two recipe examples
+        function getRecipe() {
+            const input = document.getElementById("recipeName").value.toLowerCase();
+            
+            if (input === "banana cake") {
+                const recipe = 
+                `<p><strong>Banana Cake Recipe</strong></p>
+                <p><strong>Ingredients</strong></p>
+                <ul>
+                    <li>3 Bananas</li>
+                    <li>1 Cup of Sugar</li>
+                    <li>1/2 Cup of Butter</li>
+                    <li>2 Eggs</li>
+                    <li>3/2 Cups of Flour</li>
+                    <li>1 TSP of Baking Soda</li>
+                    <li>1/2 TSP of Salt</li>
+                    <li>1/2 Cup of Milk</li>
+                    <li>1 TSP of Vanilla Extract</li>
+                </ul>
+                <p><strong>Instructions:</strong></p>
+                <ol>
+                    <li>Preheat the oven to 350°F or 175°C.</li>
+                    <li>Mix the bananas, sugar, butter, and eggs in a bowl.</li>
+                    <li>Then mix in the flour, baking soda, and salt slowly while alternating with milk.</li>
+                    <li>After that mix in vanilla extract and mix until smooth.</li>
+                    <li>Pour the batter into a greased baking pan and bake for 45 minutes.</li>
+                    <li>Let the cake cool, cut a slice, and enjoy!</li>
+                </ol>`;
 
-                // Function to fetch and parse the CSV file
-                function loadCSV() {
-                    fetch('resources/texts/recipes.csv')
-                    .then(response => response.text())
-                    .then(csvText => {
-                        Papa.parse(csvText, {
-                        header: true,
-                        skipEmptyLines: true,
-                        complete: (results) => {
-                  
-                            recipeDictionary = createRecipeDictionary(results.data);
-                            // Display the recipe dictionary for testing
-                            //displayData(recipeDictionary);
-                        }
-                        });
-                    })
-                    .catch(error => console.error('Error fetching the CSV file:', error));
-                }
-                //Creates a dictionary of recipes
-                function createRecipeDictionary(data) {
-                    const dictionary = {};
-                    data.forEach(recipe => {
-                        const title = recipe.Title;
-                        dictionary[title] = {
-                            Directions: recipe.Directions,
-                            Ingredients: []
-                        };
-                        for (let i = 1; i <= 20; i++) {
-                            const ingredientKey = `Ingredient0${i}`;
-                            const quantityKey = `Quantity0${i}`;
-                            const unitKey = `Unit0${i}`;
-               
-                            if (recipe[ingredientKey]) {
-                                // Getting rid of Jan
-                                let quantity = recipe[quantityKey];
-                                if (quantity && quantity.includes('2-Jan')) {
-                                    quantity = quantity.replace('2-Jan', '1/2').trim();
-                                } else if(quantity && quantity.includes('3-Jan')) {
-                                    quantity = quantity.replace('3-Jan', '1/3').trim();
-                         } else if (quantity && quantity.includes('4-Jan')) {
-                                    quantity = quantity.replace('4-Jan', '1/4').trim();
-                                }
-                                if (!quantity) {
-                                    quantity = '1';
-                                }
-                                // Add the ingredient details
-                                dictionary[title].Ingredients.push({
-                                    Quantity: quantity,
-                                    Unit: recipe[unitKey],
-                                    Name: recipe[ingredientKey]
-                                });
-                            }
-                        }   
-                    });
-                    return dictionary;
-                }
+                document.getElementById("recipeDisplay").innerHTML = recipe;
+            } else if(input === "fried eggs") {
+                const recipe = 
+                `<p><strong>Eggs Recipe</strong></p>
+                <p><strong>Ingredients:</strong></p>
+                <ul>
+                    <li>4 eggs</li>
+                    <li>Salt and Pepper</li>
+                    <li>2 TBSP of Cream</li>
+                    <li>1 TBSP of Butter</li>
+                </ul>
+                <p><strong>Instructions:</strong></p>
+                <ol>
+                    <li>In a bowl, mix the eggs, salt, pepper, and cream until combined.</li>
+                    <li>Melt the butter in a pan over low to medium heat.</li>
+                    <li>Add in the mixture and spread evenly over the pan.</li>
+                    <li>Cook the eggs until they are mostly set or done to your liking.</li>
+                    <li>Place on plate and enjoy!</li>
+                </ol>`;
 
-                function displayRecipe() {
-                    const recipeName = document.getElementById('recipeName').value;
-                    const recipeDisplay = document.getElementById('recipeDisplay');
-                    const recipe = recipeDictionary[recipeName];
-                    if (recipe) {
-                    // Format the recipe details for display
-                        const ingredientsList = recipe.Ingredients.map(ingredient =>
-                        `${ingredient.Quantity} ${ingredient.Unit} of ${ingredient.Name}`).join('\n');
-                        const recipeDetails = `Title: ${recipeName}\nDirections: ${recipe.Directions}\nIngredients:\n${ingredientsList}`;
-                        recipeDisplay.textContent = recipeDetails;
-                    } else {
-                    recipeDisplay.textContent = 'Recipe not found.';
-                    }
-                }
-                // Function to display the recipe dictionary
-                //function displayData(dictionary) {
-                //const outputElement = document.getElementById('output');
-                //outputElement.textContent = JSON.stringify(dictionary, null, 2); // Pretty print the JSON data
-                //}
+                document.getElementById("recipeDisplay").innerHTML = recipe;
+            } else {
+                document.getElementById("recipeDisplay").innerHTML = "<p>Recipe Not Found</p>";
+            }
+        }
 
-                // Load the CSV file on page load
-                window.onload = () => {
-                    loadCSV();
-                    document.getElementById('searchButton').addEventListener('click', displayRecipe);
-                };
+
+
+        // let recipeDictionary = {};
+
+        // // Function to fetch and parse the CSV file
+        // function loadCSV() {
+        //     fetch('resources/texts/recipes.csv')
+        //     .then(response => response.text())
+        //     .then(csvText => {
+        //         Papa.parse(csvText, {
+        //         header: true,
+        //         skipEmptyLines: true,
+        //         complete: (results) => {
+          
+        //             recipeDictionary = createRecipeDictionary(results.data);
+        //             // Display the recipe dictionary for testing
+        //             //displayData(recipeDictionary);
+        //         }
+        //         });
+        //     })
+        //     .catch(error => console.error('Error fetching the CSV file:', error));
+        // }
+
+        // //Creates a dictionary of recipes
+        // function createRecipeDictionary(data) {
+        //     const dictionary = {};
+        //     data.forEach(recipe => {
+        //         const title = recipe.Title;
+        //         dictionary[title] = {
+        //             Directions: recipe.Directions,
+        //             Ingredients: []
+        //         };
+        //         for (let i = 1; i <= 20; i++) {
+        //             const ingredientKey = `Ingredient0${i}`;
+        //             const quantityKey = `Quantity0${i}`;
+        //             const unitKey = `Unit0${i}`;
+       
+        //             if (recipe[ingredientKey]) {
+        //                 // Getting rid of Jan
+        //                 let quantity = recipe[quantityKey];
+        //                 if (quantity && quantity.includes('2-Jan')) {
+        //                     quantity = quantity.replace('2-Jan', '1/2').trim();
+        //                 } else if(quantity && quantity.includes('3-Jan')) {
+        //                     quantity = quantity.replace('3-Jan', '1/3').trim();
+        //          } else if (quantity && quantity.includes('4-Jan')) {
+        //                     quantity = quantity.replace('4-Jan', '1/4').trim();
+        //                 }
+        //                 if (!quantity) {
+        //                     quantity = '1';
+        //                 }
+        //                 // Add the ingredient details
+        //                 dictionary[title].Ingredients.push({
+        //                     Quantity: quantity,
+        //                     Unit: recipe[unitKey],
+        //                     Name: recipe[ingredientKey]
+        //                 });
+        //             }
+        //         }   
+        //     });
+        //     return dictionary;
+        // }
+
+        // function displayRecipe() {
+        //     const recipeName = document.getElementById('recipeName').value;
+        //     const recipeDisplay = document.getElementById('recipeDisplay');
+        //     const recipe = recipeDictionary[recipeName];
+        //     if (recipe) {
+        //     // Format the recipe details for display
+        //         const ingredientsList = recipe.Ingredients.map(ingredient =>
+        //         `${ingredient.Quantity} ${ingredient.Unit} of ${ingredient.Name}`).join('\n');
+        //         const recipeDetails = `Title: ${recipeName}\nDirections: ${recipe.Directions}\nIngredients:\n${ingredientsList}`;
+        //         recipeDisplay.textContent = recipeDetails;
+        //     } else {
+        //     recipeDisplay.textContent = 'Recipe not found.';
+        //     }
+        // }
+        // // Function to display the recipe dictionary
+        // //function displayData(dictionary) {
+        // //const outputElement = document.getElementById('output');
+        // //outputElement.textContent = JSON.stringify(dictionary, null, 2); // Pretty print the JSON data
+        // //}
+
+        // // Load the CSV file on page load
+        // window.onload = () => {
+        //     loadCSV();
+        //     document.getElementById('searchButton').addEventListener('click', displayRecipe);
+        // };
+
+        function toggleSidePanel() {
+            var x = document.getElementById('profile-panel');
+            var recipeInput = document.getElementById('recipeName');
+            var searchButton = document.getElementById('searchButton');
+            var recipeLabel = document.querySelector('label[for="recipeName"]');
+            if (x.style.display === "none") {
+                x.style.display = 'block';
+                // Hide recipe input elements
+                recipeInput.style.display = 'none';
+                searchButton.style.display = 'none';
+                recipeLabel.style.display = 'none';
+            } else {
+                x.style.display = 'none';
+                // Show recipe input elements
+                recipeInput.style.display = 'block';
+                searchButton.style.display = 'block';
+                recipeLabel.style.display = 'block'
+            }
+        }
             </script>
+            </script>
+        </div>
+    </body>
+    </script>
         </div>
     </body>
 </html>
