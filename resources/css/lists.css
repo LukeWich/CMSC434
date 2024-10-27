@@ -15,35 +15,24 @@
     margin-right: 10px; 
 }
 
-/* Style for the add button */
-#add-button {
-    height: 60px; 
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #07ff41;
-    color: rgb(0, 0, 0);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-/* Button hover effect */
-#add-button:hover {
-    background-color: #0b6a1f;
-}
-
 #add-to-kitchen-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
     position: absolute;
-    width: 500px;
-    height: 75px;
-    bottom: 125px;
-    left: 75px;
-    font-size: 28px;
+    width: 450px;
+    height: 64px;
+    bottom: 15px;
+    left: 11%;
+
+    font-size: 26px;
     font-weight: bold;
     text-align: center;
-    border: 2px solid #000000;
-    border-radius: 5px;
-    background-color: #acbfa9;
+    border-radius: 4px;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    background-color: #3eff6b;
 }
 
 #add-to-kitchen-button:hover {
@@ -52,8 +41,8 @@
 
 #list-container {
     position: inherit;
-    bottom: 0%;
-    height: 515px;
+    bottom: 13%;
+    height: 500px;
     width: 550px;
     overflow-y: auto;
 }
@@ -117,4 +106,4 @@ ul li.done::before {
     transform: rotate(45deg);
     height: 15px;
     width: 7px;
-  }
+}

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Kitchen</title>
+    <title>Kitchen Tab</title>
     <link href="./resources/css/kitchen.css" type="text/css" rel="stylesheet">
     <link href="./resources/css/styles.css" type="text/css" rel="stylesheet">
     <link href="./resources/css/MultiSelect.css" type="text/css" rel="stylesheet">
@@ -17,40 +17,61 @@
         <div id="item-background">
             <div id="item-list">
                 <input type="text" id="input-item" placeholder="Add a new kitchen item...">
-                <button id="add-button" onclick="addKitchenItem()">Add</button>
-                <button onclick="addItemPopup()">Add Item</button>
+                <button id="add-button" onclick="addItemPopup()">Add Item</button>
             </div>
     
-            <ul id="food-list"></ul>
+            <div id="list-container">
+                <ul id="food-list"></ul>
+            </div>
         </div>
 
         <div id="add-item-background" style="display: none">
-            <h2 id="create-item" style="text-align: center">Create Item</h1>
-            <img class="upper-right-icon" onclick="closeNewItem()" height="50" src="resources/images/close_icon.png">
+            <p id="input-item-name"></p>
+            <img class="upper-right-icon" onclick="closeNewItem()" height="60" src="resources/images/close_icon.png">
             <form>
-                <!--<label for="input-item-name">Item Name</label> -->
-                <input type="text" id="input-item-name" placeholder="Item name...">
-            
-                <!--<label for="item-tags">Item Tags</label> -->
-                <select id="item-tags" name="item-tags" data-placeholder="Select Tags" data-select-all='false' multiple data-multi-select>
-                    <option value="Produce">Produce</option>
-                    <option value="Dairy">Dairy</option>
-                    <option value="Meats">Meats</option>
-                    <option value="Seasoning">Seasoning</option>
-                    <option value="Cooking-Baking">Cooking/Baking</option>
-                    <option value="Condiments">Condiments</option>
-                    <option value="Snacks">Snacks</option>
-                    <option value="Misc">Misc</option>
-                </select>
-    
-                <!--<label for="item-amount">Amount</label>-->
-                <input type="number" id="item-amount" name="item-amount">
-    
-                <!--<label for="item-unit">Unit</label>-->
-                <select id="item-unit" name="item-unit" data-placeholder="Select Unit" data-select-all='false' dropdownwidth="200px" data-multi-select>
-                    <option value="Cans">Cans</option>
-                    <option value="Fluid Ounces">Fluid Ounces</option>
-                </select>
+                <div id = "form-sub">
+                    <p id = secondary-text>Calories:</p>
+                    <input type="number" class="input-numbers" id = "Calories" placeholder="number of calories" min="0">
+                </div>
+
+                <div id = "form-sub">
+                    <p id = secondary-text>Food Type:</p>
+                    <select class="input-select" id = "FoodType">
+                        <option value="Dairy">Dairy</option>
+                        <option value="Meats">Meats</option>
+                        <option value="Seasoning">Seasoning</option>
+                        <option value="Vegetables">Vegetables</option>
+                        <option value="Fruits">Fruits</option>
+                        <option value="Grains">Grains</option>
+                        <option value="Snacks">Snacks</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div id = "form-sub">
+                    <p id = secondary-text>Quantity:</p>
+                    <input type="number" class="input-numbers" id = "Quantity" placeholder="number of items" min="1">
+                </div>
+
+                <div id = "form-sub">
+                    <p id = secondary-text>Unit:</p>
+                    <select class="input-select" id = "Unit">
+                        <option value="Cans">Cans</option>
+                        <option value="Bags">Bags</option>
+                        <option value="Pounds">Pounds</option>
+                        <option value="Boxes">Boxes</option>
+                        <option value="Bottles">Bottles</option>
+                        <option value="Packages">Packages</option>
+                    </select>
+                </div>
+
+                <div id = "form-sub">
+                    <p id = secondary-text>Expiration Date:</p>
+                    <input type="date" class ="input-numbers" id = "date">
+                </div>
+
+                <button onclick="addKitchenItem()" id = "add-item-button">Add Item</button>
+
             </form>
         </div>
 
@@ -102,20 +123,36 @@
         <!-- End Nav Bar html -->
     </div>
 
-    <script src="MultiSelect.js"></script>
+    <!-- <script src="MultiSelect.js"></script> -->
+
     <script>
-        // Functions to open and close the pop-ups
+        const input = "";
+
         function addItemPopup() {
-            document.getElementById('add-item-background').style.display = 'block';
+            input = document.getElementById("input-item").value.trim();
+            if(input == ""){
+                alert("Please enter a food item.");
+            }else{
+                document.getElementById('add-item-background').style.display = 'block';
+                document.getElementById('item-background').style.display = 'none';
+                document.getElementById("input-item-name").innerHTML = input;
+            }
         }
 
         function closeNewItem() {
             document.getElementById('add-item-background').style.display = 'none';
+            document.getElementById('item-background').style.display = 'block';
         }
 
-
-        // Function to add items to the kitchen list with quantity and remove button
         function addKitchenItem() {
+
+            const itemName = input;
+            const calories = document.getElementById("Calories").value;
+            const foodTypeSelect = document.getElementById("FoodType");
+            const quantity = document.getElementById("Quantity").value;
+            const unit = document.getElementById("Unit").value;
+            const expirationDate = document.getElementById("Date").value;
+
             var itemInput = document.getElementById('input-item');
             var itemText = itemInput.value.trim();
 
@@ -137,6 +174,9 @@
             kitchenList.appendChild(li);
 
             itemInput.value = "";
+
+            document.getElementById('add-item-background').style.display = 'none';
+            document.getElementById('item-background').style.display = 'block';
         }
 
         // Function to remove items from the kitchen list
