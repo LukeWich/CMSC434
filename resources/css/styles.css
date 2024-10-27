@@ -155,4 +155,32 @@
 
   /*-------------------------------------------------------------------------------------------*/
 
+  /* List Css info */
+  ul {
+    margin: 0;
+    padding: 0;
+  }
 
+  ul li {
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 40px;
+    background: #eee;
+    font-size: 18px;
+    transition: 0.2s;
+    list-style-type: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  ul li:nth-child(even) {
+    background: #d0e6cc;
+  }
+
+  ul li:hover {
+    background: #87ad81;
+  }
+
+  /*-------------------------------------------------------------------------------------------*/

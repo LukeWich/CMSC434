@@ -31,7 +31,7 @@
             <form>
                 <div id = "form-sub">
                     <p id = secondary-text>Calories:</p>
-                    <input type="number" class="input-numbers" id = "Calories" placeholder="number of calories" min="0">
+                    <input type="number" class="input-numbers" id = "Calories" placeholder="number of calories" min = "0" >
                 </div>
 
                 <div id = "form-sub">
@@ -50,7 +50,7 @@
 
                 <div id = "form-sub">
                     <p id = secondary-text>Quantity:</p>
-                    <input type="number" class="input-numbers" id = "Quantity" placeholder="number of items" min="1">
+                    <input type="number" class="input-numbers" id = "Quantity" placeholder="number of items"  min= "1" >
                 </div>
 
                 <div id = "form-sub">
@@ -67,7 +67,7 @@
 
                 <div id = "form-sub">
                     <p id = secondary-text>Expiration Date:</p>
-                    <input type="date" class ="input-numbers" id = "date">
+                    <input type="date" class ="input-numbers" id = "Date">
                 </div>
 
                 <button onclick="addKitchenItem()" id = "add-item-button">Add Item</button>
@@ -123,9 +123,25 @@
         <!-- End Nav Bar html -->
     </div>
 
-    <!-- <script src="MultiSelect.js"></script> -->
-
     <script>
+        const defaultChicken = [
+            {
+                name: "Chicken Breast",
+                calories: 200,
+                foodType: "Meats",
+                quantity: 2,
+                unit: "Pounds",
+                expirationDate: "2024-11-15"
+            }
+        ];
+
+        window.onload = function() {
+            if (!localStorage.getItem("foodStuffs")) {
+                localStorage.setItem("foodStuffs", JSON.stringify(defaultChicken));
+            }
+            createList();
+        };
+
         function addItemPopup() {
             const input = document.getElementById("input-item").value.trim();
             if(input == ""){
@@ -143,66 +159,73 @@
         }
 
         function addKitchenItem() {
+            const name = document.getElementById("input-item-name").innerHTML;
+            const calories = document.getElementById("Calories").value;
+            const foodType = document.getElementById("FoodType").value;
+            const quantity = document.getElementById("Quantity").value;
+            const unit = document.getElementById("Unit").value;
+            const expiration = document.getElementById("Date").value;
 
-            // const itemName = input;
-            // const calories = document.getElementById("Calories").value;
-            // const foodTypeSelect = document.getElementById("FoodType");
-            // const quantity = document.getElementById("Quantity").value;
-            // const unit = document.getElementById("Unit").value;
-            // const expirationDate = document.getElementById("Date").value;
+            const item = {
+                name: name,
+                calories: parseInt(calories, 10),
+                foodType: foodType,
+                quantity: parseInt(quantity, 10),
+                unit: unit,
+                expirationDate: expiration
+            };
 
-            var itemInput = document.getElementById('input-item');
-            var itemText = itemInput.value.trim();
-
-            if (itemText === "") {
-                alert("Please enter a kitchen item.");
-                return;
-            }
-
-            var kitchenList = document.getElementById('food-list');
-
-            var li = document.createElement('li');
-            li.innerHTML = `
-                ${itemText} 
-                <button class="increase-btn" onclick="increaseQuantity(this)">+</button> 
-                <span class="quantity">1</span>
-                <button class="decrease-btn" onclick="decreaseQuantity(this)">-</button>
-                <span class="close" onclick="removeKitchenItem(this)">x</span>
-            `;
-            kitchenList.appendChild(li);
-
-            itemInput.value = "";
-
-            document.getElementById('add-item-background').style.display = 'none';
-            document.getElementById('item-background').style.display = 'block';
+            const storage = localStorage.getItem("foodStuffs");
+            const temp = storage ? JSON.parse(storage) : [];
+            temp.push(item);
+            localStorage.setItem("foodStuffs", JSON.stringify(temp));
+            closeNewItem();
+            createList();
         }
 
-        // Function to remove items from the kitchen list
-        function removeKitchenItem(button) {
-            var li = button.parentNode;
-            li.parentNode.removeChild(li);
+        function createList(){
+            const storage = localStorage.getItem("foodStuffs");
+            const items = storage ? JSON.parse(storage) : [];
+            const itemList = document.getElementById("food-list");
+            itemList.innerHTML = ""; 
+
+            items.forEach(x => {
+                const itemElement = document.createElement("li");
+                itemElement.className = "x";
+                itemElement.innerHTML = `<p id = "item-text">${x.name} | Calories: ${x.calories} | Type: ${x.foodType} | 
+                    Amount: ${x.quantity} | Unit: ${x.unit} | Expiration Date: ${x.expirationDate} </p>`;
+
+                itemList.appendChild(itemElement);
+            });
         }
 
-        // Function to increase the quantity of an item
-        function increaseQuantity(button) {
-            var li = button.parentNode;
-            var quantitySpan = li.querySelector(".quantity");
-            var quantity = parseInt(quantitySpan.textContent);
-            quantitySpan.textContent = quantity + 1;
-        }
 
-        // Function to decrease the quantity of an item
-        function decreaseQuantity(button) {
-            var li = button.parentNode;
-            var quantitySpan = li.querySelector(".quantity");
-            var quantity = parseInt(quantitySpan.textContent);
+        // // Function to remove items from the kitchen list
+        // function removeKitchenItem(button) {
+        //     var li = button.parentNode;
+        //     li.parentNode.removeChild(li);
+        // }
 
-            if (quantity > 1) {
-                quantitySpan.textContent = quantity - 1;
-            } else {
-                li.parentNode.removeChild(li); // Remove the item if quantity is 0
-            }
-        }
+        // // Function to increase the quantity of an item
+        // function increaseQuantity(button) {
+        //     var li = button.parentNode;
+        //     var quantitySpan = li.querySelector(".quantity");
+        //     var quantity = parseInt(quantitySpan.textContent);
+        //     quantitySpan.textContent = quantity + 1;
+        // }
+
+        // // Function to decrease the quantity of an item
+        // function decreaseQuantity(button) {
+        //     var li = button.parentNode;
+        //     var quantitySpan = li.querySelector(".quantity");
+        //     var quantity = parseInt(quantitySpan.textContent);
+
+        //     if (quantity > 1) {
+        //         quantitySpan.textContent = quantity - 1;
+        //     } else {
+        //         li.parentNode.removeChild(li); // Remove the item if quantity is 0
+        //     }
+        // }
 
         function toggleSidePanel() {
             var x = document.getElementById('profile-panel');

@@ -78,8 +78,6 @@
     align-items: center;
 }
 
-
-
 #add-item-button {
     height: 64px; 
     padding: 8px 16px;
@@ -99,4 +97,11 @@
 
 #add-button:hover {
     background-color: #0b6a1f;
+}
+
+#item-text {
+    font: Helvetica;
+    color: black;
+    font-size: 15pt;
+    margin: 1%;
 }
