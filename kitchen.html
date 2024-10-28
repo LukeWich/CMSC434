@@ -20,11 +20,39 @@
                 <button id="add-button" onclick="addItemPopup()">Add Item</button>
             </div>
     
+            <!-- List Container -->
             <div id="list-container">
-                <ul id="food-list"></ul>
+                <ul id="food-list" class="collapsible">
+                    <li>Dairy
+                        <ul id="dairy-food-list" class="sublist"></ul>
+                    </li>
+                    <li>Meats
+                        <ul id="meats-food-list" class="sublist"></ul>
+                    </li>
+                    <li>Vegetables
+                        <ul id="vegetables-food-list" class="sublist"></ul>
+                    </li>
+                    <li>Fruits
+                        <ul id="fruits-food-list" class="sublist"></ul>
+                    </li>
+                    <li>Grains
+                        <ul id="grains-food-list" class="sublist"></ul>
+                    </li>
+                    <li>Snacks
+                        <ul id="snacks-food-list" class="sublist"></ul>
+                    </li>
+                    <li>Seasonings
+                        <ul id="seasonings-food-list" class="sublist"></ul>
+                    </li>
+                    <li>Other
+                        <ul id="other-food-list" class="sublist"></ul>
+                    </li>
+                </ul>
             </div>
         </div>
+        <!-- END OF LIST -->
 
+        <!-- ADD ITEM pop up -->
         <div id="add-item-background" style="display: none">
             <p id="input-item-name"></p>
             <img class="upper-right-icon" onclick="closeNewItem()" height="60" src="resources/images/close_icon.png">
@@ -37,13 +65,14 @@
                 <div id = "form-sub">
                     <p id = secondary-text>Food Type:</p>
                     <select class="input-select" id = "FoodType">
+                        <option value="Empty" style="display:none">Select one</option>
                         <option value="Dairy">Dairy</option>
                         <option value="Meats">Meats</option>
-                        <option value="Seasoning">Seasoning</option>
                         <option value="Vegetables">Vegetables</option>
                         <option value="Fruits">Fruits</option>
                         <option value="Grains">Grains</option>
                         <option value="Snacks">Snacks</option>
+                        <option value="Seasoning">Seasoning</option>
                         <option value="Other">Other</option>
                     </select>
                 </div>
@@ -74,6 +103,7 @@
 
             </form>
         </div>
+        <!-- END ADD ITEM POP UP-->
 
         <!-- Profile icon and page -->
         <img class='profile-icon' onclick="toggleSidePanel()" height="75" src="resources/images/profile_icon.png">
@@ -166,6 +196,11 @@
             const unit = document.getElementById("Unit").value;
             const expiration = document.getElementById("Date").value;
 
+            if (foodType == "Empty") {
+                alert("Please enter a food type.");
+                return;
+            }
+
             const item = {
                 name: name,
                 calories: parseInt(calories, 10),
@@ -186,15 +221,23 @@
         function createList(){
             const storage = localStorage.getItem("foodStuffs");
             const items = storage ? JSON.parse(storage) : [];
-            const itemList = document.getElementById("food-list");
-            itemList.innerHTML = ""; 
+            const foodTypes = ['dairy', 'meats', 'vegetables', 'fruits', 'grains', 'snacks', 'seasonings', 'other'];
+
+            foodTypes.forEach(x => {
+                const itemList = document.getElementById(x.toLowerCase() + "-food-list");
+                itemList.innerHTML = ""; 
+            })
 
             items.forEach(x => {
                 const itemElement = document.createElement("li");
                 itemElement.className = "x";
-                itemElement.innerHTML = `<p id = "item-text">${x.name} | Calories: ${x.calories} | Type: ${x.foodType} | 
-                    Amount: ${x.quantity} | Unit: ${x.unit} | Expiration Date: ${x.expirationDate} </p>`;
+                itemElement.innerHTML = `<p id = "item-text">${x.name} | Amount: ${x.quantity} ${x.unit}
+                                        <ul>Calories: ${x.calories} | Expiration Date: ${x.expirationDate} </ul></p>`;
+                
+                //    itemElement.innerHTML = `<p id = "item-text">${x.name} | Calories: ${x.calories} | 
+                //    Amount: ${x.quantity} | Unit: ${x.unit} | Expiration Date: ${x.expirationDate} </p>`;
 
+                const itemList = document.getElementById(x.foodType.toLowerCase() + "-food-list");
                 itemList.appendChild(itemElement);
             });
         }
@@ -226,6 +269,33 @@
         //         li.parentNode.removeChild(li); // Remove the item if quantity is 0
         //     }
         // }
+
+        // JS for the collapsable lists
+        window.addEventListener("load", () => {
+            for (let i of document.querySelectorAll(".collapsible ol, .collapsible ul")) {
+              let t = document.createElement("div");
+              t.innerHTML = i.previousSibling.textContent;
+              t.className = "toggle";
+              t.onclick = () => t.classList.toggle("open");
+              i.parentElement.removeChild(i.previousSibling);
+              i.parentElement.insertBefore(t, i);
+            }
+          });
+
+        /*var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+            content.style.display = "none";
+            } else {
+            content.style.display = "block";
+            }
+        });
+        }*/
 
         function toggleSidePanel() {
             var x = document.getElementById('profile-panel');

@@ -105,3 +105,46 @@
     font-size: 15pt;
     margin: 1%;
 }
+
+#food-list {
+    font: Helvetica;
+    color: black;
+    font-size: 24pt;
+    font-weight: bold;
+}
+
+.sublist {
+    font: Helvetica;
+    color: black;
+    font-size: 16pt;
+    font-weight: normal;
+}
+
+/* REMOVE BULLETS */
+.collapsible, .collapsible ol, .collapsible ul {
+    list-style-type: none;
+}
+  
+/* COLLAPSIBLE LIST CONTAINER */
+.collapsible {
+max-width: 550px;
+padding: 20px; margin: 0;
+}
+
+/* CONTROL SPACING & INDENTATION */
+.collapsible ol, .collapsible ul { padding-left: 15px; }
+.toggle + ol, .toggle + ul { margin-top: 10px; }
+.collapsible li { padding: 10px; }
+
+/* SHOW & HIDE CHILDREN */
+.collapsible ol, .collapsible ul { display: none; }
+.toggle.open + ol, .toggle.open + ul { display: block; }
+
+/* ADD TOGGLE ARROW */
+.toggle { cursor: pointer; }
+.toggle::after {
+float: right; content: "\27A4";
+font-size: 20px; line-height: 20px; font-weight: 700;
+transition: all 0.3s;
+}
+.toggle.open::after { transform: rotate(90deg); }
