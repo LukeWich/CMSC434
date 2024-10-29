@@ -80,24 +80,63 @@
     <script>
         const listNames = ["Weekly Shopping", "Greg's Birthday"]
 
-        for (let i=0; i<listNames.length; i++) {
-            addItemToList(listNames[i])
+        window.onload = function() {
+            if (!localStorage.getItem("listNames")) {
+                localStorage.setItem("listNames", JSON.stringify(listNames));
+            }
+            createList();
+        };
+
+        function createList() {
+            const storage = localStorage.getItem("listNames");
+            const items = storage ? JSON.parse(storage) : [];
+
+            for (let i=0; i<items.length; i++) {
+                var li = document.createElement("li");
+                var list = document.getElementById('list-of-lists');
+                li.setAttribute('id', items[i]);
+                li.innerHTML = items[i] + " <span class='close' onClick='removeItem(this); event.stopPropagation();'>x</span>";
+                li.onclick = function() {
+                    window.location = 'lists.html?list=' + items[i];
+                };
+
+                list.appendChild(li);
+            }
         }
 
-
         function addItemToList(item) {
+            // save the new list to localstorage
+            const storage = localStorage.getItem("listNames");
+            const temp = storage ? JSON.parse(storage) : [];
+            temp.push(item);
+            localStorage.setItem("listNames", JSON.stringify(temp));
+
             var li = document.createElement("li");
-            var list = document.getElementById('list-of-lists')
-            li.setAttribute('id', item)
-            li.innerHTML = item + " <span class='close' onClick=removeItem(this)>x</span>"
+            var list = document.getElementById('list-of-lists');
+            li.setAttribute('id', item);
+            li.innerHTML = item + " <span class='close' onClick=removeItem(this)>x</span>";
             li.onclick = function() {
-                window.location = 'lists.html?list=' + item
+                const storage = localStorage.getItem("listNames");
+                const temp = storage ? JSON.parse(storage) : [];
+                if (temp.includes(item)) {
+                    window.location = 'lists.html?list=' + item;
+                }
             };
 
             list.appendChild(li);
         }
 
         function removeItem(button) {
+            listToRemove = button.parentNode.id
+            // remove item from localstorage
+            const storage = localStorage.getItem("listNames");
+            const temp = storage ? JSON.parse(storage) : [];
+            const index = temp.indexOf(listToRemove);
+            if (index > -1) {
+                temp.splice(index, 1); 
+            }
+            localStorage.setItem("listNames", JSON.stringify(temp));
+
             var li = button.parentNode;
             li.parentNode.removeChild(li);
         }
@@ -120,7 +159,7 @@
             document.getElementById('add-list-background').style.display = 'none';
         }
 
-        function createNewList() {
+            function createNewList() {
             var listNameInput = document.getElementById('input-list-name');
             var listName = listNameInput.value.trim();
             let list = document.getElementById("list-of-lists");

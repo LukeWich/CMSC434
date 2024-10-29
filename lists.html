@@ -47,33 +47,70 @@
     <script>
         // Dict where each key corresponds to a different shopping list, values are list of items
         listContents = {
-            "Greg's Birthday": ["Cake", "Candles", "Hamburgers", "Hamburger Buns", "Balloons"],
-            "Weekly Shopping": ["Bread", "Ground Beef", "Milk", "Grapes", "Broccoli", "Pasta"]
+            "Greg's Birthday": {"Cake": false, "Candles": false, "Hamburgers": false, "Hamburger Buns": false, "Balloons": false},
+            "Weekly Shopping": {"Bread": false, "Ground Beef": false, "Milk": false, "Grapes": false, "Broccoli": false, "Pasta": false}
         };
 
         var url_string = window.location;
         var url = new URL(url_string);
         var listName = url.searchParams.get("list");
-        
-        if (listName in listContents) {
-            for (let i=0; i<listContents[listName].length; i++) {
-                addItem(listContents[listName][i]);
+
+        window.onload = function() {
+            
+            if (!localStorage.getItem("listContents")) {
+                localStorage.setItem("listContents", JSON.stringify(listContents));
+            }
+            storage = localStorage.getItem("listContents");
+            listContents = storage ? JSON.parse(storage) : [];
+            
+            // Adds all items in the list to the list
+            if (listName in listContents) {
+                for (const [name, checked] of Object.entries(listContents[listName])) {
+                    createListElement(name, checked);
+                }
+
+            // create new list if it doesn't already exist
+            } else {
+                listContents[listName] = {};
+                localStorage.setItem('listContents', JSON.stringify(listContents));
             }
 
-            var listTitle = document.getElementById('header-food-list')
-            listTitle.innerHTML = listName + ' List'
-        }
-
-        function addItem(item) {
+            // title of the page
+            var listTitle = document.getElementById('header-food-list');
+            listTitle.innerHTML = listName + ' List';
+        };
+        
+        // create the html for list
+        function createListElement(name, checked) {
             var taskList = document.getElementById('food-list');
-
             var li = document.createElement('li');
-            li.innerHTML = item + " <span class='close' onClick=deleteTask(this)>x</span>";
+            li.setAttribute('id', name);
+            li.innerHTML = name + " <span class='close' onClick='deleteTask(this); event.stopPropagation();'>x</span>";
             li.onclick = function() {
                 li.classList.toggle('done');
+                // update the local storage
+                storage = localStorage.getItem("listContents");
+                listContents = storage ? JSON.parse(storage) : [];
+                listContents[listName][name] = !listContents[listName][name]
+                localStorage.setItem('listContents', JSON.stringify(listContents));
             };
+            // set it the item is checked or not
+            if (checked) {
+                li.classList.toggle('done');
+            }
 
             taskList.appendChild(li);
+        }
+
+        // adds item to local storage and creates html for it
+        function addItem(item) {
+            // save the new list to localstorage
+            const storage = localStorage.getItem("listContents");
+            const temp = storage ? JSON.parse(storage) : [];
+            temp[listName][item] = false;
+            localStorage.setItem("listContents", JSON.stringify(temp));
+            
+            createListElement(item, false);
         }
 
 
@@ -94,6 +131,13 @@
         function deleteTask(button) {
             var li = button.parentNode;
             li.parentNode.removeChild(li);
+            itemToRemove = button.parentNode.id;
+
+            // remove the new list to localstorage
+            const storage = localStorage.getItem("listContents");
+            const temp = storage ? JSON.parse(storage) : [];
+            delete temp[listName][itemToRemove];
+            localStorage.setItem("listContents", JSON.stringify(temp));
         }
     </script>
 
