@@ -139,6 +139,12 @@
             delete temp[listName][itemToRemove];
             localStorage.setItem("listContents", JSON.stringify(temp));
         }
+
+        function addListToKitchen() {
+            storage = localStorage.getItem("listContents");
+            listContents = storage ? JSON.parse(storage) : [];
+
+        }
     </script>
 
 
