@@ -99,7 +99,7 @@
                     <input type="date" class ="input-numbers" id = "Date">
                 </div>
 
-                <button onclick="addKitchenItem()" id = "add-item-button">Add Item</button>
+                <button onclick="addKitchenItem()" id ="add-item-button" class="item-popup-button">Add Item</button>
 
             </form>
         </div>
@@ -176,7 +176,7 @@
             const input = document.getElementById("input-item").value.trim();
             if(input == ""){
                 alert("Please enter a food item.");
-            }else{
+            } else {
                 document.getElementById('add-item-background').style.display = 'block';
                 document.getElementById('item-background').style.display = 'none';
                 document.getElementById("input-item-name").innerHTML = input;
