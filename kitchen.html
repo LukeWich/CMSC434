@@ -240,7 +240,14 @@ function addKitchenItem() {
 }
 
 
-    function createList() {
+function removeKitchenItem(itemIndex) {
+    const storage = JSON.parse(localStorage.getItem("foodStuffs"));
+    storage.splice(itemIndex, 1); // Remove the item at the specified index
+    localStorage.setItem("foodStuffs", JSON.stringify(storage));
+    createList(); // Re-render the list to update the UI
+}
+
+function createList() {
     const storage = localStorage.getItem("foodStuffs");
     const items = storage ? JSON.parse(storage) : [];
     const foodTypes = ['dairy', 'meats', 'vegetables', 'fruits', 'grains', 'snacks', 'seasonings', 'other'];
@@ -257,12 +264,14 @@ function addKitchenItem() {
             <p id="item-text">${x.name} | Amount: ${x.quantity} ${x.unit}
             <ul>Calories: ${x.calories} | Expiration Date: ${x.expirationDate}</ul></p>
             <button class="edit-button" onclick="editKitchenItem(${index})">Edit</button>
+            <button class="remove-button" onclick="removeKitchenItem(${index})">Remove</button>
         `;
 
         const itemList = document.getElementById(x.foodType.toLowerCase() + "-food-list");
         itemList.appendChild(itemElement);
     });
 }
+
 
 
 
