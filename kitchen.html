@@ -188,59 +188,82 @@
             document.getElementById('item-background').style.display = 'block';
         }
 
-        function addKitchenItem() {
-            const name = document.getElementById("input-item-name").innerHTML;
-            const calories = document.getElementById("Calories").value;
-            const foodType = document.getElementById("FoodType").value;
-            const quantity = document.getElementById("Quantity").value;
-            const unit = document.getElementById("Unit").value;
-            const expiration = document.getElementById("Date").value;
+        function editKitchenItem(itemIndex) {
+    const storage = JSON.parse(localStorage.getItem("foodStuffs"));
+    const itemToEdit = storage[itemIndex];
 
-            if (foodType == "Empty") {
-                alert("Please enter a food type.");
-                return;
-            }
+    // Pre-fill the form with the existing item's details
+    document.getElementById('input-item-name').innerHTML = itemToEdit.name;
+    document.getElementById('Calories').value = itemToEdit.calories;
+    document.getElementById('FoodType').value = itemToEdit.foodType;
+    document.getElementById('Quantity').value = itemToEdit.quantity;
+    document.getElementById('Unit').value = itemToEdit.unit;
+    document.getElementById('Date').value = itemToEdit.expirationDate;
 
-            const item = {
-                name: name,
-                calories: parseInt(calories, 10),
-                foodType: foodType,
-                quantity: parseInt(quantity, 10),
-                unit: unit,
-                expirationDate: expiration
-            };
+    // Remove the old item from storage
+    storage.splice(itemIndex, 1);
+    localStorage.setItem("foodStuffs", JSON.stringify(storage));
 
-            const storage = localStorage.getItem("foodStuffs");
-            const temp = storage ? JSON.parse(storage) : [];
-            temp.push(item);
-            localStorage.setItem("foodStuffs", JSON.stringify(temp));
-            closeNewItem();
-            createList();
-        }
+    // Show the add item dialogue
+    document.getElementById('add-item-background').style.display = 'block';
+    document.getElementById('item-background').style.display = 'none';
+}
 
-        function createList(){
-            const storage = localStorage.getItem("foodStuffs");
-            const items = storage ? JSON.parse(storage) : [];
-            const foodTypes = ['dairy', 'meats', 'vegetables', 'fruits', 'grains', 'snacks', 'seasonings', 'other'];
+function addKitchenItem() {
+    const name = document.getElementById("input-item-name").innerHTML;
+    const calories = document.getElementById("Calories").value;
+    const foodType = document.getElementById("FoodType").value;
+    const quantity = document.getElementById("Quantity").value;
+    const unit = document.getElementById("Unit").value;
+    const expiration = document.getElementById("Date").value;
 
-            foodTypes.forEach(x => {
-                const itemList = document.getElementById(x.toLowerCase() + "-food-list");
-                itemList.innerHTML = ""; 
-            })
+    if (foodType == "Empty") {
+        alert("Please enter a food type.");
+        return;
+    }
 
-            items.forEach(x => {
-                const itemElement = document.createElement("li");
-                itemElement.className = "x";
-                itemElement.innerHTML = `<p id = "item-text">${x.name} | Amount: ${x.quantity} ${x.unit}
-                                        <ul>Calories: ${x.calories} | Expiration Date: ${x.expirationDate} </ul></p>`;
-                
-                //    itemElement.innerHTML = `<p id = "item-text">${x.name} | Calories: ${x.calories} | 
-                //    Amount: ${x.quantity} | Unit: ${x.unit} | Expiration Date: ${x.expirationDate} </p>`;
+    const item = {
+        name: name,
+        calories: parseInt(calories, 10),
+        foodType: foodType,
+        quantity: parseInt(quantity, 10),
+        unit: unit,
+        expirationDate: expiration
+    };
 
-                const itemList = document.getElementById(x.foodType.toLowerCase() + "-food-list");
-                itemList.appendChild(itemElement);
-            });
-        }
+    const storage = localStorage.getItem("foodStuffs");
+    const temp = storage ? JSON.parse(storage) : [];
+    temp.push(item);
+    localStorage.setItem("foodStuffs", JSON.stringify(temp));
+    closeNewItem();
+    createList();
+}
+
+
+    function createList() {
+    const storage = localStorage.getItem("foodStuffs");
+    const items = storage ? JSON.parse(storage) : [];
+    const foodTypes = ['dairy', 'meats', 'vegetables', 'fruits', 'grains', 'snacks', 'seasonings', 'other'];
+
+    foodTypes.forEach(x => {
+        const itemList = document.getElementById(x.toLowerCase() + "-food-list");
+        itemList.innerHTML = ""; 
+    });
+
+    items.forEach((x, index) => {
+        const itemElement = document.createElement("li");
+        itemElement.className = "x";
+        itemElement.innerHTML = `
+            <p id="item-text">${x.name} | Amount: ${x.quantity} ${x.unit}
+            <ul>Calories: ${x.calories} | Expiration Date: ${x.expirationDate}</ul></p>
+            <button class="edit-button" onclick="editKitchenItem(${index})">Edit</button>
+        `;
+
+        const itemList = document.getElementById(x.foodType.toLowerCase() + "-food-list");
+        itemList.appendChild(itemElement);
+    });
+}
+
 
 
         // // Function to remove items from the kitchen list
