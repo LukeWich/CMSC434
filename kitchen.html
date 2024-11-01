@@ -79,7 +79,7 @@
 
                 <div id = "form-sub">
                     <p id = secondary-text>Quantity:</p>
-                    <input type="number" class="input-numbers" id = "Quantity" placeholder="number of items"  min= "1" >
+                    <input type="number" class="input-numbers" id = "Quantity" placeholder="number of items"  min= ".1" value="1" step=".1">
                 </div>
 
                 <div id = "form-sub">
@@ -162,6 +162,14 @@
                 quantity: 2,
                 unit: "Pounds",
                 expirationDate: "2024-11-15"
+            },
+            {
+                name: "Milk",
+                calories: 200,
+                foodType: "Dairy",
+                quantity: 1,
+                unit: "Bottle",
+                expirationDate: "2024-11-08"
             }
         ];
 
@@ -219,24 +227,25 @@ function addKitchenItem() {
 
     if (foodType == "Empty") {
         alert("Please enter a food type.");
-        return;
+
+    } else {
+
+        const item = {
+            name: name,
+            calories: parseInt(calories, 10),
+            foodType: foodType,
+            quantity: parseFloat(quantity, 10),
+            unit: unit,
+            expirationDate: expiration
+        };
+    
+        const storage = localStorage.getItem("foodStuffs");
+        const temp = storage ? JSON.parse(storage) : [];
+        temp.push(item);
+        localStorage.setItem("foodStuffs", JSON.stringify(temp));
+        closeNewItem();
+        createList();
     }
-
-    const item = {
-        name: name,
-        calories: parseInt(calories, 10),
-        foodType: foodType,
-        quantity: parseInt(quantity, 10),
-        unit: unit,
-        expirationDate: expiration
-    };
-
-    const storage = localStorage.getItem("foodStuffs");
-    const temp = storage ? JSON.parse(storage) : [];
-    temp.push(item);
-    localStorage.setItem("foodStuffs", JSON.stringify(temp));
-    closeNewItem();
-    createList();
 }
 
 
