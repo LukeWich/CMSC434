@@ -80,7 +80,7 @@
 .sublist {
     font: Helvetica;
     color: black;
-    font-size: 16pt;
+    font-size: 18pt;
     font-weight: normal;
 }
 
@@ -92,7 +92,8 @@
 /* COLLAPSIBLE LIST CONTAINER */
 .collapsible {
 max-width: 550px;
-padding: 20px; margin: 0;
+padding: 0px; 
+margin: 0;
 }
 
 /* CONTROL SPACING & INDENTATION */
