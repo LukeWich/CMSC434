@@ -1,6 +1,78 @@
   /*-------------------------------------------------------------------------------------------*/
 
   /* General CSS */
+
+
+
+
+
+
+
+  .keyboard {
+    position: absolute; /* Use absolute to position it within the parent container */
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Ensure it fits the width of its container */
+    background-color: #ebebeb;
+    padding: 10px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Ensure it stays above other UI elements */
+    max-width: 640px; /* Limit to the width of the app container */
+    margin: 0 auto; /* Center it within the container */
+}
+
+.device .keyboard {
+  position: absolute; /* Position the keyboard within the `.device` container */
+  bottom: 0;
+  left: -1.75%;
+  width: 100%; /* Match the width of the `.device` container */
+  background-color: #ebebeb;
+  padding: 10px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* Ensure it stays above other UI elements */
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.key {
+    padding: 10px 15px;
+    margin: 2px;
+    font-size: 18px;
+    border-radius: 3px;
+    background-color: #90d883; /* Matches other buttons */
+    border: 2px solid #ccc;
+    cursor: pointer;
+    color: #000;
+    transition: background-color 0.2s;
+    flex-grow: 1; /* Ensures keys are evenly spaced */
+    max-width: 50px; /* Prevents keys from being too wide */
+}
+
+.key:hover {
+    background-color: #87ad81; /* Subtle hover effect */
+}
+
+.space-bar {
+    text-align: center;
+    flex-grow: 8; /* Makes the space bar wider */
+    padding: 10px 15px;
+    margin: 2px;
+    font-size: 18px;
+    border-radius: 5px;
+    background-color: #90d883; /* Matches other buttons */
+    border: 2px solid #ccc;
+    cursor: pointer;
+    color: #000;
+    transition: background-color 0.2s;
+    
+    max-width: 500px; /* Prevents keys from being too wide */
+}
+
+
   .device {
     margin: auto; 
     width: 640px;
@@ -55,6 +127,8 @@
   #add-button:hover {
     background-color: #87ad81;
   }
+
+
 
   /*-------------------------------------------------------------------------------------------*/
 
@@ -231,6 +305,9 @@
   .active {
     background-color: #71986b;
   }
+
+  /* Existing styles are unchanged */
+
 
   /*-------------------------------------------------------------------------------------------*/
   
