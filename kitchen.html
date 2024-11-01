@@ -105,6 +105,69 @@
         </div>
         <!-- END ADD ITEM POP UP-->
 
+        <div id="edit-item-background" style="display: none">
+            <p id="input-item-name"></p>
+            
+            <form>
+                <div id = "form-sub">
+                    <p id = secondary-text>Calories:</p>
+                    <input type="number" class="input-numbers" id = "Calories" placeholder="number of calories" min = "0" >
+                </div>
+
+                <div id = "form-sub">
+                    <p id = secondary-text>Food Type:</p>
+                    <select class="input-select" id = "FoodType">
+                        <option value="Empty" style="display:none">Select one</option>
+                        <option value="Dairy">Dairy</option>
+                        <option value="Meats">Meats</option>
+                        <option value="Vegetables">Vegetables</option>
+                        <option value="Fruits">Fruits</option>
+                        <option value="Grains">Grains</option>
+                        <option value="Snacks">Snacks</option>
+                        <option value="Seasoning">Seasoning</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div id = "form-sub">
+                    <p id = secondary-text>Quantity:</p>
+                    <input type="number" class="input-numbers" id = "Quantity" placeholder="number of items"  min= ".1" value="1" step=".1">
+                </div>
+
+                <div id = "form-sub">
+                    <p id = secondary-text>Unit:</p>
+                    <select class="input-select" id = "Unit">
+                        <option value="Cans">Cans</option>
+                        <option value="Bags">Bags</option>
+                        <option value="Pounds">Pounds</option>
+                        <option value="Boxes">Boxes</option>
+                        <option value="Bottles">Bottles</option>
+                        <option value="Packages">Packages</option>
+                    </select>
+                </div>
+
+                <div id = "form-sub">
+                    <p id = secondary-text>Expiration Date:</p>
+                    <input type="date" class ="input-numbers" id = "Date">
+                </div>
+
+                <button onclick="addKitchenItem()" id ="edit-item-button" class="item-popup-button">Add Item</button>
+
+            </form>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
         <!-- Profile icon and page -->
         <img class='profile-icon' onclick="toggleSidePanel()" height="75" src="resources/images/profile_icon.png">
         <div class="profile-panel" id="profile-panel" style="display: none">
@@ -235,11 +298,17 @@
 
         let originalItem = null; // Store the original item data
 
+
+
+
+
+        let editingItemIndex = null; // Track the index of the item being edited
+
 function editKitchenItem(itemIndex) {
     const storage = JSON.parse(localStorage.getItem("foodStuffs"));
     const itemToEdit = storage[itemIndex];
 
-    // Store the original item data in case we need to revert changes
+    // Store the original item and index for editing
     originalItem = { ...itemToEdit };
     editingItemIndex = itemIndex;
 
@@ -251,32 +320,45 @@ function editKitchenItem(itemIndex) {
     document.getElementById('Unit').value = itemToEdit.unit;
     document.getElementById('Date').value = itemToEdit.expirationDate;
 
-    // Remove the original item from storage temporarily
-    storage.splice(itemIndex, 1);
-    localStorage.setItem("foodStuffs", JSON.stringify(storage));
 
+
+
+    
     // Show the add item dialog
     document.getElementById('add-item-background').style.display = 'block';
     document.getElementById('item-background').style.display = 'none';
 }
 
 function closeNewItem() {
-    if (originalItem !== null) {
-        // Re-add the original item if editing was canceled
+    if (originalItem !== null && editingItemIndex !== null) {
+        // Retrieve the current storage
         const storage = JSON.parse(localStorage.getItem("foodStuffs"));
-        storage.push(originalItem);
+
+        // Remove the original item at the editing index
+        storage.splice(editingItemIndex, 1);
+
+        // Add a copy of the original item to the storage
+        const itemCopy = { ...originalItem };
+        storage.push(itemCopy);
+
+        // Update localStorage with the modified array
         localStorage.setItem("foodStuffs", JSON.stringify(storage));
 
-        // Reset originalItem to null
+        // Reset originalItem and editingItemIndex to indicate no item is being edited
         originalItem = null;
+        editingItemIndex = null;
     }
 
-    // Close the dialog and reset editing state
+    // Close the dialog
     document.getElementById('add-item-background').style.display = 'none';
     document.getElementById('item-background').style.display = 'block';
 
-    createList(); // Re-render the list to reflect the unchanged state
+    createList(); // Re-render the list to ensure the dropdowns work properly
 }
+
+
+
+
 
 
 function addKitchenItem() {
@@ -287,28 +369,37 @@ function addKitchenItem() {
     const unit = document.getElementById("Unit").value;
     const expiration = document.getElementById("Date").value;
 
-    if (foodType == "Empty") {
+    if (foodType === "Empty") {
         alert("Please enter a food type.");
-
-    } else {
-
-        const item = {
-            name: name,
-            calories: parseInt(calories, 10),
-            foodType: foodType,
-            quantity: parseFloat(quantity, 10),
-            unit: unit,
-            expirationDate: expiration
-        };
-    
-        const storage = localStorage.getItem("foodStuffs");
-        const temp = storage ? JSON.parse(storage) : [];
-        temp.push(item);
-        localStorage.setItem("foodStuffs", JSON.stringify(temp));
-        closeNewItem();
-        createList();
+        return;
     }
+
+    const item = {
+        name: name,
+        calories: parseInt(calories, 10),
+        foodType: foodType,
+        quantity: parseFloat(quantity),
+        unit: unit,
+        expirationDate: expiration
+    };
+
+    const storage = localStorage.getItem("foodStuffs");
+    const temp = storage ? JSON.parse(storage) : [];
+
+    if (editingItemIndex !== null) {
+        // Replace the item at the index being edited
+        temp[editingItemIndex] = item;
+        editingItemIndex = null; // Reset the index after saving changes
+    } else {
+        // Add new item if not editing
+        temp.push(item);
+    }
+
+    localStorage.setItem("foodStuffs", JSON.stringify(temp));
+    closeNewItem();
+    createList();
 }
+
 
 
 function removeKitchenItem(itemIndex) {
