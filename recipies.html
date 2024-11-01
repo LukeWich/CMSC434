@@ -1,245 +1,908 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Recipes Tab</title>
-        <link href="./resources/css/recipies.css" type="text/css" rel="stylesheet">
-        <link href="./resources/css/styles.css" type="text/css" rel="stylesheet">
-        <!-- cant access internet so dont use -->
-        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script> -->
-    </head>
-    
-    <body>
-        <div class="device">
-            <!-- Beginning of the Recipe page Body -->
-            <div id = "header">Recipes</div>
-
-            <div id = "item-background">
-                <div id="input-container">
-                    <p id = secondary-text>Recipe Name:</p>
-                    <input type="text" id="recipeName" placeholder="e.g. Banana Cake"><button id="searchButton" onclick="getRecipe()">Search</button>
-                </div>
-        
-                <div id="recipeDisplay"></div>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Recipes Tab</title>
+    <link
+      href="./resources/css/recipies.css"
+      type="text/css"
+      rel="stylesheet"
+    />
+    <link href="./resources/css/styles.css" type="text/css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="device">
+      <!-- Beginning of the Recipe page Body -->
+      <div id="header">Recipes</div>
+      <div id="item-background">
+        <div id="input-container">
+          <div class="grid">
+            <div class="tile" onclick="searchRecipesByCategory('Italian')">
+              <div>
+                <img
+                  src="./resources/images/italian_icon.png"
+                  alt="Italian Recipes"
+                  style="width: 80px; height: 80px"
+                />
+                <p>Italian</p>
+              </div>
             </div>
-
-            <!-- Profile icon and page -->
-            <img class='profile-icon' onclick="toggleSidePanel()" height="75" src="resources/images/profile_icon.png">
-            <div class="profile-panel" id="profile-panel" style="display: none">
-                <a class="profile-heading" href="profile.html" style="top: 10px">
-                    <img style="position:absolute; height:100px; left:20px" src="resources/images/profile_icon.png">
-                    <b class="user-name">User's Name</b>
-                    <small>View Profile</small>
-                </a>
-
-                <a href="settings.html" style="top: 150px">
-                    <img class="panel-images" src="resources/images/settings_icon.png">
-                    <b>Settings</b>
-                </a>
-
-                <a href="" style="top: 225px">
-                    <img class="panel-images" src="resources/images/plus_icon.png">
-                    <b>Add Users</b>
-                </a>
-
-                <a href="help.html" style="top: 300px">
-                    <img class="panel-images" src="resources/images/question_icon.png">
-                    <b>Help</b>
-                </a>
-
-                <a href="" style="top: 375px">
-                    <img class="panel-images" src="resources/images/logout_icon.png">
-                    <b>Log Out</b>
-                </a>
-
-                <img class="close-icon" onclick="toggleSidePanel()" height="50" src="resources/images/close_icon.png">
+            <div class="tile" onclick="searchRecipesByCategory('Chinese')">
+              <div>
+                <img
+                  src="./resources/images/chinese_icon.png"
+                  alt="Chinese Recipes"
+                  style="width: 80px; height: 80px"
+                />
+                <p>Chinese</p>
+              </div>
             </div>
-            <!--- End Profile side panel -->
-            
-            <!-- Nav Bar html -->
-            <div class="icon-bar">
-                <a href="kitchen.html">
-                    <img src="resources/images/kitchen_icon.png" height="75">
-                </a>
-                <a href="lists_home.html">
-                    <img src="resources/images/lists_icon.png" height="75">
-                </a>
-                <a href="recipies.html" class="active">
-                    <img src="resources/images/recipies_icon.png" height="75">
-                </a>
+            <div class="tile" onclick="searchRecipesByCategory('Vegetarian')">
+              <div>
+                <img
+                  src="./resources/images/vegetarian_icon.png"
+                  alt="Vegetarian Recipes"
+                  style="width: 80px; height: 80px"
+                />
+                <p>Vegetarian</p>
+              </div>
             </div>
-            <!-- End Nav Bar html -->
+            <div class="tile" onclick="searchRecipesByCategory('Desserts')">
+              <div>
+                <img
+                  src="./resources/images/cake_icon.png"
+                  alt="Desserts"
+                  style="width: 80px; height: 80px"
+                />
+                <p>Desserts</p>
+              </div>
+            </div>
+            <div class="tile" onclick="searchRecipesByCategory('Mexican')">
+              <img
+                src="./resources/images/mexican_icon.png"
+                alt="Mexican"
+                style="width: 80px; height: 80px"
+              />
+              <p>Mexican</p>
+            </div>
+            <div class="tile" onclick="searchRecipesByCategory('Favorites')">
+              <img
+                src="./resources/images/favorites_icon.png"
+                alt="Favorites"
+                style="width: 80px; height: 80px"
+              />
+              <p>Favorites</p>
+            </div>
+            <div
+              class="tile"
+              id="addRecipeTile"
+              onclick="openAddRecipeForm()"
+              style="cursor: pointer"
+            >
+              <img
+                src="./resources/images/plus_icon.png"
+                alt="Add Recipe"
+                style="width: 80px; height: 80px"
+              />
+              <p>Add New Recipe</p>
+            </div>
+            <div
+              class="tile"
+              id="deleteRecipeTile"
+              onclick="openDeleteModal()"
+              style="cursor: pointer"
+            >
+              <img
+                src="./resources/images/close_icon.png"
+                alt="Delete Recipe"
+                style="width: 80px; height: 80px"
+              />
+              <p>Delete Recipe</p>
+            </div>
+            <div
+              class="tile"
+              id="searchRecipeTile"
+              onclick="openSearchModal()"
+              style="cursor: pointer"
+            >
+              <img
+                src="./resources/images/search_icon.png"
+                alt="Search Recipes"
+                style="width: 80px; height: 80px"
+              />
+              <p>Search Recipe</p>
+            </div>
+          </div>
         </div>
-    </body>
+        <div
+          class="tile"
+          id="filterRecipeTile"
+          onclick="filterRecipes()"
+          style="cursor: pointer"
+        >
+          <img
+            src="./resources/images/filter_icon.jpg"
+            alt="Filter Recipes"
+            style="width: 80px; height: 80px"
+          />
+          <p>Filter Recipes</p>
+        </div>
+
+        <div id="recipeDisplay" style="display: none">
+          <button id="addNewRecipeButton" style="display: none">
+            Add New Recipe
+          </button>
+        </div>
+      </div>
+
+      <!-- Profile icon and page -->
+      <img
+        class="profile-icon"
+        onclick="toggleSidePanel()"
+        height="75"
+        src="resources/images/profile_icon.png"
+      />
+      <div class="profile-panel" id="profile-panel" style="display: none">
+        <a class="profile-heading" href="profile.html" style="top: 10px">
+          <img
+            style="position: absolute; height: 100px; left: 20px"
+            src="resources/images/profile_icon.png"
+          />
+          <b class="user-name">User's Name</b>
+          <small>View Profile</small>
+        </a>
+        <a href="settings.html" style="top: 150px">
+          <img class="panel-images" src="resources/images/settings_icon.png" />
+          <b>Settings</b>
+        </a>
+        <a href="" style="top: 225px">
+          <img class="panel-images" src="resources/images/plus_icon.png" />
+          <b>Add Users</b>
+        </a>
+        <a href="help.html" style="top: 300px">
+          <img class="panel-images" src="resources/images/question_icon.png" />
+          <b>Help</b>
+        </a>
+        <a href="" style="top: 375px">
+          <img class="panel-images" src="resources/images/logout_icon.png" />
+          <b>Log Out</b>
+        </a>
+        <img
+          class="close-icon"
+          onclick="toggleSidePanel()"
+          height="50"
+          src="resources/images/close_icon.png"
+        />
+      </div>
+      <!-- End Profile side panel -->
+
+      <!-- Nav Bar html -->
+      <div class="icon-bar">
+        <a href="kitchen.html">
+          <img src="resources/images/kitchen_icon.png" height="75" />
+        </a>
+        <a href="lists_home.html">
+          <img src="resources/images/lists_icon.png" height="75" />
+        </a>
+        <a href="recipies.html" class="active">
+          <img src="resources/images/recipies_icon.png" height="75" />
+        </a>
+      </div>
+
+
+                  <!-- Virtual Keyboard -->
+<div id="virtual-keyboard" class="keyboard" style="display: none;">
+  <div class="keyboard-row">
+      <button class="key">Q</button>
+      <button class="key">W</button>
+      <button class="key">E</button>
+      <button class="key">R</button>
+      <button class="key">T</button>
+      <button class="key">Y</button>
+      <button class="key">U</button>
+      <button class="key">I</button>
+      <button class="key">O</button>
+      <button class="key">P</button>
+  </div>
+  <div class="keyboard-row">
+      <button class="key">A</button>
+      <button class="key">S</button>
+      <button class="key">D</button>
+      <button class="key">F</button>
+      <button class="key">G</button>
+      <button class="key">H</button>
+      <button class="key">J</button>
+      <button class="key">K</button>
+      <button class="key">L</button>
+  </div>
+  <div class="keyboard-row">
+      <button class="key">Z</button>
+      <button class="key">X</button>
+      <button class="key">C</button>
+      <button class="key">V</button>
+      <button class="key">B</button>
+      <button class="key">N</button>
+      <button class="key">M</button>
+      <button class="key">←</button>
+      <button class="key">⏎</button>
+  </div>
+  <div class="keyboard-row">
+      <button class="space-bar" style="width: 50%;">Space</button>
+  </div>
+</div>
+      <!-- End Nav Bar html -->
+    </div>
+
+    <!-- Modal for Adding Recipe -->
+    <div id="addRecipeModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeAddRecipeModal()">&times;</span>
+        <h2>Select a Category</h2>
+        <select id="categoryDropdown" onchange="toggleRecipeDetails()">
+          <option value="">-- Select Category --</option>
+          <option value="Italian">Italian</option>
+          <option value="Chinese">Chinese</option>
+          <option value="Vegetarian">Vegetarian</option>
+          <option value="Desserts">Desserts</option>
+          <option value="Mexican">Mexican</option>
+        </select>
+
+        <div id="recipeDetails" style="display: none">
+          <h3>Enter Recipe Details</h3>
+          <label for="recipeTitle">Recipe Title:</label><br />
+          <input type="text" id="recipeTitle" required /><br />
+          <label for="recipeIngredients">Ingredients (comma separated):</label
+          ><br />
+          <input type="text" id="recipeIngredients" required /><br />
+          <label for="recipeInstructions">Instructions:</label><br />
+          <textarea id="recipeInstructions" required></textarea><br />
+          <button id="add-recipe-btn" onclick="addRecipe()">Add Recipe</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for Deleting Recipe -->
+    <div id="deleteModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeDeleteModal()">&times;</span>
+        <h2>Delete Recipe</h2>
+
+        <label for="categorySelect">Select Category:</label><br /><br />
+        <select id="categorySelect">
+          <option value="">Select a category</option>
+          <option value="Italian">Italian</option>
+          <option value="Chinese">Chinese</option>
+          <option value="Vegetarian">Vegetarian</option>
+          <option value="Desserts">Desserts</option>
+          <option value="Mexican">Mexican</option>
+        </select>
+        <br /><br />
+        <label for="recipeTitle">Recipe Title:</label><br /><br />
+        <input type="text" id="recipeTitle" placeholder="Enter recipe title" />
+
+        <p>Are you sure you want to delete this recipe?</p>
+        <button id="delete-recipe-btn" onclick="confirmDelete()">
+          Yes, Delete
+        </button>
+        <button id="cancel_btn" onclick="closeDeleteModal()">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Modal for Searching Recipe -->
+
+    <div id="searchModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeSearchModal()">&times;</span>
+        <h2>Search Recipe</h2>
+
+        <label for="searchCategorySelect">Select Category:</label><br /><br />
+        <select id="searchCategorySelect" onchange="filterRecipes()">
+          <option value="">Select a category</option>
+          <option value="Italian">Italian</option>
+          <option value="Chinese">Chinese</option>
+          <option value="Vegetarian">Vegetarian</option>
+          <option value="Dessert">Desserts</option>
+          <option value="Mexican">Mexican</option>
+        </select>
+        <br /><br />
+
+        <label for="searchRecipeTitle">Recipe Title:</label><br /><br />
+        <input
+          type="text"
+          id="searchRecipeTitle"
+          placeholder="Enter recipe title"
+          oninput="filterRecipes()"
+        />
+        <br /><br />
+
+        <button id="searchRecipeButton" onclick="handleSearch()">Search</button>
+        <button id="cancel_btn" onclick="closeSearchModal()">Close</button>
+        <ul id="searchResults"></ul>
+      </div>
+    </div>
+
+    <!-- Filter Modal -->
+    <div id="filterModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeFilterModal()">&times;</span>
+        <h2>Filter Recipes</h2>
+
+        <label for="searchCategorySelect">Category:</label>
+        <select id="searchCategorySelect">
+          <option value="">-- Select Category --</option>
+          <option value="Italian">Italian</option>
+          <option value="Chinese">Chinese</option>
+          <option value="Vegetarian">Vegetarian</option>
+          <option value="Desserts">Desserts</option>
+          <option value="Mexican">Mexican</option></select
+        ><br /><br />
+
+        <label for="searchIngredient">Ingredient:</label>
+        <input
+          type="text"
+          id="searchIngredient"
+          placeholder="Enter ingredient"
+        /><br /><br />
+
+        <button id="filterbtn" onclick="filterRecipes()">Search</button>
+        <button id="filter_closebtn" onclick="closeFilterModal()">Close</button>
+
+        <ul id="searchResults"></ul>
+      </div>
+    </div>
 
     <script>
-        // hard code for two recipe examples
-        function getRecipe() {
-            const input = document.getElementById("recipeName").value.toLowerCase();
-            
-            if (input === "banana cake") {
-                const recipe = 
-                `<p><strong>Banana Cake Recipe</strong></p>
-                <p><strong>Ingredients</strong></p>
-                <ul>
-                    <li>3 Bananas</li>
-                    <li>1 Cup of Sugar</li>
-                    <li>1/2 Cup of Butter</li>
-                    <li>2 Eggs</li>
-                    <li>3/2 Cups of Flour</li>
-                    <li>1 TSP of Baking Soda</li>
-                    <li>1/2 TSP of Salt</li>
-                    <li>1/2 Cup of Milk</li>
-                    <li>1 TSP of Vanilla Extract</li>
-                </ul>
-                <p><strong>Instructions:</strong></p>
-                <ol>
-                    <li>Preheat the oven to 350°F or 175°C.</li>
-                    <li>Mix the bananas, sugar, butter, and eggs in a bowl.</li>
-                    <li>Then mix in the flour, baking soda, and salt slowly while alternating with milk.</li>
-                    <li>After that mix in vanilla extract and mix until smooth.</li>
-                    <li>Pour the batter into a greased baking pan and bake for 45 minutes.</li>
-                    <li>Let the cake cool, cut a slice, and enjoy!</li>
-                </ol>`;
+      let selectedCategory = "";
 
-                document.getElementById("recipeDisplay").innerHTML = recipe;
-            } else if(input === "fried eggs") {
-                const recipe = 
-                `<p><strong>Eggs Recipe</strong></p>
-                <p><strong>Ingredients:</strong></p>
-                <ul>
-                    <li>4 eggs</li>
-                    <li>Salt and Pepper</li>
-                    <li>2 TBSP of Cream</li>
-                    <li>1 TBSP of Butter</li>
-                </ul>
-                <p><strong>Instructions:</strong></p>
-                <ol>
-                    <li>In a bowl, mix the eggs, salt, pepper, and cream until combined.</li>
-                    <li>Melt the butter in a pan over low to medium heat.</li>
-                    <li>Add in the mixture and spread evenly over the pan.</li>
-                    <li>Cook the eggs until they are mostly set or done to your liking.</li>
-                    <li>Place on plate and enjoy!</li>
-                </ol>`;
+      function openAddRecipeForm() {
+        document.getElementById("addRecipeModal").style.display = "block";
+      }
 
-                document.getElementById("recipeDisplay").innerHTML = recipe;
-            } else {
-                document.getElementById("recipeDisplay").innerHTML = "<p>Recipe Not Found</p>";
+      function closeAddRecipeModal() {
+        document.getElementById("addRecipeModal").style.display = "none";
+        selectedCategory = "";
+        document.getElementById("recipeDetails").style.display = "none";
+      }
+
+      function setCategory(category) {
+        selectedCategory = category;
+        document.getElementById("categoryOptions").style.display = "none";
+        document.getElementById("recipeDetails").style.display = "block";
+      }
+
+      //Function to add recipes
+      function addRecipe() {
+        const selectedCategory =
+          document.getElementById("categoryDropdown").value;
+        const recipeTitle = document.getElementById("recipeTitle").value;
+        const recipeIngredients =
+          document.getElementById("recipeIngredients").value;
+        const recipeInstructions =
+          document.getElementById("recipeInstructions").value;
+
+        if (
+          selectedCategory &&
+          recipeTitle &&
+          recipeIngredients &&
+          recipeInstructions
+        ) {
+          recipeDictionary[selectedCategory.toLowerCase()][
+            recipeTitle.replace(/\s+/g, "").toLowerCase()
+          ] = {
+            title: recipeTitle,
+            ingredients: recipeIngredients
+              .split(",")
+              .map((ingredient) => ingredient.trim()),
+            instructions: recipeInstructions,
+            servings: 4,
+            prepTime: "15 minutes",
+            cookTime: "30 minutes",
+            totalTime: "45 minutes",
+          };
+          alert(
+            `${recipeTitle} has been added to ${selectedCategory} recipes!`
+          );
+          closeAddRecipeModal();
+        } else {
+          alert("Please fill in all the details for the new recipe.");
+        }
+      }
+
+      //Hard coded recipe dictionary to show functionality
+      const recipeDictionary = {
+        desserts: {
+          bananaCake: {
+            title: "Banana Cake",
+            ingredients: [
+              "2 ripe bananas, mashed",
+              "1/2 cup unsalted butter, softened",
+              "1 cup sugar",
+              "2 eggs",
+              "1 teaspoon vanilla extract",
+              "1 1/2 cups all-purpose flour",
+              "1 teaspoon baking soda",
+              "1/2 teaspoon salt",
+              "1/2 cup sour cream or yogurt",
+            ],
+            instructions: [
+              "Preheat your oven to 350°F (175°C) and grease a 9-inch round cake pan.",
+              "In a mixing bowl, cream together the butter and sugar until light and fluffy.",
+              "Add the eggs, one at a time, beating well after each addition. Mix in the vanilla and mashed bananas.",
+              "In another bowl, combine the flour, baking soda, and salt.",
+              "Gradually add the dry ingredients to the banana mixture, alternating with sour cream, and mix until just combined.",
+              "Pour the batter into the prepared cake pan and smooth the top.",
+              "Bake for 30-35 minutes or until a toothpick inserted into the center comes out clean.",
+              "Allow the cake to cool in the pan for 10 minutes, then transfer to a wire rack to cool completely.",
+            ],
+            servings: 8,
+            prepTime: "15 minutes",
+            cookTime: "35 minutes",
+            totalTime: "50 minutes",
+          },
+          chocolateCake: {
+            title: "Chocolate Cake",
+            ingredients: [
+              "1/2 cup margarine",
+              "2 cups sugar",
+              "2 eggs",
+              "5 tbsp cocoa",
+              "1/2 tsp salt",
+              "1/2 cup sour milk",
+              "2 tsp baking soda",
+              "2 cups flour",
+              "1/2 tsp cloves",
+              "1 tsp vanilla",
+            ],
+            instructions:
+              "Mix all ingredients together. Pour in 1 cup boiling water. Mix well. Bake about 35 minutes at 375 degrees.",
+            servings: 12,
+            prepTime: "15 minutes",
+            cookTime: "35 minutes",
+            totalTime: "50 minutes",
+          },
+        },
+        italian: {
+          vealScallopini: {
+            title: "Veal Scallopini",
+            ingredients: [
+              "2 pounds veal steak, sliced thinly",
+              "1/2 cup flour",
+              "4 tbsp oil",
+              "1 can sliced mushrooms",
+              "2 cups sauterne wine",
+              "1/4 cup onion",
+              "salt and pepper to taste",
+            ],
+            instructions:
+              "Cut meat into 2-inch pieces and coat in flour. Brown in oil. Add mushrooms, salt, and pepper, and wine. Pour over meat in a casserole. Cook in covered casserole for 1 hour at 375 degrees or in a heavy covered skillet at low heat for 45 minutes.",
+            servings: 4,
+            prepTime: "15 minutes",
+            cookTime: "1 hour",
+            totalTime: "1 hour 15 minutes",
+          },
+          spaghettiAndMeatballs: {
+            title: "Spaghetti and Meatballs",
+            ingredients: [
+              "1 pound spaghetti",
+              "1 pound ground beef",
+              "1/2 cup bread crumbs",
+              "1 egg",
+              "1/4 cup parsley, chopped",
+              "1 tsp salt",
+              "1/2 tsp pepper",
+              "2 cups marinara sauce",
+              "parmesan cheese for garnish",
+            ],
+            instructions:
+              "Cook spaghetti according to package instructions. In a bowl, combine ground beef, bread crumbs, egg, parsley, salt, and pepper; form into meatballs. Brown meatballs in a skillet, then simmer in marinara sauce for 30 minutes. Serve over spaghetti and garnish with parmesan cheese.",
+            servings: 4,
+            prepTime: "15 minutes",
+            cookTime: "30 minutes",
+            totalTime: "45 minutes",
+          },
+        },
+        chinese: {
+          kungPaoChicken: {
+            title: "Kung Pao Chicken",
+            ingredients: [
+              "1 pound chicken breast, diced",
+              "2 tbsp soy sauce",
+              "1 tbsp cornstarch",
+              "2 tbsp oil",
+              "3 cloves garlic, minced",
+              "1/2 cup peanuts",
+              "1 bell pepper, diced",
+              "2 green onions, chopped",
+              "1/4 cup hoisin sauce",
+            ],
+            instructions:
+              "Marinate chicken in soy sauce and cornstarch for 30 minutes. Heat oil in a wok, stir-fry garlic and chicken until cooked. Add peanuts, bell pepper, green onions, and hoisin sauce. Cook for 2-3 minutes until heated through.",
+            servings: 4,
+            prepTime: "30 minutes",
+            cookTime: "10 minutes",
+            totalTime: "40 minutes",
+          },
+        },
+        vegetarian: {
+          vegetableStirFry: {
+            title: "Vegetable Stir Fry",
+            ingredients: [
+              "2 tablespoons vegetable oil",
+              "1 cup broccoli florets",
+              "1 cup bell peppers, sliced",
+              "1 cup carrots, julienned",
+              "1 cup snap peas",
+              "3 cloves garlic, minced",
+              "1 tablespoon soy sauce",
+              "1 tablespoon oyster sauce (or vegetarian alternative)",
+              "Salt and pepper to taste",
+              "Cooked rice or noodles for serving",
+            ],
+            instructions:
+              "Heat vegetable oil in a large skillet over medium-high heat. Add garlic and sauté for 30 seconds. Add broccoli, bell peppers, and carrots; stir-fry for 3-4 minutes. Add snap peas and cook for another 2 minutes. Stir in soy sauce and oyster sauce, season with salt and pepper. Serve over cooked rice or noodles.",
+            servings: 4,
+            prepTime: "10 minutes",
+            cookTime: "10 minutes",
+            totalTime: "20 minutes",
+          },
+          capreseSalad: {
+            title: "Caprese Salad",
+            ingredients: [
+              "4 large ripe tomatoes, sliced",
+              "8 ounces fresh mozzarella cheese, sliced",
+              "1 cup fresh basil leaves",
+              "3 tablespoons olive oil",
+              "1 tablespoon balsamic vinegar",
+              "Salt and pepper to taste",
+            ],
+            instructions:
+              "On a large platter, alternate slices of tomatoes and mozzarella. Tuck basil leaves in between the layers. Drizzle with olive oil and balsamic vinegar. Season with salt and pepper to taste.",
+            servings: 4,
+            prepTime: "15 minutes",
+            cookTime: "0 minutes",
+            totalTime: "15 minutes",
+          },
+        },
+        mexican: {
+          chickenFajitas: {
+            title: "Chicken Fajitas",
+            ingredients: [
+              "1 pound chicken breast, sliced",
+              "1 bell pepper, sliced",
+              "1 onion, sliced",
+              "2 tbsp olive oil",
+              "2 tsp chili powder",
+              "1 tsp cumin",
+              "1 tsp garlic powder",
+              "Salt and pepper to taste",
+              "8 small flour tortillas",
+              "Sour cream and salsa for serving",
+            ],
+            instructions:
+              "In a skillet, heat olive oil over medium heat. Add sliced chicken, chili powder, cumin, garlic powder, salt, and pepper. Cook until chicken is no longer pink. Add bell pepper and onion, and sauté until vegetables are tender. Serve with warm tortillas, sour cream, and salsa.",
+            servings: 4,
+            prepTime: "10 minutes",
+            cookTime: "15 minutes",
+            totalTime: "25 minutes",
+          },
+          beefEnchiladas: {
+            title: "Beef Enchiladas",
+            ingredients: [
+              "1 pound ground beef",
+              "1 onion, diced",
+              "2 cloves garlic, minced",
+              "1 can enchilada sauce",
+              "8 corn tortillas",
+              "1 cup shredded cheese (cheddar or Mexican blend)",
+              "1 tsp cumin",
+              "Salt and pepper to taste",
+              "Fresh cilantro for garnish",
+            ],
+            instructions:
+              "Preheat oven to 375°F (190°C). In a skillet, cook ground beef, onion, and garlic until meat is browned. Stir in cumin, salt, and pepper. Fill each tortilla with the beef mixture, roll, and place in a baking dish. Pour enchilada sauce over the top and sprinkle with cheese. Bake for 20-25 minutes until cheese is bubbly. Garnish with fresh cilantro before serving.",
+            servings: 4,
+            prepTime: "15 minutes",
+            cookTime: "25 minutes",
+            totalTime: "40 minutes",
+          },
+        },
+        favorites: {},
+      };
+      //Function to search recipes by the category
+      function searchRecipesByCategory(category) {
+        const recipeDisplay = document.getElementById("recipeDisplay");
+        recipeDisplay.innerHTML = "";
+
+        const recipes = recipeDictionary[category.toLowerCase()];
+        if (recipes) {
+          for (const recipeKey in recipes) {
+            const recipe = recipes[recipeKey];
+            const recipeLink = document.createElement("div");
+            recipeLink.className = "recipe-title";
+            recipeLink.innerHTML = `<h2 style="cursor: pointer;">${recipe.title}</h2>`;
+
+            recipeLink.addEventListener("click", () => {
+              displayRecipeDetails(recipe);
+            });
+
+            recipeDisplay.appendChild(recipeLink);
+          }
+          recipeDisplay.style.display = "block";
+          document.getElementById("addNewRecipeButton").style.display = "block";
+        } else {
+          recipeDisplay.innerHTML = `<p>No recipes found for the category: ${category}</p>`;
+          recipeDisplay.style.display = "block";
+          document.getElementById("addNewRecipeButton").style.display = "none";
+        }
+      }
+
+      //Function for searchingRecipes by the title
+      function searchRecipes(title) {
+        const recipeDisplay = document.getElementById("recipeDisplay");
+        recipeDisplay.innerHTML = "";
+        let foundRecipes = false;
+
+        for (const category in recipeDictionary) {
+          for (const recipeKey in recipeDictionary[category]) {
+            const recipe = recipeDictionary[category][recipeKey];
+
+            if (recipe.title.toLowerCase().includes(title.toLowerCase())) {
+              foundRecipes = true;
+
+              const recipeLink = document.createElement("div");
+              recipeLink.className = "recipe-title";
+              recipeLink.innerHTML = `<h2 style="cursor: pointer;">${recipe.title}</h2>`;
+
+              recipeLink.addEventListener("click", () => {
+                displayRecipeDetails(recipe);
+              });
+
+              recipeDisplay.appendChild(recipeLink);
             }
+          }
+        }
+        closeSearchModal();
+
+        if (foundRecipes) {
+          recipeDisplay.style.display = "block";
+          document.getElementById("addNewRecipeButton").style.display = "block";
+        } else {
+          recipeDisplay.innerHTML = `<p>No recipes found with the title: ${title}</p>`;
+          recipeDisplay.style.display = "block";
+          document.getElementById("addNewRecipeButton").style.display = "none";
+        }
+      }
+
+      function displayRecipeDetails(recipe) {
+        const recipeDisplay = document.getElementById("recipeDisplay");
+        recipeDisplay.innerHTML = `
+            <h2>${recipe.title}</h2>
+            <p><strong>Ingredients:</strong> ${recipe.ingredients.join(
+              ", "
+            )}</p>
+            <p><strong>Instructions:</strong> ${recipe.instructions}</p>
+            <p><strong>Servings:</strong> ${recipe.servings}</p>
+            <p><strong>Prep Time:</strong> ${recipe.prepTime}</p>
+            <p><strong>Cook Time:</strong> ${recipe.cookTime}</p>
+            <p><strong>Total Time:</strong> ${recipe.totalTime}</p>
+            <button id="addToFavoritesButton">Add to Favorites</button>
+        `;
+
+        const addToFavoritesButton = document.getElementById(
+          "addToFavoritesButton"
+        );
+        addToFavoritesButton.addEventListener("click", () => {
+          addToFavorites(recipe);
+        });
+      }
+      //function to add a recipe to favorites category
+      function addToFavorites(recipe) {
+        const favorites = recipeDictionary.favorites;
+        const recipeKey = recipe.title.replace(/\s+/g, "").toLowerCase();
+
+        if (!favorites[recipeKey]) {
+          favorites[recipeKey] = recipe;
+          alert(`${recipe.title} has been added to favorites!`);
+        } else {
+          alert(`${recipe.title} is already in your favorites!`);
+        }
+      }
+
+      //function to display favorite recipes
+      function displayFavorites() {
+        const favorites = recipeDictionary.favorites;
+        const recipeDisplay = document.getElementById("recipeDisplay");
+        recipeDisplay.innerHTML = "";
+
+        if (Object.keys(favorites).length === 0) {
+          recipeDisplay.innerHTML = "<p>No favorites added yet.</p>";
+        } else {
+          for (const recipeKey in favorites) {
+            const recipe = favorites[recipeKey];
+            const recipeLink = document.createElement("div");
+            recipeLink.className = "recipe-title";
+            recipeLink.innerHTML = `<h2 style="cursor: pointer;">${recipe.title}</h2>`;
+            recipeLink.addEventListener("click", () => {
+              displayRecipeDetails(recipe);
+            });
+            recipeDisplay.appendChild(recipeLink);
+          }
+        }
+        recipeDisplay.style.display = "block";
+      }
+      window.onclick = function (event) {
+        const modal = document.getElementById("addRecipeModal");
+        if (event.target == modal) {
+          closeAddRecipeModal();
+        }
+      };
+
+      function toggleRecipeDetails() {
+        const categoryDropdown = document.getElementById("categoryDropdown");
+        const recipeDetails = document.getElementById("recipeDetails");
+
+        if (categoryDropdown.value) {
+          recipeDetails.style.display = "block";
+        } else {
+          recipeDetails.style.display = "none";
+        }
+      }
+
+      function openDeleteModal() {
+        document.getElementById("deleteModal").style.display = "block";
+      }
+
+      function closeDeleteModal() {
+        document.getElementById("deleteModal").style.display = "none";
+      }
+
+      //Function to delete recipes
+      function confirmDelete() {
+        const selectedCategory =
+          document.getElementById("categorySelect").value;
+        const recipeTitle = document.getElementById("recipeTitle").value;
+
+        if (selectedCategory && recipeTitle) {
+          const normalizedCategory = selectedCategory.toLowerCase();
+          const normalizedTitle = recipeTitle.replace(/\s+/g, "").toLowerCase();
+
+          // console.log('Selected Category:', normalizedCategory);
+          //console.log('Normalized Title:', normalizedTitle);
+
+          if (recipeDictionary[normalizedCategory]) {
+            console.log(
+              "Category exists. Recipes:",
+              Object.keys(recipeDictionary[normalizedCategory])
+            );
+
+            if (recipeDictionary[normalizedCategory][normalizedTitle]) {
+              delete recipeDictionary[normalizedCategory][normalizedTitle];
+              alert(
+                `${recipeTitle} has been deleted from ${selectedCategory} recipes!`
+              );
+            } else {
+              alert("Recipe not found. Please check the category and title.");
+            }
+          } else {
+            alert("Category not found. Please check the category.");
+          }
+
+          closeDeleteModal();
+        } else {
+          alert("Please select a category and enter a recipe title.");
+        }
+      }
+
+      function openSearchModal() {
+        document.getElementById("searchCategorySelect").value = "";
+        document.getElementById("searchRecipeTitle").value = "";
+        document.getElementById("searchResults").innerHTML = "";
+        document.getElementById("searchModal").style.display = "block";
+      }
+
+      function closeSearchModal() {
+        document.getElementById("searchModal").style.display = "none";
+      }
+
+      function openFilterModal() {
+        document.getElementById("filterModal").style.display = "block";
+      }
+
+      function closeFilterModal() {
+        document.getElementById("filterModal").style.display = "none";
+      }
+
+      document.getElementById("filterRecipeTile").onclick = openFilterModal;
+
+      function filterRecipes() {
+        const category = document
+          .getElementById("searchCategorySelect")
+          .value.toLowerCase()
+          .trim();
+        const ingredientQuery = document
+          .getElementById("searchIngredient")
+          .value.toLowerCase()
+          .trim();
+        const resultsContainer = document.getElementById("recipeDisplay");
+
+        resultsContainer.innerHTML = "";
+        resultsContainer.style.display = "block";
+
+        if (category && !recipeDictionary[category]) {
+          const noCategoryResult = document.createElement("p");
+          noCategoryResult.textContent = "No such category found.";
+          resultsContainer.appendChild(noCategoryResult);
+          closeFilterModal();
+          return;
         }
 
+        const recipesToSearch = category
+          ? recipeDictionary[category]
+          : Object.assign({}, ...Object.values(recipeDictionary));
 
+        const filteredRecipes = Object.entries(recipesToSearch).filter(
+          ([recipeKey, recipeDetails]) => {
+            return (
+              !ingredientQuery ||
+              (recipeDetails.ingredients &&
+                recipeDetails.ingredients.some((ingredient) =>
+                  ingredient.toLowerCase().includes(ingredientQuery)
+                ))
+            );
+          }
+        );
+        closeFilterModal();
+        if (filteredRecipes.length === 0) {
+          const noRecipeResult = document.createElement("p");
+          noRecipeResult.textContent = "No recipes found.";
+          resultsContainer.appendChild(noRecipeResult);
+        } else {
+          for (const [recipeKey, recipe] of filteredRecipes) {
+            const recipeLink = document.createElement("div");
+            recipeLink.className = "recipe-title";
+            recipeLink.innerHTML = `<h2 style="cursor: pointer;">${recipe.title}</h2>`;
 
-        // let recipeDictionary = {};
+            recipeLink.addEventListener("click", () => {
+              displayRecipeDetails(recipe);
+            });
 
-        // // Function to fetch and parse the CSV file
-        // function loadCSV() {
-        //     fetch('resources/texts/recipes.csv')
-        //     .then(response => response.text())
-        //     .then(csvText => {
-        //         Papa.parse(csvText, {
-        //         header: true,
-        //         skipEmptyLines: true,
-        //         complete: (results) => {
-          
-        //             recipeDictionary = createRecipeDictionary(results.data);
-        //             // Display the recipe dictionary for testing
-        //             //displayData(recipeDictionary);
-        //         }
-        //         });
-        //     })
-        //     .catch(error => console.error('Error fetching the CSV file:', error));
-        // }
-
-        // //Creates a dictionary of recipes
-        // function createRecipeDictionary(data) {
-        //     const dictionary = {};
-        //     data.forEach(recipe => {
-        //         const title = recipe.Title;
-        //         dictionary[title] = {
-        //             Directions: recipe.Directions,
-        //             Ingredients: []
-        //         };
-        //         for (let i = 1; i <= 20; i++) {
-        //             const ingredientKey = `Ingredient0${i}`;
-        //             const quantityKey = `Quantity0${i}`;
-        //             const unitKey = `Unit0${i}`;
-       
-        //             if (recipe[ingredientKey]) {
-        //                 // Getting rid of Jan
-        //                 let quantity = recipe[quantityKey];
-        //                 if (quantity && quantity.includes('2-Jan')) {
-        //                     quantity = quantity.replace('2-Jan', '1/2').trim();
-        //                 } else if(quantity && quantity.includes('3-Jan')) {
-        //                     quantity = quantity.replace('3-Jan', '1/3').trim();
-        //          } else if (quantity && quantity.includes('4-Jan')) {
-        //                     quantity = quantity.replace('4-Jan', '1/4').trim();
-        //                 }
-        //                 if (!quantity) {
-        //                     quantity = '1';
-        //                 }
-        //                 // Add the ingredient details
-        //                 dictionary[title].Ingredients.push({
-        //                     Quantity: quantity,
-        //                     Unit: recipe[unitKey],
-        //                     Name: recipe[ingredientKey]
-        //                 });
-        //             }
-        //         }   
-        //     });
-        //     return dictionary;
-        // }
-
-        // function displayRecipe() {
-        //     const recipeName = document.getElementById('recipeName').value;
-        //     const recipeDisplay = document.getElementById('recipeDisplay');
-        //     const recipe = recipeDictionary[recipeName];
-        //     if (recipe) {
-        //     // Format the recipe details for display
-        //         const ingredientsList = recipe.Ingredients.map(ingredient =>
-        //         `${ingredient.Quantity} ${ingredient.Unit} of ${ingredient.Name}`).join('\n');
-        //         const recipeDetails = `Title: ${recipeName}\nDirections: ${recipe.Directions}\nIngredients:\n${ingredientsList}`;
-        //         recipeDisplay.textContent = recipeDetails;
-        //     } else {
-        //     recipeDisplay.textContent = 'Recipe not found.';
-        //     }
-        // }
-        // // Function to display the recipe dictionary
-        // //function displayData(dictionary) {
-        // //const outputElement = document.getElementById('output');
-        // //outputElement.textContent = JSON.stringify(dictionary, null, 2); // Pretty print the JSON data
-        // //}
-
-        // // Load the CSV file on page load
-        // window.onload = () => {
-        //     loadCSV();
-        //     document.getElementById('searchButton').addEventListener('click', displayRecipe);
-        // };
-
-        function toggleSidePanel() {
-            var x = document.getElementById('profile-panel');
-            var recipeInput = document.getElementById('recipeName');
-            var searchButton = document.getElementById('searchButton');
-            var recipeLabel = document.querySelector('label[for="recipeName"]');
-            if (x.style.display === "none") {
-                x.style.display = 'block';
-                // Hide recipe input elements
-                recipeInput.style.display = 'none';
-                searchButton.style.display = 'none';
-                recipeLabel.style.display = 'none';
-            } else {
-                x.style.display = 'none';
-                // Show recipe input elements
-                recipeInput.style.display = 'block';
-                searchButton.style.display = 'block';
-                recipeLabel.style.display = 'block'
-            }
+            resultsContainer.appendChild(recipeLink);
+          }
         }
-            </script>
-            </script>
-        </div>
-    </body>
+
+        document.getElementById("addNewRecipeButton").style.display = "block";
+      }
+
+      function handleSearch() {
+        const title = document.getElementById("searchRecipeTitle").value;
+        searchRecipes(title);
+      }
+
+      function toggleSidePanel() {
+        const profilePanel = document.getElementById("profile-panel");
+        profilePanel.style.display =
+          profilePanel.style.display === "block" ? "none" : "block";
+      }
     </script>
-        </div>
-    </body>
+
+
+
+
+
+<script>
+  document.querySelectorAll('input[type="text"], input[type="number"], input[type="date"], textarea').forEach(input => {
+      input.addEventListener('focus', () => {
+          document.getElementById('virtual-keyboard').style.display = 'block';
+      });
+
+      input.addEventListener('blur', () => {
+          // Delay hiding the keyboard to simulate interaction time
+          setTimeout(() => {
+              document.getElementById('virtual-keyboard').style.display = 'none';
+          }, 200);
+      });
+  });
+</script>
+
+  </body>
 </html>
