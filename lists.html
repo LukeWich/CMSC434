@@ -1,395 +1,399 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Shopping List Tab</title>
-        <link href="./resources/css/lists.css" type="text/css" rel="stylesheet">
-        <link href="./resources/css/styles.css" type="text/css" rel="stylesheet">
-    </head>
-    
-    <body>
-        <div class="device">
-            <div id = "header">Shopping List</div>
-            <div id = "item-background">
-                <div id="item-list">
-                    <input type="text" id="input-item" placeholder="Add a new item...">
-                    <button id="add-button" onclick="addTask()">Add</button>
-                </div>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Shopping List Tab</title>
+		<link href="./resources/css/lists.css" type="text/css" rel="stylesheet" />
+		<link href="./resources/css/styles.css" type="text/css" rel="stylesheet" />
+	</head>
 
-                <div id="list-container">
-                    <ul id="food-list"></ul>
-                </div>
+	<body>
+		<div class="device">
+			<div id="header">Shopping List</div>
+			<div id="item-background">
+				<div id="item-list">
+					<input type="text" id="input-item" placeholder="Add a new item..." />
+					<button id="add-button" onclick="addTask()">Add</button>
+				</div>
 
-                <button id="add-to-kitchen-button" onclick="addListToKitchen()">Add Checked Items to Kitchen</button>
-            </div>
+				<div id="list-container">
+					<ul id="food-list"></ul>
+				</div>
 
-            <div id="add-item-background" style="display: none">
-                <p id="input-item-name"></p>
-                <img class="upper-right-icon" onclick="closeNewItem()" height="60" src="resources/images/close_icon.png">
-                <form id="item-form">
-                    <div id = "form-sub">
-                        <p id = secondary-text>Calories:</p>
-                        <input type="number" class="input-numbers" id = "Calories" placeholder="number of calories" min = "0" >
-                    </div>
-    
-                    <div id = "form-sub">
-                        <p id = secondary-text>Food Type:</p>
-                        <select class="input-select" id = "FoodType">
-                            <option value="Empty" style="display:none">Select one</option>
-                            <option value="Dairy">Dairy</option>
-                            <option value="Meats">Meats</option>
-                            <option value="Vegetables">Vegetables</option>
-                            <option value="Fruits">Fruits</option>
-                            <option value="Grains">Grains</option>
-                            <option value="Snacks">Snacks</option>
-                            <option value="Seasoning">Seasoning</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-    
-                    <div id = "form-sub">
-                        <p id = secondary-text>Quantity:</p>
-                        <input type="number" class="input-numbers" id = "Quantity" placeholder="number of items"  min= "1" >
-                    </div>
-    
-                    <div id = "form-sub">
-                        <p id = secondary-text>Unit:</p>
-                        <select class="input-select" id = "Unit">
-                            <option value="Cans">Cans</option>
-                            <option value="Bags">Bags</option>
-                            <option value="Pounds">Pounds</option>
-                            <option value="Boxes">Boxes</option>
-                            <option value="Bottles">Bottles</option>
-                            <option value="Packages">Packages</option>
-                        </select>
-                    </div>
-    
-                    <div id = "form-sub">
-                        <p id = secondary-text>Expiration Date:</p>
-                        <input type="date" class ="input-numbers" id = "Date">
-                    </div>
-    
-                    <button type='button' onclick="prevItem()" id="prev-item-button" class="item-popup-button"><</button>
-                    <button type='button' onclick="addKitchenItem()" id = "add-item-button" class="item-popup-button">Add Item</button>
-                    <button type='button' onclick="nextItem()" id="next-item-button" class="item-popup-button">></button>
-    
-                </form>
-            </div>
-            <!-- END ADD ITEM POP UP-->
+				<button id="add-to-kitchen-button" onclick="addListToKitchen()">Add Checked Items to Kitchen</button>
+			</div>
 
-            <!-- Back icon -->
-            <a href="lists_home.html">
-                <img class='profile-icon' height="75" src="resources/images/back_icon.png">
-            </a>
+			<div id="add-item-background" style="display: none">
+				<p id="input-item-name"></p>
+				<img class="upper-right-icon" onclick="closeNewItem()" height="60" src="resources/images/close_icon.png" />
+				<form id="item-form">
+					<div id="form-sub">
+						<p id="secondary-text">Calories:</p>
+						<input type="number" class="input-numbers" id="Calories" placeholder="number of calories" min="0" />
+					</div>
 
-            <!-- Nav Bar html -->
-            <div class="icon-bar">
-                <a href="kitchen.html">
-                    <img src="resources/images/kitchen_icon.png" height="75">
-                </a>
-                <a href="lists_home.html" class="active">
-                    <img src="resources/images/lists_icon.png" height="75">
-                </a>
-                <a href="recipies.html">
-                    <img src="resources/images/recipies_icon.png" height="75">
-                </a>
-            </div>
-                       <!-- Virtual Keyboard -->
-<div id="virtual-keyboard" class="keyboard" style="display: none;">
-    <div class="keyboard-row">
-        <button class="key">Q</button>
-        <button class="key">W</button>
-        <button class="key">E</button>
-        <button class="key">R</button>
-        <button class="key">T</button>
-        <button class="key">Y</button>
-        <button class="key">U</button>
-        <button class="key">I</button>
-        <button class="key">O</button>
-        <button class="key">P</button>
-    </div>
-    <div class="keyboard-row">
-        <button class="key">A</button>
-        <button class="key">S</button>
-        <button class="key">D</button>
-        <button class="key">F</button>
-        <button class="key">G</button>
-        <button class="key">H</button>
-        <button class="key">J</button>
-        <button class="key">K</button>
-        <button class="key">L</button>
-    </div>
-    <div class="keyboard-row">
-        <button class="key">Z</button>
-        <button class="key">X</button>
-        <button class="key">C</button>
-        <button class="key">V</button>
-        <button class="key">B</button>
-        <button class="key">N</button>
-        <button class="key">M</button>
-        <button class="key">←</button>
-        <button class="key">⏎</button>
-    </div>
-    <div class="keyboard-row">
-        <button class="space-bar" style="width: 50%;">Space</button>
-    </div>
-</div>
-            <!-- End Nav Bar html -->
-        </div>
+					<div id="form-sub">
+						<p id="secondary-text">Food Type:</p>
+						<select class="input-select" id="FoodType">
+							<option value="Empty" style="display: none">Select one</option>
+							<option value="Dairy">Dairy</option>
+							<option value="Meats">Meats</option>
+							<option value="Vegetables">Vegetables</option>
+							<option value="Fruits">Fruits</option>
+							<option value="Grains">Grains</option>
+							<option value="Snacks">Snacks</option>
+							<option value="Seasoning">Seasoning</option>
+							<option value="Other">Other</option>
+						</select>
+					</div>
 
-        <script>
-            document.querySelectorAll('input[type="text"], input[type="number"], input[type="date"], textarea').forEach(input => {
-                input.addEventListener('focus', () => {
-                    document.getElementById('virtual-keyboard').style.display = 'block';
-                });
-        
-                input.addEventListener('blur', () => {
-                    // Delay hiding the keyboard to simulate interaction time
-                    setTimeout(() => {
-                        document.getElementById('virtual-keyboard').style.display = 'none';
-                    }, 200);
-                });
-            });
-        </script>
+					<div id="form-sub">
+						<p id="secondary-text">Quantity:</p>
+						<input type="number" class="input-numbers" id="Quantity" placeholder="number of items" min="1" />
+					</div>
 
+					<div id="form-sub">
+						<p id="secondary-text">Unit:</p>
+						<select class="input-select" id="Unit">
+							<option value="Cans">Cans</option>
+							<option value="Bags">Bags</option>
+							<option value="Pounds">Pounds</option>
+							<option value="Boxes">Boxes</option>
+							<option value="Bottles">Bottles</option>
+							<option value="Packages">Packages</option>
+						</select>
+					</div>
 
-    </body>
-    
-    <script>
-        // Dict where each key corresponds to a different shopping list, values are list of items
-        listContents = {
-            "Greg's Birthday": {"Cake": false, "Candles": false, "Hamburgers": false, "Hamburger Buns": false, "Balloons": false},
-            "Weekly Shopping": {"Bread": false, "Chicken": false, "Milk": false, "Grapes": false, "Broccoli": false, "Pasta": false, "Pasta Sauce": false}
-        };
+					<div id="form-sub">
+						<p id="secondary-text">Expiration Date:</p>
+						<input type="date" class="input-numbers" id="Date" />
+					</div>
 
-        var url_string = window.location;
-        var url = new URL(url_string);
-        var listName = url.searchParams.get("list");
+					<button type="button" onclick="prevItem()" id="prev-item-button" class="item-popup-button"><</button>
+					<button type="button" onclick="addKitchenItem()" id="add-item-button" class="item-popup-button">Add Item</button>
+					<button type="button" onclick="nextItem()" id="next-item-button" class="item-popup-button">></button>
+				</form>
+			</div>
+			<!-- END ADD ITEM POP UP-->
 
-        window.onload = function() {
-            
-            if (!localStorage.getItem("listContents")) {
-                localStorage.setItem("listContents", JSON.stringify(listContents));
-            }
-            storage = localStorage.getItem("listContents");
-            listContents = storage ? JSON.parse(storage) : [];
-            
-            // Adds all items in the list to the list
-            if (listName in listContents) {
-                for (const [name, checked] of Object.entries(listContents[listName])) {
-                    createListElement(name, checked);
-                }
+			<!-- Back icon -->
+			<a href="lists_home.html">
+				<img class="profile-icon" height="75" src="resources/images/back_icon.png" />
+			</a>
 
-            // create new list if it doesn't already exist
-            } else {
-                listContents[listName] = {};
-                localStorage.setItem('listContents', JSON.stringify(listContents));
-            }
+			<!-- Nav Bar html -->
+			<div class="icon-bar">
+				<a href="kitchen.html">
+					<img src="resources/images/kitchen_icon.png" height="75" />
+				</a>
+				<a href="lists_home.html" class="active">
+					<img src="resources/images/lists_icon.png" height="75" />
+				</a>
+				<a href="recipies.html">
+					<img src="resources/images/recipies_icon.png" height="75" />
+				</a>
+			</div>
+			<!-- Virtual Keyboard -->
+			<div id="virtual-keyboard" class="keyboard" style="display: none">
+				<div class="keyboard-row">
+					<button class="key">Q</button>
+					<button class="key">W</button>
+					<button class="key">E</button>
+					<button class="key">R</button>
+					<button class="key">T</button>
+					<button class="key">Y</button>
+					<button class="key">U</button>
+					<button class="key">I</button>
+					<button class="key">O</button>
+					<button class="key">P</button>
+				</div>
+				<div class="keyboard-row">
+					<button class="key">A</button>
+					<button class="key">S</button>
+					<button class="key">D</button>
+					<button class="key">F</button>
+					<button class="key">G</button>
+					<button class="key">H</button>
+					<button class="key">J</button>
+					<button class="key">K</button>
+					<button class="key">L</button>
+				</div>
+				<div class="keyboard-row">
+					<button class="key">Z</button>
+					<button class="key">X</button>
+					<button class="key">C</button>
+					<button class="key">V</button>
+					<button class="key">B</button>
+					<button class="key">N</button>
+					<button class="key">M</button>
+					<button class="key">←</button>
+					<button class="key">⏎</button>
+				</div>
+				<div class="keyboard-row">
+					<button class="space-bar" style="width: 50%">Space</button>
+				</div>
+			</div>
+			<!-- End Nav Bar html -->
+		</div>
 
-            // title of the page
-            var listTitle = document.getElementById('header');
-            listTitle.innerHTML = listName + ' List';
-        };
-        
-        // create the html for list
-        function createListElement(name, checked) {
-            var taskList = document.getElementById('food-list');
-            var li = document.createElement('li');
-            li.setAttribute('id', name);
-            li.innerHTML = name + " <span class='close' onClick='deleteTask(this); event.stopPropagation();'>x</span>";
-            li.onclick = function() {
-                li.classList.toggle('done');
-                // update the local storage
-                storage = localStorage.getItem("listContents");
-                listContents = storage ? JSON.parse(storage) : [];
-                listContents[listName][name] = !listContents[listName][name]
-                localStorage.setItem('listContents', JSON.stringify(listContents));
-            };
-            // set it the item is checked or not
-            if (checked) {
-                li.classList.toggle('done');
-            }
+		<script>
+			document.querySelectorAll('input[type="text"], input[type="number"], input[type="date"], textarea').forEach((input) => {
+				input.addEventListener("focus", () => {
+					document.getElementById("virtual-keyboard").style.display = "block";
+				});
 
-            taskList.appendChild(li);
-        }
+				input.addEventListener("blur", () => {
+					// Delay hiding the keyboard to simulate interaction time
+					setTimeout(() => {
+						document.getElementById("virtual-keyboard").style.display = "none";
+					}, 200);
+				});
+			});
+		</script>
+	</body>
 
-        // adds item to local storage and creates html for it
-        function addItem(item) {
-            // save the new list to localstorage
-            const storage = localStorage.getItem("listContents");
-            const temp = storage ? JSON.parse(storage) : [];
-            temp[listName][item] = false;
-            localStorage.setItem("listContents", JSON.stringify(temp));
-            
-            createListElement(item, false);
-        }
+	<script>
+		// Dict where each key corresponds to a different shopping list, values are list of items
+		listContents = {
+			"Greg's Birthday": {
+				Cake: false,
+				Candles: false,
+				Hamburgers: false,
+				"Hamburger Buns": false,
+				Balloons: false,
+			},
+			"Weekly Shopping": {
+				Bread: false,
+				Chicken: false,
+				Milk: false,
+				Grapes: false,
+				Broccoli: false,
+				Pasta: false,
+				"Pasta Sauce": false,
+			},
+		};
 
-        // removes item from local storage and item in html list
-        function removeItem(itemToRemove) {
-            const li = document.getElementById(itemToRemove);
-            li.parentNode.removeChild(li);
-            const storage = localStorage.getItem("listContents");
-            const temp = storage ? JSON.parse(storage) : [];
-            delete temp[listName][itemToRemove];
-            localStorage.setItem("listContents", JSON.stringify(temp));
-        }
+		var url_string = window.location;
+		var url = new URL(url_string);
+		var listName = url.searchParams.get("list");
 
+		window.onload = function () {
+			if (!localStorage.getItem("listContents")) {
+				localStorage.setItem("listContents", JSON.stringify(listContents));
+			}
+			storage = localStorage.getItem("listContents");
+			listContents = storage ? JSON.parse(storage) : [];
 
-        function addTask() {
-            var taskInput = document.getElementById('input-item');
-            var taskText = taskInput.value.trim();
+			// Adds all items in the list to the list
+			if (listName in listContents) {
+				for (const [name, checked] of Object.entries(listContents[listName])) {
+					createListElement(name, checked);
+				}
 
-            if (taskText === "") {
-                alert("Please enter a food item.");
-                return;
-            }
+				// create new list if it doesn't already exist
+			} else {
+				listContents[listName] = {};
+				localStorage.setItem("listContents", JSON.stringify(listContents));
+			}
 
-            addItem(taskText);
+			// title of the page
+			var listTitle = document.getElementById("header");
+			listTitle.innerHTML = listName + " List";
+		};
 
-            taskInput.value = "";
-        }
+		// create the html for list
+		function createListElement(name, checked) {
+			var taskList = document.getElementById("food-list");
+			var li = document.createElement("li");
+			li.setAttribute("id", name);
+			li.innerHTML = name + " <span class='close' onClick='deleteTask(this); event.stopPropagation();'>x</span>";
+			li.onclick = function () {
+				li.classList.toggle("done");
+				// update the local storage
+				storage = localStorage.getItem("listContents");
+				listContents = storage ? JSON.parse(storage) : [];
+				listContents[listName][name] = !listContents[listName][name];
+				localStorage.setItem("listContents", JSON.stringify(listContents));
+			};
+			// set it the item is checked or not
+			if (checked) {
+				li.classList.toggle("done");
+			}
 
-        function deleteTask(button) {
-            itemToRemove = button.parentNode.id;
+			taskList.appendChild(li);
+		}
 
-            // remove the new list to localstorage
-            removeItem(itemToRemove);
-        }
+		// adds item to local storage and creates html for it
+		function addItem(item) {
+			// save the new list to localstorage
+			const storage = localStorage.getItem("listContents");
+			const temp = storage ? JSON.parse(storage) : [];
+			temp[listName][item] = false;
+			localStorage.setItem("listContents", JSON.stringify(temp));
 
-        // ADD LIST ITEMS TO KITCHEN FUNCTIONS
+			createListElement(item, false);
+		}
 
-        function addListToKitchen() {
-            storage = localStorage.getItem("listContents");
-            listContents = storage ? JSON.parse(storage) : [];
+		// removes item from local storage and item in html list
+		function removeItem(itemToRemove) {
+			const li = document.getElementById(itemToRemove);
+			li.parentNode.removeChild(li);
+			const storage = localStorage.getItem("listContents");
+			const temp = storage ? JSON.parse(storage) : [];
+			delete temp[listName][itemToRemove];
+			localStorage.setItem("listContents", JSON.stringify(temp));
+		}
 
-            checkedItems = []
-            for (const [name, checked] of Object.entries(listContents[listName])) {
-                if (checked) {
-                    checkedItems.push(name);
-                }
-            }
-            
-            if (checkedItems.length != 0) {
-                localStorage.setItem("checkedItems", JSON.stringify(checkedItems));
-                localStorage.setItem('i', 0);
-            
-                document.getElementById('add-item-background').style.display = 'block';
-                document.getElementById('item-background').style.display = 'none';
-                document.getElementById("input-item-name").innerHTML = checkedItems[0];
-                document.getElementById("prev-item-button").style.display = 'none';
-                if (checkedItems.length == 1) {
-                    document.getElementById("next-item-button").style.display = 'none';
-                }
-            }
-        }
+		function addTask() {
+			var taskInput = document.getElementById("input-item");
+			var taskText = taskInput.value.trim();
 
-        function closeNewItem() {
-            document.getElementById('add-item-background').style.display = 'none';
-            document.getElementById('item-background').style.display = 'block';
-        }
+			if (taskText === "") {
+				alert("Please enter a food item.");
+				return;
+			}
 
-        function addKitchenItem() {
-            const name = document.getElementById("input-item-name").innerHTML;
-            const calories = document.getElementById("Calories").value;
-            const foodType = document.getElementById("FoodType").value;
-            const quantity = document.getElementById("Quantity").value;
-            const unit = document.getElementById("Unit").value;
-            const expiration = document.getElementById("Date").value;
+			addItem(taskText);
 
-            if (foodType == "Empty") {
-                alert("Please enter a food type.");
-                return;
-            }
+			taskInput.value = "";
+		}
 
-            const item = {
-                name: name,
-                calories: parseInt(calories, 10),
-                foodType: foodType,
-                quantity: parseInt(quantity, 10),
-                unit: unit,
-                expirationDate: expiration
-            };
+		function deleteTask(button) {
+			itemToRemove = button.parentNode.id;
 
-            if (!localStorage.getItem("foodStuffs")) {
-                localStorage.setItem("foodStuffs", JSON.stringify([{}]));
-            }
+			// remove the new list to localstorage
+			removeItem(itemToRemove);
+		}
 
-            // SAVE TO THE KITCHEN
-            const storage = localStorage.getItem("foodStuffs");
-            const temp = storage ? JSON.parse(storage) : [];
-            temp.push(item);
-            localStorage.setItem("foodStuffs", JSON.stringify(temp));
-            
-            // UPDATE THE CURRENT LIST TO REMOVE IT
-            i = Number(localStorage.getItem('i'));
-            const checkedStorage = localStorage.getItem("checkedItems");
-            const checkedItems = checkedStorage ? JSON.parse(checkedStorage) : [];
-            
-            // remove the item
-            removeItem(checkedItems[i]);
-            checkedItems.splice(i, 1);
-            localStorage.setItem("checkedItems", JSON.stringify(checkedItems));
+		// ADD LIST ITEMS TO KITCHEN FUNCTIONS
 
-            // if all items have been added
-            if (checkedItems.length == 0) {
-                closeNewItem()
-                document.getElementById("item-form").reset();
-                return;
-            }
+		function addListToKitchen() {
+			storage = localStorage.getItem("listContents");
+			listContents = storage ? JSON.parse(storage) : [];
 
-            // if last item was removed update i
-            if (i >= checkedItems.length) {
-                i = i - 1;
-                localStorage.setItem('i', i);
-            }
+			checkedItems = [];
+			for (const [name, checked] of Object.entries(listContents[listName])) {
+				if (checked) {
+					checkedItems.push(name);
+				}
+			}
 
-            // update the side buttons 
-            if (i >= checkedItems.length - 1) {
-                document.getElementById("next-item-button").style.display = 'none';
-            }
-            if (i == 0) {
-                document.getElementById("prev-item-button").style.display = 'none';
-            }
+			if (checkedItems.length != 0) {
+				localStorage.setItem("checkedItems", JSON.stringify(checkedItems));
+				localStorage.setItem("i", 0);
 
-            document.getElementById("input-item-name").innerHTML = checkedItems[i];
-            document.getElementById("item-form").reset();
-        }
+				document.getElementById("add-item-background").style.display = "block";
+				document.getElementById("item-background").style.display = "none";
+				document.getElementById("input-item-name").innerHTML = checkedItems[0];
+				document.getElementById("prev-item-button").style.display = "none";
+				if (checkedItems.length == 1) {
+					document.getElementById("next-item-button").style.display = "none";
+				}
+			}
+		}
 
-        function nextItem() {
-            i = Number(localStorage.getItem('i'));
-            const storage = localStorage.getItem("checkedItems");
-            const checkedItems = storage ? JSON.parse(storage) : [];
-            i = i + 1;
-            localStorage.setItem('i', i);
+		function closeNewItem() {
+			document.getElementById("add-item-background").style.display = "none";
+			document.getElementById("item-background").style.display = "block";
+		}
 
-            if (i >= checkedItems.length - 1) {
-                document.getElementById("next-item-button").style.display = 'none';
-            }
-            
-            document.getElementById("prev-item-button").style.display = 'block';
-            document.getElementById("input-item-name").innerHTML = checkedItems[i];
-            document.getElementById("item-form").reset();
-            
-        }
+		function addKitchenItem() {
+			const name = document.getElementById("input-item-name").innerHTML;
+			const calories = document.getElementById("Calories").value;
+			const foodType = document.getElementById("FoodType").value;
+			const quantity = document.getElementById("Quantity").value;
+			const unit = document.getElementById("Unit").value;
+			const expiration = document.getElementById("Date").value;
 
-        function prevItem() {
-            i = Number(localStorage.getItem('i'));
-            const storage = localStorage.getItem("checkedItems");
-            const checkedItems = storage ? JSON.parse(storage) : [];
-            i = i - 1;
-            localStorage.setItem('i', i);
+			if (foodType == "Empty") {
+				alert("Please enter a food type.");
+				return;
+			}
 
-            if (i == 0) {
-                document.getElementById("prev-item-button").style.display = 'none';
-            }
-            
-            document.getElementById("next-item-button").style.display = 'block';
-            document.getElementById("input-item-name").innerHTML = checkedItems[i];
-            document.getElementById("item-form").reset();
+			const item = {
+				name: name,
+				calories: parseInt(calories, 10),
+				foodType: foodType,
+				quantity: parseInt(quantity, 10),
+				unit: unit,
+				expirationDate: expiration,
+			};
 
-        }
-    </script>
+			if (!localStorage.getItem("foodStuffs")) {
+				localStorage.setItem("foodStuffs", JSON.stringify([{}]));
+			}
 
+			// SAVE TO THE KITCHEN
+			const storage = localStorage.getItem("foodStuffs");
+			const temp = storage ? JSON.parse(storage) : [];
+			temp.push(item);
+			localStorage.setItem("foodStuffs", JSON.stringify(temp));
 
+			// UPDATE THE CURRENT LIST TO REMOVE IT
+			i = Number(localStorage.getItem("i"));
+			const checkedStorage = localStorage.getItem("checkedItems");
+			const checkedItems = checkedStorage ? JSON.parse(checkedStorage) : [];
 
+			// remove the item
+			removeItem(checkedItems[i]);
+			checkedItems.splice(i, 1);
+			localStorage.setItem("checkedItems", JSON.stringify(checkedItems));
+
+			// if all items have been added
+			if (checkedItems.length == 0) {
+				closeNewItem();
+				document.getElementById("item-form").reset();
+				return;
+			}
+
+			// if last item was removed update i
+			if (i >= checkedItems.length) {
+				i = i - 1;
+				localStorage.setItem("i", i);
+			}
+
+			// update the side buttons
+			if (i >= checkedItems.length - 1) {
+				document.getElementById("next-item-button").style.display = "none";
+			}
+			if (i == 0) {
+				document.getElementById("prev-item-button").style.display = "none";
+			}
+
+			document.getElementById("input-item-name").innerHTML = checkedItems[i];
+			document.getElementById("item-form").reset();
+		}
+
+		function nextItem() {
+			i = Number(localStorage.getItem("i"));
+			const storage = localStorage.getItem("checkedItems");
+			const checkedItems = storage ? JSON.parse(storage) : [];
+			i = i + 1;
+			localStorage.setItem("i", i);
+
+			if (i >= checkedItems.length - 1) {
+				document.getElementById("next-item-button").style.display = "none";
+			}
+
+			document.getElementById("prev-item-button").style.display = "block";
+			document.getElementById("input-item-name").innerHTML = checkedItems[i];
+			document.getElementById("item-form").reset();
+		}
+
+		function prevItem() {
+			i = Number(localStorage.getItem("i"));
+			const storage = localStorage.getItem("checkedItems");
+			const checkedItems = storage ? JSON.parse(storage) : [];
+			i = i - 1;
+			localStorage.setItem("i", i);
+
+			if (i == 0) {
+				document.getElementById("prev-item-button").style.display = "none";
+			}
+
+			document.getElementById("next-item-button").style.display = "block";
+			document.getElementById("input-item-name").innerHTML = checkedItems[i];
+			document.getElementById("item-form").reset();
+		}
+	</script>
 </html>

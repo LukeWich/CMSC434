@@ -1,115 +1,138 @@
-#item-list{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
+#item-list {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 10px;
 }
 
 .edit-button {
-    height: 40px;
-    padding: 5px 15px;
-    font-size: 18px;
-    background-color: #90d883; /* Match the add-button color */
-    color: rgb(0, 0, 0);
-    border-radius: 4px;
-    cursor: pointer;
-    border: 2px solid #ccc; /* Consistent with other buttons */
-    margin-left: 10px; /* Adds space between other elements */
-    transition: background-color 0.3s;
+	height: 40px;
+	padding: 5px 15px;
+	font-size: 18px;
+	background-color: #90d883; /* Match the add-button color */
+	color: rgb(0, 0, 0);
+	border-radius: 4px;
+	cursor: pointer;
+	border: 2px solid #ccc; /* Consistent with other buttons */
+	margin-left: 10px; /* Adds space between other elements */
+	transition: background-color 0.3s;
 }
 
 .edit-button:hover {
-    background-color: #87ad81; /* Hover effect similar to add-button */
+	background-color: #87ad81; /* Hover effect similar to add-button */
 }
 
 .remove-button {
-    height: 40px;
-    padding: 5px 15px;
-    font-size: 18px;
-    background-color: #f28b82; /* A distinct color, but matches the app style */
-    color: rgb(0, 0, 0);
-    border-radius: 4px;
-    cursor: pointer;
-    border: 2px solid #ccc; /* Consistent with other buttons */
-    margin-left: 10px; /* Adds space between the Edit button */
-    transition: background-color 0.3s;
+	height: 40px;
+	padding: 5px 15px;
+	font-size: 18px;
+	background-color: #f28b82; /* A distinct color, but matches the app style */
+	color: rgb(0, 0, 0);
+	border-radius: 4px;
+	cursor: pointer;
+	border: 2px solid #ccc; /* Consistent with other buttons */
+	margin-left: 10px; /* Adds space between the Edit button */
+	transition: background-color 0.3s;
 }
 
 .remove-button:hover {
-    background-color: #e57373; /* A subtle hover effect */
+	background-color: #e57373; /* A subtle hover effect */
 }
 
 #input-item {
-    width: 300px; 
-    height: 40px; 
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #000000;
-    border-radius: 5px;
-    margin-right: 10px; 
+	width: 300px;
+	height: 40px;
+	padding: 10px;
+	font-size: 16px;
+	border: 2px solid #000000;
+	border-radius: 5px;
+	margin-right: 10px;
 }
 
 #list-container {
-    position: inherit;
-    bottom: 2%;
-    height: 590px;
-    width: 550px;
-    overflow-y: auto;
+	position: inherit;
+	bottom: 2%;
+	height: 590px;
+	width: 550px;
+	overflow-y: auto;
 }
 
 /* ------------------------------------------------------------ */
 
 #add-button:hover {
-    background-color: #0b6a1f;
+	background-color: #0b6a1f;
 }
 
 #item-text {
-    font: Helvetica;
-    color: black;
-    font-size: 15pt;
-    margin: 1%;
+	font: Helvetica;
+	color: black;
+	font-size: 15pt;
+	margin: 1%;
 }
 
 #food-list {
-    font: Helvetica;
-    color: black;
-    font-size: 24pt;
-    font-weight: bold;
+	font: Helvetica;
+	color: black;
+	font-size: 24pt;
+	font-weight: bold;
 }
 
 .sublist {
-    font: Helvetica;
-    color: black;
-    font-size: 18pt;
-    font-weight: normal;
+	font: Helvetica;
+	color: black;
+	font-size: 18pt;
+	font-weight: normal;
 }
 
 /* REMOVE BULLETS */
-.collapsible, .collapsible ol, .collapsible ul {
-    list-style-type: none;
+.collapsible,
+.collapsible ol,
+.collapsible ul {
+	list-style-type: none;
 }
-  
+
 /* COLLAPSIBLE LIST CONTAINER */
 .collapsible {
-max-width: 550px;
-padding: 0px; 
-margin: 0;
+	max-width: 550px;
+	padding: 0px;
+	margin: 0;
 }
 
 /* CONTROL SPACING & INDENTATION */
-.collapsible ol, .collapsible ul { padding-left: 15px; }
-.toggle + ol, .toggle + ul { margin-top: 10px; }
-.collapsible li { padding: 10px; }
+.collapsible ol,
+.collapsible ul {
+	padding-left: 15px;
+}
+.toggle + ol,
+.toggle + ul {
+	margin-top: 10px;
+}
+.collapsible li {
+	padding: 10px;
+}
 
 /* SHOW & HIDE CHILDREN */
-.collapsible ol, .collapsible ul { display: none; }
-.toggle.open + ol, .toggle.open + ul { display: block; }
+.collapsible ol,
+.collapsible ul {
+	display: none;
+}
+.toggle.open + ol,
+.toggle.open + ul {
+	display: block;
+}
 
 /* ADD TOGGLE ARROW */
-.toggle { cursor: pointer; }
-.toggle::after {
-float: right; content: "\27A4";
-font-size: 20px; line-height: 20px; font-weight: 700;
-transition: all 0.3s;
+.toggle {
+	cursor: pointer;
 }
-.toggle.open::after { transform: rotate(90deg); }
+.toggle::after {
+	float: right;
+	content: "\27A4";
+	font-size: 20px;
+	line-height: 20px;
+	font-weight: 700;
+	transition: all 0.3s;
+}
+.toggle.open::after {
+	transform: rotate(90deg);
+}

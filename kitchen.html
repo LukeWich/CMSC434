@@ -1,538 +1,476 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Kitchen Tab</title>
-    <link href="./resources/css/kitchen.css" type="text/css" rel="stylesheet">
-    <link href="./resources/css/styles.css" type="text/css" rel="stylesheet">
-    <link href="./resources/css/MultiSelect.css" type="text/css" rel="stylesheet">
-</head>
-
-<body>
-    <div class="device">
-        <!-- Kitchen Header -->
-        <div id="header">Kitchen</div>
-        
-        <!-- Kitchen List Section -->
-        <div id="item-background">
-            <div id="item-list">
-                <input type="text" id="input-item" placeholder="Add a new kitchen item...">
-                <button id="add-button" onclick="addItemPopup()">Add Item</button>
-            </div>
-    
-            <!-- List Container -->
-            <div id="list-container">
-                <ul id="food-list" class="collapsible">
-                    <li>Dairy
-                        <ul id="dairy-food-list" class="sublist"></ul>
-                    </li>
-                    <li>Meats
-                        <ul id="meats-food-list" class="sublist"></ul>
-                    </li>
-                    <li>Vegetables
-                        <ul id="vegetables-food-list" class="sublist"></ul>
-                    </li>
-                    <li>Fruits
-                        <ul id="fruits-food-list" class="sublist"></ul>
-                    </li>
-                    <li>Grains
-                        <ul id="grains-food-list" class="sublist"></ul>
-                    </li>
-                    <li>Snacks
-                        <ul id="snacks-food-list" class="sublist"></ul>
-                    </li>
-                    <li>Seasonings
-                        <ul id="seasonings-food-list" class="sublist"></ul>
-                    </li>
-                    <li>Other
-                        <ul id="other-food-list" class="sublist"></ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- END OF LIST -->
-
-        <!-- ADD ITEM pop up -->
-        <div id="add-item-background" style="display: none">
-            <p id="input-item-name"></p>
-            <img class="upper-right-icon" onclick="closeNewItem()" height="60" src="resources/images/close_icon.png">
-            <form>
-                <div id = "form-sub">
-                    <p id = secondary-text>Calories:</p>
-                    <input type="number" class="input-numbers" id = "Calories" placeholder="number of calories" min = "0" >
-                </div>
-
-                <div id = "form-sub">
-                    <p id = secondary-text>Food Type:</p>
-                    <select class="input-select" id = "FoodType">
-                        <option value="Empty" style="display:none">Select one</option>
-                        <option value="Dairy">Dairy</option>
-                        <option value="Meats">Meats</option>
-                        <option value="Vegetables">Vegetables</option>
-                        <option value="Fruits">Fruits</option>
-                        <option value="Grains">Grains</option>
-                        <option value="Snacks">Snacks</option>
-                        <option value="Seasoning">Seasoning</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-
-                <div id = "form-sub">
-                    <p id = secondary-text>Quantity:</p>
-                    <input type="number" class="input-numbers" id = "Quantity" placeholder="number of items"  min= ".1" value="1" step=".1">
-                </div>
-
-                <div id = "form-sub">
-                    <p id = secondary-text>Unit:</p>
-                    <select class="input-select" id = "Unit">
-                        <option value="Cans">Cans</option>
-                        <option value="Bags">Bags</option>
-                        <option value="Pounds">Pounds</option>
-                        <option value="Boxes">Boxes</option>
-                        <option value="Bottles">Bottles</option>
-                        <option value="Packages">Packages</option>
-                    </select>
-                </div>
-
-                <div id = "form-sub">
-                    <p id = secondary-text>Expiration Date:</p>
-                    <input type="date" class ="input-numbers" id = "Date">
-                </div>
-
-                <button onclick="addKitchenItem()" id ="add-item-button" class="item-popup-button">Add Item</button>
-
-            </form>
-        </div>
-        <!-- END ADD ITEM POP UP-->
-
-        <div id="edit-item-background" style="display: none">
-            <p id="input-item-name"></p>
-            
-            <form>
-                <div id = "form-sub">
-                    <p id = secondary-text>Calories:</p>
-                    <input type="number" class="input-numbers" id = "Calories" placeholder="number of calories" min = "0" >
-                </div>
-
-                <div id = "form-sub">
-                    <p id = secondary-text>Food Type:</p>
-                    <select class="input-select" id = "FoodType">
-                        <option value="Empty" style="display:none">Select one</option>
-                        <option value="Dairy">Dairy</option>
-                        <option value="Meats">Meats</option>
-                        <option value="Vegetables">Vegetables</option>
-                        <option value="Fruits">Fruits</option>
-                        <option value="Grains">Grains</option>
-                        <option value="Snacks">Snacks</option>
-                        <option value="Seasoning">Seasoning</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-
-                <div id = "form-sub">
-                    <p id = secondary-text>Quantity:</p>
-                    <input type="number" class="input-numbers" id = "Quantity" placeholder="number of items"  min= ".1" value="1" step=".1">
-                </div>
-
-                <div id = "form-sub">
-                    <p id = secondary-text>Unit:</p>
-                    <select class="input-select" id = "Unit">
-                        <option value="Cans">Cans</option>
-                        <option value="Bags">Bags</option>
-                        <option value="Pounds">Pounds</option>
-                        <option value="Boxes">Boxes</option>
-                        <option value="Bottles">Bottles</option>
-                        <option value="Packages">Packages</option>
-                    </select>
-                </div>
-
-                <div id = "form-sub">
-                    <p id = secondary-text>Expiration Date:</p>
-                    <input type="date" class ="input-numbers" id = "Date">
-                </div>
-
-                <button onclick="addKitchenItem()" id ="edit-item-button" class="item-popup-button">Add Item</button>
-
-            </form>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <!-- Profile icon and page -->
-        <img class='profile-icon' onclick="toggleSidePanel()" height="75" src="resources/images/profile_icon.png">
-        <div class="profile-panel" id="profile-panel" style="display: none">
-            <a class="profile-heading" href="profile.html" style="top: 10px">
-                <img style="position:absolute; height:100px; left:20px" src="resources/images/profile_icon.png">
-                <b class="user-name">User's Name</b>
-                <small>View Profile</small>
-            </a>
-
-            <a href="settings.html" style="top: 150px">
-                <img class="panel-images" src="resources/images/settings_icon.png">
-                <b>Settings</b>
-            </a>
-
-            <a href="" style="top: 225px">
-                <img class="panel-images" src="resources/images/plus_icon.png">
-                <b>Add Users</b>
-            </a>
-
-            <a href="help.html" style="top: 300px">
-                <img class="panel-images" src="resources/images/question_icon.png">
-                <b>Help</b>
-            </a>
-
-            <a href="" style="top: 375px">
-                <img class="panel-images" src="resources/images/logout_icon.png">
-                <b>Log Out</b>
-            </a>
-
-            <img class="close-icon" onclick="toggleSidePanel()" height="50" src="resources/images/close_icon.png">
-        </div>
-        <!--- End Profile side panel -->
-        
-        <!-- Nav Bar html -->
-        <div class="icon-bar">
-            <a href="kitchen.html" class="active">
-                <img src="resources/images/kitchen_icon.png" height="75">
-            </a>
-            <a href="lists_home.html">
-                <img src="resources/images/lists_icon.png" height="75">
-            </a>
-            <a href="recipies.html">
-                <img src="resources/images/recipies_icon.png" height="75">
-            </a>
-        </div>
-        <!-- End Nav Bar html -->
-
-            <!-- Virtual Keyboard -->
-<div id="virtual-keyboard" class="keyboard" style="display: none;">
-    <div class="keyboard-row">
-        <button class="key">Q</button>
-        <button class="key">W</button>
-        <button class="key">E</button>
-        <button class="key">R</button>
-        <button class="key">T</button>
-        <button class="key">Y</button>
-        <button class="key">U</button>
-        <button class="key">I</button>
-        <button class="key">O</button>
-        <button class="key">P</button>
-    </div>
-    <div class="keyboard-row">
-        <button class="key">A</button>
-        <button class="key">S</button>
-        <button class="key">D</button>
-        <button class="key">F</button>
-        <button class="key">G</button>
-        <button class="key">H</button>
-        <button class="key">J</button>
-        <button class="key">K</button>
-        <button class="key">L</button>
-    </div>
-    <div class="keyboard-row">
-        <button class="key">Z</button>
-        <button class="key">X</button>
-        <button class="key">C</button>
-        <button class="key">V</button>
-        <button class="key">B</button>
-        <button class="key">N</button>
-        <button class="key">M</button>
-        <button class="key">←</button>
-        <button class="key">⏎</button>
-    </div>
-    <div class="keyboard-row">
-        <button class="space-bar" style="width: 50%;">Space</button>
-    </div>
-</div>
-
-    </div>
-
-    <script>
-        const defaultChicken = [
-            {
-                name: "Chicken Breast",
-                calories: 200,
-                foodType: "Meats",
-                quantity: 2,
-                unit: "Pounds",
-                expirationDate: "2024-11-15"
-            },
-            {
-                name: "Milk",
-                calories: 200,
-                foodType: "Dairy",
-                quantity: 1,
-                unit: "Bottle",
-                expirationDate: "2024-11-08"
-            }
-        ];
-
-        window.onload = function() {
-            if (!localStorage.getItem("foodStuffs")) {
-                localStorage.setItem("foodStuffs", JSON.stringify(defaultChicken));
-            }
-            createList();
-        };
-
-        function addItemPopup() {
-            const input = document.getElementById("input-item").value.trim();
-            if(input == ""){
-                alert("Please enter a food item.");
-            } else {
-                document.getElementById('add-item-background').style.display = 'block';
-                document.getElementById('item-background').style.display = 'none';
-                document.getElementById("input-item-name").innerHTML = input;
-            }
-        }
-
-        let originalItem = null; // Store the original item data
-
-
-
-
-
-        let editingItemIndex = null; // Track the index of the item being edited
-
-function editKitchenItem(itemIndex) {
-    const storage = JSON.parse(localStorage.getItem("foodStuffs"));
-    const itemToEdit = storage[itemIndex];
-
-    // Store the original item and index for editing
-    originalItem = { ...itemToEdit };
-    editingItemIndex = itemIndex;
-
-    // Pre-fill the form with the existing item's details
-    document.getElementById('input-item-name').innerHTML = itemToEdit.name;
-    document.getElementById('Calories').value = itemToEdit.calories;
-    document.getElementById('FoodType').value = itemToEdit.foodType;
-    document.getElementById('Quantity').value = itemToEdit.quantity;
-    document.getElementById('Unit').value = itemToEdit.unit;
-    document.getElementById('Date').value = itemToEdit.expirationDate;
-
-
-
-
-    
-    // Show the add item dialog
-    document.getElementById('add-item-background').style.display = 'block';
-    document.getElementById('item-background').style.display = 'none';
-}
-
-function closeNewItem() {
-    // Simply hide the add/edit item dialog and show the item background
-    document.getElementById('add-item-background').style.display = 'none';
-    document.getElementById('item-background').style.display = 'block';
-}
-
-
-function createList() {
-    const storage = localStorage.getItem("foodStuffs");
-    const items = storage ? JSON.parse(storage) : [];
-    const foodTypes = ['dairy', 'meats', 'vegetables', 'fruits', 'grains', 'snacks', 'seasonings', 'other'];
-
-    // Capture the current expanded/collapsed state of each list
-    const expandedStates = {};
-    foodTypes.forEach(type => {
-        const listElement = document.getElementById(type.toLowerCase() + "-food-list").parentElement;
-        if (listElement) {
-            expandedStates[type] = listElement.querySelector('.toggle')?.classList.contains('open');
-        }
-    });
-
-    // Clear and rebuild each category's item list
-    foodTypes.forEach(type => {
-        const itemList = document.getElementById(type.toLowerCase() + "-food-list");
-        itemList.innerHTML = "";
-    });
-
-    items.forEach((item, index) => {
-        const itemElement = document.createElement("li");
-        itemElement.className = "item-entry";
-        itemElement.innerHTML = `
-            <p id="item-text">${item.name} | Amount: ${item.quantity} ${item.unit}
-            <ul>Calories: ${item.calories} | Expiration Date: ${item.expirationDate}</ul></p>
-            <button class="edit-button" onclick="editKitchenItem(${index})">Edit</button>
-            <button class="remove-button" onclick="removeKitchenItem(${index})">Remove</button>
-        `;
-
-        const itemList = document.getElementById(item.foodType.toLowerCase() + "-food-list");
-        itemList.appendChild(itemElement);
-    });
-
-    // Restore the expanded/collapsed state
-    foodTypes.forEach(type => {
-        const listElement = document.getElementById(type.toLowerCase() + "-food-list").parentElement;
-        if (listElement && expandedStates[type]) {
-            listElement.querySelector('.toggle').classList.add('open');
-        }
-    });
-}
-
-
-
-
-
-
-
-function addKitchenItem() {
-    const name = document.getElementById("input-item-name").innerHTML;
-    const calories = document.getElementById("Calories").value;
-    const foodType = document.getElementById("FoodType").value;
-    const quantity = document.getElementById("Quantity").value;
-    const unit = document.getElementById("Unit").value;
-    const expiration = document.getElementById("Date").value;
-
-    if (foodType === "Empty") {
-        alert("Please enter a food type.");
-        return;
-    }
-
-    const item = {
-        name: name,
-        calories: parseInt(calories, 10),
-        foodType: foodType,
-        quantity: parseFloat(quantity),
-        unit: unit,
-        expirationDate: expiration
-    };
-
-    const storage = localStorage.getItem("foodStuffs");
-    const temp = storage ? JSON.parse(storage) : [];
-
-    if (editingItemIndex !== null) {
-        // Replace the item at the index being edited
-        temp[editingItemIndex] = item;
-        editingItemIndex = null; // Reset the index after saving changes
-    } else {
-        // Add new item if not editing
-        temp.push(item);
-    }
-
-    localStorage.setItem("foodStuffs", JSON.stringify(temp));
-    closeNewItem();
-    createList();
-}
-
-
-
-function removeKitchenItem(itemIndex) {
-    const storage = JSON.parse(localStorage.getItem("foodStuffs"));
-    storage.splice(itemIndex, 1); // Remove the item at the specified index
-    localStorage.setItem("foodStuffs", JSON.stringify(storage));
-    createList(); // Re-render the list to update the UI
-}
-
-function createList() {
-    const storage = localStorage.getItem("foodStuffs");
-    const items = storage ? JSON.parse(storage) : [];
-    const foodTypes = ['dairy', 'meats', 'vegetables', 'fruits', 'grains', 'snacks', 'seasonings', 'other'];
-
-    foodTypes.forEach(x => {
-        const itemList = document.getElementById(x.toLowerCase() + "-food-list");
-        itemList.innerHTML = ""; 
-    });
-
-    items.forEach((x, index) => {
-        const itemElement = document.createElement("li");
-        itemElement.className = "x";
-        itemElement.innerHTML = `
-            <p id="item-text">${x.name} | Amount: ${x.quantity} ${x.unit}
-            <ul>Calories: ${x.calories} | Expiration Date: ${x.expirationDate}</ul></p>
-            <button class="edit-button" onclick="editKitchenItem(${index})">Edit</button>
-            <button class="remove-button" onclick="removeKitchenItem(${index})">Remove</button>
-        `;
-
-        const itemList = document.getElementById(x.foodType.toLowerCase() + "-food-list");
-        itemList.appendChild(itemElement);
-    });
-}
-
-
-
-
-        // // Function to remove items from the kitchen list
-        // function removeKitchenItem(button) {
-        //     var li = button.parentNode;
-        //     li.parentNode.removeChild(li);
-        // }
-
-        // // Function to increase the quantity of an item
-        // function increaseQuantity(button) {
-        //     var li = button.parentNode;
-        //     var quantitySpan = li.querySelector(".quantity");
-        //     var quantity = parseInt(quantitySpan.textContent);
-        //     quantitySpan.textContent = quantity + 1;
-        // }
-
-        // // Function to decrease the quantity of an item
-        // function decreaseQuantity(button) {
-        //     var li = button.parentNode;
-        //     var quantitySpan = li.querySelector(".quantity");
-        //     var quantity = parseInt(quantitySpan.textContent);
-
-        //     if (quantity > 1) {
-        //         quantitySpan.textContent = quantity - 1;
-        //     } else {
-        //         li.parentNode.removeChild(li); // Remove the item if quantity is 0
-        //     }
-        // }
-
-        // JS for the collapsable lists
-        window.addEventListener("load", () => {
-            for (let i of document.querySelectorAll(".collapsible ol, .collapsible ul")) {
-              let t = document.createElement("div");
-              t.innerHTML = i.previousSibling.textContent;
-              t.className = "toggle";
-              t.onclick = () => t.classList.toggle("open");
-              i.parentElement.removeChild(i.previousSibling);
-              i.parentElement.insertBefore(t, i);
-            }
-          });
-
-        function toggleSidePanel() {
-            var x = document.getElementById('profile-panel');
-            if (x.style.display === "none") {
-                x.style.display = 'block';
-            } else {
-                x.style.display = 'none';
-            }
-        }
-
-
-
-
-
-
-        
-    </script>
-
-
-
-<script>
-    document.querySelectorAll('input[type="text"], input[type="number"], input[type="date"], textarea').forEach(input => {
-        input.addEventListener('focus', () => {
-            document.getElementById('virtual-keyboard').style.display = 'block';
-        });
-
-        input.addEventListener('blur', () => {
-            // Delay hiding the keyboard to simulate interaction time
-            setTimeout(() => {
-                document.getElementById('virtual-keyboard').style.display = 'none';
-            }, 200);
-        });
-    });
-</script>
-
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Kitchen Tab</title>
+		<link href="./resources/css/kitchen.css" type="text/css" rel="stylesheet" />
+		<link href="./resources/css/styles.css" type="text/css" rel="stylesheet" />
+
+		<!-- not currently in use -->
+		<!-- <link href="./resources/css/MultiSelect.css" type="text/css" rel="stylesheet"> -->
+	</head>
+
+	<body>
+		<div class="device">
+			<!-- Kitchen Header -->
+			<div id="header">Kitchen</div>
+
+			<!-- Kitchen List Section -->
+			<div id="item-background">
+				<div id="item-list">
+					<input type="text" id="input-item" placeholder="Add a new kitchen item..." />
+					<button id="add-button" onclick="addItemPopup()">Add Item</button>
+				</div>
+
+				<!-- List Container -->
+				<div id="list-container">
+					<ul id="food-list" class="collapsible">
+						<li>
+							Dairy
+							<ul id="dairy-food-list" class="sublist"></ul>
+						</li>
+						<li>
+							Meats
+							<ul id="meats-food-list" class="sublist"></ul>
+						</li>
+						<li>
+							Vegetables
+							<ul id="vegetables-food-list" class="sublist"></ul>
+						</li>
+						<li>
+							Fruits
+							<ul id="fruits-food-list" class="sublist"></ul>
+						</li>
+						<li>
+							Grains
+							<ul id="grains-food-list" class="sublist"></ul>
+						</li>
+						<li>
+							Snacks
+							<ul id="snacks-food-list" class="sublist"></ul>
+						</li>
+						<li>
+							Seasonings
+							<ul id="seasonings-food-list" class="sublist"></ul>
+						</li>
+						<li>
+							Other
+							<ul id="other-food-list" class="sublist"></ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- END OF LIST -->
+
+			<!-- ADD ITEM pop up -->
+			<div id="add-item-background" style="display: none">
+				<p id="input-item-name"></p>
+				<img class="upper-right-icon" onclick="closeNewItem()" height="60" src="resources/images/close_icon.png" />
+				<form>
+					<div id="form-sub">
+						<p id="secondary-text">Calories:</p>
+						<input type="number" class="input-numbers" id="Calories" placeholder="number of calories" min="0" />
+					</div>
+
+					<div id="form-sub">
+						<p id="secondary-text">Food Type:</p>
+						<select class="input-select" id="FoodType">
+							<option value="Empty" style="display: none">Select one</option>
+							<option value="Dairy">Dairy</option>
+							<option value="Meats">Meats</option>
+							<option value="Vegetables">Vegetables</option>
+							<option value="Fruits">Fruits</option>
+							<option value="Grains">Grains</option>
+							<option value="Snacks">Snacks</option>
+							<option value="Seasoning">Seasoning</option>
+							<option value="Other">Other</option>
+						</select>
+					</div>
+
+					<div id="form-sub">
+						<p id="secondary-text">Quantity:</p>
+						<input type="number" class="input-numbers" id="Quantity" placeholder="number of items" min=".1" value="1" step=".1" />
+					</div>
+
+					<div id="form-sub">
+						<p id="secondary-text">Unit:</p>
+						<select class="input-select" id="Unit">
+							<option value="Cans">Cans</option>
+							<option value="Bags">Bags</option>
+							<option value="Pounds">Pounds</option>
+							<option value="Boxes">Boxes</option>
+							<option value="Bottles">Bottles</option>
+							<option value="Packages">Packages</option>
+						</select>
+					</div>
+
+					<div id="form-sub">
+						<p id="secondary-text">Expiration Date:</p>
+						<input type="date" class="input-numbers" id="Date" />
+					</div>
+
+					<button onclick="addKitchenItem()" id="add-item-button" class="item-popup-button">Add Item</button>
+				</form>
+			</div>
+			<!-- END ADD ITEM POP UP-->
+
+			<div id="edit-item-background" style="display: none">
+				<p id="input-item-name"></p>
+
+				<form>
+					<div id="form-sub">
+						<p id="secondary-text">Calories:</p>
+						<input type="number" class="input-numbers" id="Calories" placeholder="number of calories" min="0" />
+					</div>
+
+					<div id="form-sub">
+						<p id="secondary-text">Food Type:</p>
+						<select class="input-select" id="FoodType">
+							<option value="Empty" style="display: none">Select one</option>
+							<option value="Dairy">Dairy</option>
+							<option value="Meats">Meats</option>
+							<option value="Vegetables">Vegetables</option>
+							<option value="Fruits">Fruits</option>
+							<option value="Grains">Grains</option>
+							<option value="Snacks">Snacks</option>
+							<option value="Seasoning">Seasoning</option>
+							<option value="Other">Other</option>
+						</select>
+					</div>
+
+					<div id="form-sub">
+						<p id="secondary-text">Quantity:</p>
+						<input type="number" class="input-numbers" id="Quantity" placeholder="number of items" min=".1" value="1" step=".1" />
+					</div>
+
+					<div id="form-sub">
+						<p id="secondary-text">Unit:</p>
+						<select class="input-select" id="Unit">
+							<option value="Cans">Cans</option>
+							<option value="Bags">Bags</option>
+							<option value="Pounds">Pounds</option>
+							<option value="Boxes">Boxes</option>
+							<option value="Bottles">Bottles</option>
+							<option value="Packages">Packages</option>
+						</select>
+					</div>
+
+					<div id="form-sub">
+						<p id="secondary-text">Expiration Date:</p>
+						<input type="date" class="input-numbers" id="Date" />
+					</div>
+
+					<button onclick="addKitchenItem()" id="edit-item-button" class="item-popup-button">Add Item</button>
+				</form>
+			</div>
+
+			<!-- Profile icon and page -->
+			<img class="profile-icon" onclick="toggleSidePanel()" height="75" src="resources/images/profile_icon.png" />
+			<div class="profile-panel" id="profile-panel" style="display: none">
+				<a class="profile-heading" href="profile.html" style="top: 10px">
+					<img style="position: absolute; height: 100px; left: 20px" src="resources/images/profile_icon.png" />
+					<b class="user-name">User's Name</b>
+					<small>View Profile</small>
+				</a>
+
+				<a href="settings.html" style="top: 150px">
+					<img class="panel-images" src="resources/images/settings_icon.png" />
+					<b>Settings</b>
+				</a>
+
+				<a href="" style="top: 225px">
+					<img class="panel-images" src="resources/images/plus_icon.png" />
+					<b>Add Users</b>
+				</a>
+
+				<a href="help.html" style="top: 300px">
+					<img class="panel-images" src="resources/images/question_icon.png" />
+					<b>Help</b>
+				</a>
+
+				<a href="" style="top: 375px">
+					<img class="panel-images" src="resources/images/logout_icon.png" />
+					<b>Log Out</b>
+				</a>
+
+				<img class="close-icon" onclick="toggleSidePanel()" height="50" src="resources/images/close_icon.png" />
+			</div>
+			<!--- End Profile side panel -->
+
+			<!-- Nav Bar html -->
+			<div class="icon-bar">
+				<a href="kitchen.html" class="active">
+					<img src="resources/images/kitchen_icon.png" height="75" />
+				</a>
+				<a href="lists_home.html">
+					<img src="resources/images/lists_icon.png" height="75" />
+				</a>
+				<a href="recipies.html">
+					<img src="resources/images/recipies_icon.png" height="75" />
+				</a>
+			</div>
+			<!-- End Nav Bar html -->
+
+			<!-- Virtual Keyboard -->
+			<div id="virtual-keyboard" class="keyboard" style="display: none">
+				<div class="keyboard-row">
+					<button class="key">Q</button>
+					<button class="key">W</button>
+					<button class="key">E</button>
+					<button class="key">R</button>
+					<button class="key">T</button>
+					<button class="key">Y</button>
+					<button class="key">U</button>
+					<button class="key">I</button>
+					<button class="key">O</button>
+					<button class="key">P</button>
+				</div>
+				<div class="keyboard-row">
+					<button class="key">A</button>
+					<button class="key">S</button>
+					<button class="key">D</button>
+					<button class="key">F</button>
+					<button class="key">G</button>
+					<button class="key">H</button>
+					<button class="key">J</button>
+					<button class="key">K</button>
+					<button class="key">L</button>
+				</div>
+				<div class="keyboard-row">
+					<button class="key">Z</button>
+					<button class="key">X</button>
+					<button class="key">C</button>
+					<button class="key">V</button>
+					<button class="key">B</button>
+					<button class="key">N</button>
+					<button class="key">M</button>
+					<button class="key">←</button>
+					<button class="key">⏎</button>
+				</div>
+				<div class="keyboard-row">
+					<button class="space-bar" style="width: 50%">Space</button>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			const defaultChicken = [
+				{
+					name: "Chicken Breast",
+					calories: 200,
+					foodType: "Meats",
+					quantity: 2,
+					unit: "Pounds",
+					expirationDate: "2024-11-15",
+				},
+				{
+					name: "Milk",
+					calories: 200,
+					foodType: "Dairy",
+					quantity: 1,
+					unit: "Bottle",
+					expirationDate: "2024-11-08",
+				},
+			];
+
+			window.onload = function () {
+				if (!localStorage.getItem("foodStuffs")) {
+					localStorage.setItem("foodStuffs", JSON.stringify(defaultChicken));
+				}
+				createList();
+			};
+
+			function addItemPopup() {
+				const input = document.getElementById("input-item").value.trim();
+				if (input == "") {
+					alert("Please enter a food item.");
+				} else {
+					document.getElementById("add-item-background").style.display = "block";
+					document.getElementById("item-background").style.display = "none";
+					document.getElementById("input-item-name").innerHTML = input;
+				}
+			}
+
+			let originalItem = null; // Store the original item data
+
+			let editingItemIndex = null; // Track the index of the item being edited
+
+			function editKitchenItem(itemIndex) {
+				const storage = JSON.parse(localStorage.getItem("foodStuffs"));
+				const itemToEdit = storage[itemIndex];
+
+				// Store the original item and index for editing
+				originalItem = { ...itemToEdit };
+				editingItemIndex = itemIndex;
+
+				// Pre-fill the form with the existing item's details
+				document.getElementById("input-item-name").innerHTML = itemToEdit.name;
+				document.getElementById("Calories").value = itemToEdit.calories;
+				document.getElementById("FoodType").value = itemToEdit.foodType;
+				document.getElementById("Quantity").value = itemToEdit.quantity;
+				document.getElementById("Unit").value = itemToEdit.unit;
+				document.getElementById("Date").value = itemToEdit.expirationDate;
+
+				// Show the add item dialog
+				document.getElementById("add-item-background").style.display = "block";
+				document.getElementById("item-background").style.display = "none";
+			}
+
+			function closeNewItem() {
+				// Simply hide the add/edit item dialog and show the item background
+				document.getElementById("add-item-background").style.display = "none";
+				document.getElementById("item-background").style.display = "block";
+			}
+
+			function createList() {
+				const storage = localStorage.getItem("foodStuffs");
+				const items = storage ? JSON.parse(storage) : [];
+				const foodTypes = ["dairy", "meats", "vegetables", "fruits", "grains", "snacks", "seasonings", "other"];
+
+				// Capture the current expanded/collapsed state of each list
+				const expandedStates = {};
+				foodTypes.forEach((type) => {
+					const listElement = document.getElementById(type.toLowerCase() + "-food-list").parentElement;
+					if (listElement) {
+						expandedStates[type] = listElement.querySelector(".toggle")?.classList.contains("open");
+					}
+				});
+
+				// Clear and rebuild each category's item list
+				foodTypes.forEach((type) => {
+					const itemList = document.getElementById(type.toLowerCase() + "-food-list");
+					itemList.innerHTML = "";
+				});
+
+				items.forEach((item, index) => {
+					const itemElement = document.createElement("li");
+					itemElement.className = "item-entry";
+					itemElement.innerHTML = `
+                <p id="item-text">${item.name} | Amount: ${item.quantity} ${item.unit}
+                <ul>Calories: ${item.calories} | Expiration Date: ${item.expirationDate}</ul></p>
+                <button class="edit-button" onclick="editKitchenItem(${index})">Edit</button>
+                <button class="remove-button" onclick="removeKitchenItem(${index})">Remove</button>
+            `;
+
+					const itemList = document.getElementById(item.foodType.toLowerCase() + "-food-list");
+					itemList.appendChild(itemElement);
+				});
+
+				// Restore the expanded/collapsed state
+				foodTypes.forEach((type) => {
+					const listElement = document.getElementById(type.toLowerCase() + "-food-list").parentElement;
+					if (listElement && expandedStates[type]) {
+						listElement.querySelector(".toggle").classList.add("open");
+					}
+				});
+			}
+
+			function addKitchenItem() {
+				const name = document.getElementById("input-item-name").innerHTML;
+				const calories = document.getElementById("Calories").value;
+				const foodType = document.getElementById("FoodType").value;
+				const quantity = document.getElementById("Quantity").value;
+				const unit = document.getElementById("Unit").value;
+				const expiration = document.getElementById("Date").value;
+
+				if (foodType === "Empty") {
+					alert("Please enter a food type.");
+					return;
+				}
+
+				const item = {
+					name: name,
+					calories: parseInt(calories, 10),
+					foodType: foodType,
+					quantity: parseFloat(quantity),
+					unit: unit,
+					expirationDate: expiration,
+				};
+
+				const storage = localStorage.getItem("foodStuffs");
+				const temp = storage ? JSON.parse(storage) : [];
+
+				if (editingItemIndex !== null) {
+					// Replace the item at the index being edited
+					temp[editingItemIndex] = item;
+					editingItemIndex = null; // Reset the index after saving changes
+				} else {
+					// Add new item if not editing
+					temp.push(item);
+				}
+
+				localStorage.setItem("foodStuffs", JSON.stringify(temp));
+				closeNewItem();
+				createList();
+			}
+
+			function removeKitchenItem(itemIndex) {
+				const storage = JSON.parse(localStorage.getItem("foodStuffs"));
+				storage.splice(itemIndex, 1); // Remove the item at the specified index
+				localStorage.setItem("foodStuffs", JSON.stringify(storage));
+				createList(); // Re-render the list to update the UI
+			}
+
+			function createList() {
+				const storage = localStorage.getItem("foodStuffs");
+				const items = storage ? JSON.parse(storage) : [];
+				const foodTypes = ["dairy", "meats", "vegetables", "fruits", "grains", "snacks", "seasonings", "other"];
+
+				foodTypes.forEach((x) => {
+					const itemList = document.getElementById(x.toLowerCase() + "-food-list");
+					itemList.innerHTML = "";
+				});
+
+				items.forEach((x, index) => {
+					const itemElement = document.createElement("li");
+					itemElement.className = "x";
+					itemElement.innerHTML = `
+                <p id="item-text">${x.name} | Amount: ${x.quantity} ${x.unit}
+                <ul>Calories: ${x.calories} | Expiration Date: ${x.expirationDate}</ul></p>
+                <button class="edit-button" onclick="editKitchenItem(${index})">Edit</button>
+                <button class="remove-button" onclick="removeKitchenItem(${index})">Remove</button>
+            `;
+
+					const itemList = document.getElementById(x.foodType.toLowerCase() + "-food-list");
+					itemList.appendChild(itemElement);
+				});
+			}
+
+			// JS for the collapsable lists
+			window.addEventListener("load", () => {
+				for (let i of document.querySelectorAll(".collapsible ol, .collapsible ul")) {
+					let t = document.createElement("div");
+					t.innerHTML = i.previousSibling.textContent;
+					t.className = "toggle";
+					t.onclick = () => t.classList.toggle("open");
+					i.parentElement.removeChild(i.previousSibling);
+					i.parentElement.insertBefore(t, i);
+				}
+			});
+
+			function toggleSidePanel() {
+				var x = document.getElementById("profile-panel");
+				if (x.style.display === "none") {
+					x.style.display = "block";
+				} else {
+					x.style.display = "none";
+				}
+			}
+		</script>
+
+		<script>
+			document.querySelectorAll('input[type="text"], input[type="number"], input[type="date"], textarea').forEach((input) => {
+				input.addEventListener("focus", () => {
+					document.getElementById("virtual-keyboard").style.display = "block";
+				});
+
+				input.addEventListener("blur", () => {
+					// Delay hiding the keyboard to simulate interaction time
+					setTimeout(() => {
+						document.getElementById("virtual-keyboard").style.display = "none";
+					}, 200);
+				});
+			});
+		</script>
+	</body>
 </html>

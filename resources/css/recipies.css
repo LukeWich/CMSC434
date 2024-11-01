@@ -1,128 +1,135 @@
 #input-container {
-    display: flex; 
-    align-items: center; 
-    margin-top: 0;
-    margin-bottom: 5px; 
-    margin-left: 11px;
-    margin-right: 11px;
-    padding: 4px;
-    position: relative;
+	display: flex;
+	align-items: center;
+	margin-top: 0;
+	margin-bottom: 5px;
+	margin-left: 11px;
+	margin-right: 11px;
+	padding: 4px;
+	position: relative;
 }
 
 .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 10px; 
-    margin: 0 auto; 
-    justify-items: center; 
-    justify-content: center; 
-    max-width: 600px; 
-    width: 100%; 
-    font-size: 20px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 10px;
+	margin: 0 auto;
+	justify-items: center;
+	justify-content: center;
+	max-width: 600px;
+	width: 100%;
+	font-size: 20px;
 }
 
 .tile {
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    text-align: center; 
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
 }
 
 .tile img {
-    width: 80px;
-    height: 80px;
-    object-fit: contain; 
+	width: 80px;
+	height: 80px;
+	object-fit: contain;
 }
 
 #recipeDisplay {
-    display: none; 
-    overflow-y: auto;
-    font-family: Helvetica;
-    font-size: 15pt;
-    border: 2px solid #ccc;
-    padding: 20px;
-    background-color: #f9f9f9;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    width: 475px;
-    height: 500px;
-    margin: 20px auto; 
-}  
-#addToFavoritesButton, #add-recipe-btn, #delete-recipe-btn,#cancel_btn, #searchRecipeButton,#filterbtn,#filter_closebtn{
-    height: 64px; 
-    padding: 8px 16px;
-    font-size: 18px;
-    background-color:  #3eff6b;
-    color: rgb(0, 0, 0);
-    border-radius: 4px;
-    cursor: pointer;
-    border: 2px solid #ccc;
+	display: none;
+	overflow-y: auto;
+	font-family: Helvetica;
+	font-size: 15pt;
+	border: 2px solid #ccc;
+	padding: 20px;
+	background-color: #f9f9f9;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+	width: 475px;
+	height: 500px;
+	margin: 20px auto;
+}
+#addToFavoritesButton,
+#add-recipe-btn,
+#delete-recipe-btn,
+#cancel_btn,
+#searchRecipeButton,
+#filterbtn,
+#filter_closebtn {
+	height: 64px;
+	padding: 8px 16px;
+	font-size: 18px;
+	background-color: #3eff6b;
+	color: rgb(0, 0, 0);
+	border-radius: 4px;
+	cursor: pointer;
+	border: 2px solid #ccc;
 }
 
-     /* Modal styles */
-     .modal {
-        display: none; 
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%; 
-        height: 100%; 
-        overflow: auto; 
-        background-color: rgb(0, 0, 0); 
-        background-color: rgba(0, 0, 0, 0.4);
-        padding-top: 60px;
-    }
+/* Modal styles */
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4);
+	padding-top: 60px;
+}
 
-    .modal-content {
-        background-color: #fefefe;
-        margin: 5% auto; 
-        padding: 20px;
-        border: 1px solid #888;
-        width: 60%; 
-        max-width: 500px; 
-        border-radius: 10px; 
-    }
+.modal-content {
+	background-color: #fefefe;
+	margin: 5% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 60%;
+	max-width: 500px;
+	border-radius: 10px;
+}
 
-    .modal-content h2, 
-    .modal-content h3 {
-        font-size: 2em; 
-    }
+.modal-content h2,
+.modal-content h3 {
+	font-size: 2em;
+}
 
-    .modal-content label {
-        font-size: 1.5em; 
-    }
-    .modal-content button {
-        margin: 10px; 
-        padding: 10px 20px; 
-        font-size: 1.2em; 
-    }
+.modal-content label {
+	font-size: 1.5em;
+}
+.modal-content button {
+	margin: 10px;
+	padding: 10px 20px;
+	font-size: 1.2em;
+}
 
-    .modal-content input, 
-    .modal-content textarea {
-        font-size: 1.2em; 
-    }
+.modal-content input,
+.modal-content textarea {
+	font-size: 1.2em;
+}
 
-    .modal-content .category-option {
-        font-size: 1.5em; 
-    }
+.modal-content .category-option {
+	font-size: 1.5em;
+}
 
-    .close {
-        color: #aaa;
-        float: right;
-        font-size: 32px; 
-        font-weight: bold;
-        padding: 10px; 
-    }
-    p {
-        font-size: 22px; 
-    }
+.close {
+	color: #aaa;
+	float: right;
+	font-size: 32px;
+	font-weight: bold;
+	padding: 10px;
+}
+p {
+	font-size: 22px;
+}
 
-    #categorySelect, #categoryDropdown, #searchCategorySelect {
-        width: 250px;  
-        height: 40px;
-        font-size:22px;  
-        padding: 5px;  
-        border: 2px solid #ccc;  
-        border-radius: 4px;  
-    }
-    
+#categorySelect,
+#categoryDropdown,
+#searchCategorySelect {
+	width: 250px;
+	height: 40px;
+	font-size: 22px;
+	padding: 5px;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+}
