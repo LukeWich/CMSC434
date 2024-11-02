@@ -268,7 +268,7 @@
 					calories: 200,
 					foodType: "Dairy",
 					quantity: 1,
-					unit: "Bottle",
+					unit: "Bottles",
 					expirationDate: "2024-11-08",
 				},
 			];
@@ -349,8 +349,7 @@
                 <p id="item-text">${item.name} | Amount: ${item.quantity} ${item.unit}
                 <ul>Calories: ${item.calories} | Expiration Date: ${item.expirationDate}</ul></p>
                 <button class="edit-button" onclick="editKitchenItem(${index})">Edit</button>
-                <button class="remove-button" onclick="removeKitchenItem(${index})">Remove</button>
-            `;
+                <button class="remove-button" onclick="removeKitchenItem(${index})">Remove</button>`;
 
 					const itemList = document.getElementById(item.foodType.toLowerCase() + "-food-list");
 					itemList.appendChild(itemElement);
@@ -428,8 +427,7 @@
                 <p id="item-text">${x.name} | Amount: ${x.quantity} ${x.unit}
                 <ul>Calories: ${x.calories} | Expiration Date: ${x.expirationDate}</ul></p>
                 <button class="edit-button" onclick="editKitchenItem(${index})">Edit</button>
-                <button class="remove-button" onclick="removeKitchenItem(${index})">Remove</button>
-            `;
+                <button class="remove-button" onclick="removeKitchenItem(${index})">Remove</button>`;
 
 					const itemList = document.getElementById(x.foodType.toLowerCase() + "-food-list");
 					itemList.appendChild(itemElement);
@@ -456,9 +454,7 @@
 					x.style.display = "none";
 				}
 			}
-		</script>
 
-		<script>
 			document.querySelectorAll('input[type="text"], input[type="number"], input[type="date"], textarea').forEach((input) => {
 				input.addEventListener("focus", () => {
 					document.getElementById("virtual-keyboard").style.display = "block";

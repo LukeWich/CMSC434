@@ -135,21 +135,6 @@
 			</div>
 			<!-- End Nav Bar html -->
 		</div>
-
-		<script>
-			document.querySelectorAll('input[type="text"], input[type="number"], input[type="date"], textarea').forEach((input) => {
-				input.addEventListener("focus", () => {
-					document.getElementById("virtual-keyboard").style.display = "block";
-				});
-
-				input.addEventListener("blur", () => {
-					// Delay hiding the keyboard to simulate interaction time
-					setTimeout(() => {
-						document.getElementById("virtual-keyboard").style.display = "none";
-					}, 200);
-				});
-			});
-		</script>
 	</body>
 
 	<script>
@@ -395,5 +380,18 @@
 			document.getElementById("input-item-name").innerHTML = checkedItems[i];
 			document.getElementById("item-form").reset();
 		}
+
+		document.querySelectorAll('input[type="text"], input[type="number"], input[type="date"], textarea').forEach((input) => {
+			input.addEventListener("focus", () => {
+				document.getElementById("virtual-keyboard").style.display = "block";
+			});
+
+			input.addEventListener("blur", () => {
+				// Delay hiding the keyboard to simulate interaction time
+				setTimeout(() => {
+					document.getElementById("virtual-keyboard").style.display = "none";
+				}, 200);
+			});
+		});
 	</script>
 </html>
