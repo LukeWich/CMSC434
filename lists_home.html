@@ -25,6 +25,13 @@
                 <button id="create-list-button" onclick="createNewList()">Create List</button>
              </div>
 
+             <div id="remove-list-background" style="display: none">
+                <h2 id="remove-list-text" style="text-align: center"></h1>
+                <img class="upper-right-icon" onclick="closeRemoveListPopup()" height="50" src="resources/images/close_icon.png">
+                <button id="remove-list-button">Delete List</button>
+                <button id="dont-remove-list-button" onclick="closeRemoveListPopup()">Cancel</button>
+             </div>
+
             <!-- Profile icon and page -->
             <img class='profile-icon' onclick="toggleSidePanel()" height="75" src="resources/images/profile_icon.png">
             <div class="profile-panel" id="profile-panel" style="display: none">
@@ -136,7 +143,7 @@
                 var li = document.createElement("li");
                 var list = document.getElementById('list-of-lists');
                 li.setAttribute('id', items[i]);
-                li.innerHTML = items[i] + " <span class='close' onClick='removeItem(this); event.stopPropagation();'>x</span>";
+                li.innerHTML = items[i] + " <span class='close' onClick=' event.stopPropagation(); createRemoveListPopup(this); event.stopPropagation();'>x</span>";
                 li.onclick = function() {
                     window.location = 'lists.html?list=' + items[i];
                 };
@@ -155,7 +162,7 @@
             var li = document.createElement("li");
             var list = document.getElementById('list-of-lists');
             li.setAttribute('id', item);
-            li.innerHTML = item + " <span class='close' onClick=removeItem(this)>x</span>";
+            li.innerHTML = item + " <span class='close' onClick='createRemoveListPopup(this); event.stopPropagation();'>x</span>";
             li.onclick = function() {
                 const storage = localStorage.getItem("listNames");
                 const temp = storage ? JSON.parse(storage) : [];
@@ -167,8 +174,8 @@
             list.appendChild(li);
         }
 
-        function removeItem(button) {
-            listToRemove = button.parentNode.id
+        function removeItem(listToRemove) {
+            //listToRemove = listToRemove.parentNode.id
             // remove item from localstorage
             const storage = localStorage.getItem("listNames");
             const temp = storage ? JSON.parse(storage) : [];
@@ -179,8 +186,9 @@
             }
 
             localStorage.setItem("listNames", JSON.stringify(temp));
-            var li = button.parentNode;
+            li = document.getElementById(listToRemove)
             li.parentNode.removeChild(li);
+            closeRemoveListPopup();
         }
         
         function toggleSidePanel() {
@@ -199,6 +207,19 @@
 
         function closeNewList() {
             document.getElementById('add-list-background').style.display = 'none';
+        }
+
+        // Remove list popup
+        function createRemoveListPopup(button) {
+            listToRemove = button.parentNode.id
+
+            document.getElementById('remove-list-background').style.display = 'block';
+            document.getElementById('remove-list-text').innerHTML = 'Are you sure you want to delete ' + String(listToRemove) + '?';
+            document.getElementById('remove-list-button').onclick = function () { removeItem(listToRemove); };
+        }
+
+        function closeRemoveListPopup() {
+            document.getElementById('remove-list-background').style.display = 'none';
         }
 
         function createNewList() {

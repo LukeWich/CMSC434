@@ -39,3 +39,58 @@
 #create-list-button:hover {
 	background-color: #87ad81;
 }
+
+#remove-list-background {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 500px;
+	height: 200px;
+	margin: -100px 0px 0px -250px;
+	background-color: #ebebeb;
+	border: 4px solid #a2a2a2;
+	border-radius: 12px;
+}
+
+#remove-list-text {
+	margin: auto;
+  	width: 60%;
+	padding: 25px;
+	text-align: center;
+}
+
+#remove-list-button {
+	position: absolute;
+	width: 150px;
+	height: 50px;
+	bottom: 25px;
+	left: 300px;
+	font-size: 22px;
+	font-weight: bold;
+	text-align: center;
+	border: 2px solid #000000;
+	border-radius: 5px;
+	background-color: #ff5858;
+}
+
+#remove-list-button:hover {
+	background-color: #ff4040;
+}
+
+#dont-remove-list-button {
+	position: absolute;
+	width: 150px;
+	height: 50px;
+	bottom: 25px;
+	left: 50px;
+	font-size: 22px;
+	font-weight: bold;
+	text-align: center;
+	border: 2px solid #000000;
+	border-radius: 5px;
+	background-color: #acbfa9;
+}
+
+#dont-remove-list-button:hover {
+	background-color: #87ad81;
+}
