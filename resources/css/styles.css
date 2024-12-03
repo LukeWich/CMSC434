@@ -280,6 +280,8 @@
 	bottom: 0;
 	background-color: #90d883;
 	overflow: auto;
+	height: 80;
+	text-decoration: none;
 }
 
 .icon-bar a {
@@ -288,6 +290,7 @@
 	width: calc(100% / 3);
 	padding: 12px 0;
 	transition: all 0.3s ease;
+	text-decoration: none;
 }
 
 .icon-bar a:hover {
