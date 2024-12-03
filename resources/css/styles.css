@@ -296,7 +296,6 @@
 	bottom: 0;
 	background-color: #90d883;
 	overflow: auto;
-	height: 80;
 	text-decoration: none;
 }
 
@@ -304,7 +303,8 @@
 	float: left;
 	text-align: center;
 	width: calc(100% / 3);
-	padding: 12px 0;
+	padding-top: 12px;
+	padding-bottom: 12px;
 	transition: all 0.3s ease;
 	text-decoration: none;
 }
