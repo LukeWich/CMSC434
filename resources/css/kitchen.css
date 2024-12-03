@@ -158,6 +158,20 @@
 	margin-top: 10px;
 }
 .collapsible li {
+	border: 2px solid #000;
+	border-radius: 8px;
+	padding: 10px;
+}
+
+.collapsible li:nth-child(even) {
+	border: 2px solid #000;
+	border-radius: 8px;
+	padding: 10px;
+	background:#eee;
+}
+.collapsible li:nth-child(odd) {
+	border: 2px solid #000;
+	border-radius: 8px;
 	padding: 10px;
 }
 
