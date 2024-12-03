@@ -32,39 +32,6 @@
                 <button id="dont-remove-list-button" onclick="closeRemoveListPopup()">Cancel</button>
              </div>
 
-            <!-- Profile icon and page -->
-            <img class='profile-icon' onclick="toggleSidePanel()" height="75" src="resources/images/profile_icon.png">
-            <div class="profile-panel" id="profile-panel" style="display: none">
-                <a class="profile-heading" href="profile.html" style="top: 10px">
-                    <img style="position:absolute; height:100px; left:20px" src="resources/images/profile_icon.png">
-                    <b class="user-name">User's Name</b>
-                    <small>View Profile</small>
-                </a>
-
-                <a href="settings.html" style="top: 150px">
-                    <img class="panel-images" src="resources/images/settings_icon.png">
-                    <b>Settings</b>
-                </a>
-
-                <a href="" style="top: 225px">
-                    <img class="panel-images" src="resources/images/plus_icon.png">
-                    <b>Add Users</b>
-                </a>
-
-                <a href="help.html" style="top: 300px">
-                    <img class="panel-images" src="resources/images/question_icon.png">
-                    <b>Help</b>
-                </a>
-
-                <a href="" style="top: 375px">
-                    <img class="panel-images" src="resources/images/logout_icon.png">
-                    <b>Log Out</b>
-                </a>
-
-                <img class="close-icon" onclick="toggleSidePanel()" height="50" src="resources/images/close_icon.png">
-            </div>
-            <!--- End Profile side panel -->
-
             <!-- Nav Bar html -->
 			<div class="icon-bar">
 				<a href="kitchen.html">
@@ -195,15 +162,6 @@
             li = document.getElementById(listToRemove)
             li.parentNode.removeChild(li);
             closeRemoveListPopup();
-        }
-        
-        function toggleSidePanel() {
-            var x = document.getElementById('profile-panel');
-            if (x.style.display === "none") {
-                x.style.display = 'block';
-            } else {
-                x.style.display = 'none';
-            }
         }
 
         // Add list functionality

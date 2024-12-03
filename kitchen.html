@@ -14,13 +14,11 @@
 		<div class="device">
 			<!-- Kitchen Header -->
 			<div id="header">Kitchen</div>
+			<img class="upper-right-icon" onclick="addItemPopup()" height="65" src="resources/images/plus_icon.png">
+			<img class="profile-icon" onclick="addSectionPopup()" height="75" src="resources/images/settings_icon.png" />
 
 			<!-- Kitchen List Section -->
 			<div id="item-background">
-				<div id="item-list">
-					<input type="text" id="input-item" placeholder="Add a new kitchen item..." />
-					<button id="add-button" onclick="addItemPopup()">Add Item</button>
-				</div>
 
 				<!-- List Container -->
 				<div id="list-container">
@@ -62,14 +60,48 @@
 			</div>
 			<!-- END OF LIST -->
 
+			<!-- EDIT SECTIONS pop up -->
+			<div id="edit-section-background" class="popup-background" style="display: none">
+				<p id="input-item-name">Edit Sections</p>
+				<img class="upper-right-icon" onclick="closeEditSection()" height="60" src="resources/images/close_icon.png" />
+			
+				<ul id="food-list">
+					<li id="dairy">Dairy
+						<span class="close">x</span>
+					</li>
+					<li id="Meats">Meats
+						<span class="close">x</span>
+					</li>
+					<li id="Vegetables">Vegetables
+						<span class="close">x</span>
+					</li>
+					<li id="Fruits">Fruits
+						<span class="close">x</span>
+					</li>
+					<li id="Grains">Grains
+						<span class="close">x</span>
+					</li>
+					<li id="Seasonings">Seasonings
+						<span class="close">x</span>
+					</li>
+					<li id="Other">Other
+						<span class="close">x</span>
+					</li>
+					<li id="Other">
+						<input type="text" id="new-section-input" placeholder="New Section Name..." />
+						<span class="add">✔</span>
+					</li>
+				</ul>
+			</div>
+
 			<!-- ADD ITEM pop up -->
-			<div id="add-item-background" style="display: none">
-				<p id="input-item-name"></p>
+			<div id="add-item-background" class="popup-background" style="display: none">
+				<p id="input-item-name">New Item</p>
 				<img class="upper-right-icon" onclick="closeNewItem()" height="60" src="resources/images/close_icon.png" />
 				<form>
 					<div id="form-sub">
-						<p id="secondary-text">Calories:</p>
-						<input type="number" class="input-numbers" id="Calories" placeholder="number of calories" min="0" />
+						<p id="secondary-text">Name:</p>
+						<input type="text" class="input-text" id="ItemName" placeholder="Item Name" />
 					</div>
 
 					<div id="form-sub">
@@ -88,19 +120,47 @@
 					</div>
 
 					<div id="form-sub">
-						<p id="secondary-text">Quantity:</p>
-						<input type="number" class="input-numbers" id="Quantity" placeholder="number of items" min=".1" value="1" step=".1" />
+						<p id="secondary-text">Calories:</p>
+						<input type="number" class="input-numbers" id="Calories" placeholder="Number of Cals" min="0" />
 					</div>
 
 					<div id="form-sub">
-						<p id="secondary-text">Unit:</p>
-						<select class="input-select" id="Unit">
-							<option value="Cans">Cans</option>
-							<option value="Bags">Bags</option>
-							<option value="Pounds">Pounds</option>
-							<option value="Boxes">Boxes</option>
-							<option value="Bottles">Bottles</option>
-							<option value="Packages">Packages</option>
+						<p id="secondary-text">Quantity:</p>
+						<input type="number" class="input-numbers" id="Quantity" placeholder="Number of Items" min=".1" value="1" step=".1" />
+						<select id="Unit" class="input-select">
+							<!-- Weight Units -->
+							<optgroup label="Weight">
+								<option value="grams">Grams (g)</option>
+								<option value="kilograms">Kilograms (kg)</option>
+								<option value="pounds">Pounds (lb)</option>
+								<option value="ounces">Ounces (oz)</option>
+							</optgroup>
+							<!-- Volume Units -->
+							<optgroup label="Volume">
+								<option value="milliliters">Milliliters (mL)</option>
+								<option value="liters">Liters (L)</option>
+								<option value="cups">Cups</option>
+								<option value="pints">Pints</option>
+								<option value="quarts">Quarts</option>
+								<option value="gallons">Gallons</option>
+							</optgroup>
+							<!-- Quantity Units -->
+							<optgroup label="Quantity">
+								<option value="pieces">Pieces</option>
+								<option value="dozen">Dozen</option>
+								<option value="units">Units</option>
+							</optgroup>
+							<!-- Miscellaneous Units -->
+							<optgroup label="Other">
+								<option value="units">Units</option>
+								<option value="bags">Cans</option>
+								<option value="bags">Containers</option>
+								<option value="bags">Bags</option>
+								<option value="teaspoons">Teaspoons (tsp)</option>
+								<option value="tablespoons">Tablespoons (tbsp)</option>
+								<option value="dash">Dash</option>
+								<option value="pinch">Pinch</option>
+							</optgroup>
 						</select>
 					</div>
 
@@ -119,11 +179,6 @@
 
 				<form>
 					<div id="form-sub">
-						<p id="secondary-text">Calories:</p>
-						<input type="number" class="input-numbers" id="Calories" placeholder="number of calories" min="0" />
-					</div>
-
-					<div id="form-sub">
 						<p id="secondary-text">Food Type:</p>
 						<select class="input-select" id="FoodType">
 							<option value="Empty" style="display: none">Select one</option>
@@ -136,6 +191,11 @@
 							<option value="Seasoning">Seasoning</option>
 							<option value="Other">Other</option>
 						</select>
+					</div>
+
+					<div id="form-sub">
+						<p id="secondary-text">Calories:</p>
+						<input type="number" class="input-numbers" id="Calories" placeholder="Number of Calories" min="0" />
 					</div>
 
 					<div id="form-sub">
@@ -164,47 +224,14 @@
 				</form>
 			</div>
 
-			<!-- Profile icon and page -->
-			<img class="profile-icon" onclick="toggleSidePanel()" height="75" src="resources/images/profile_icon.png" />
-			<div class="profile-panel" id="profile-panel" style="display: none">
-				<a class="profile-heading" href="profile.html" style="top: 10px">
-					<img style="position: absolute; height: 100px; left: 20px" src="resources/images/profile_icon.png" />
-					<b class="user-name">User's Name</b>
-					<small>View Profile</small>
-				</a>
-
-				<a href="settings.html" style="top: 150px">
-					<img class="panel-images" src="resources/images/settings_icon.png" />
-					<b>Settings</b>
-				</a>
-
-				<a href="" style="top: 225px">
-					<img class="panel-images" src="resources/images/plus_icon.png" />
-					<b>Add Users</b>
-				</a>
-
-				<a href="help.html" style="top: 300px">
-					<img class="panel-images" src="resources/images/question_icon.png" />
-					<b>Help</b>
-				</a>
-
-				<a href="" style="top: 375px">
-					<img class="panel-images" src="resources/images/logout_icon.png" />
-					<b>Log Out</b>
-				</a>
-
-				<img class="close-icon" onclick="toggleSidePanel()" height="50" src="resources/images/close_icon.png" />
-			</div>
-			<!--- End Profile side panel -->
-
 			<!-- Nav Bar html -->
 			<div class="icon-bar">
-				<a href="kitchen.html">
+				<a href="kitchen.html" class="active">
 					<img src="resources/images/kitchen_icon.png" height="70" />
 					<br>
 					<span id = secondary-text>Kitchen</span>
 				</a>
-				<a href="lists_home.html" class="active">
+				<a href="lists_home.html">
 					<img src="resources/images/lists_icon.png" height="70" />
 					<br>
 					<span id = secondary-text>Lists</span>
@@ -286,15 +313,19 @@
 				createList();
 			};
 
+			function addSectionPopup() {
+				document.getElementById("edit-section-background").style.display = "block";
+				document.getElementById("item-background").style.display = "none";
+			}
+
+			function closeEditSection() {
+				document.getElementById("edit-section-background").style.display = "none";
+				document.getElementById("item-background").style.display = "block";
+			}
+
 			function addItemPopup() {
-				const input = document.getElementById("input-item").value.trim();
-				if (input == "") {
-					alert("Please enter a food item.");
-				} else {
-					document.getElementById("add-item-background").style.display = "block";
-					document.getElementById("item-background").style.display = "none";
-					document.getElementById("input-item-name").innerHTML = input;
-				}
+				document.getElementById("add-item-background").style.display = "block";
+				document.getElementById("item-background").style.display = "none";
 			}
 
 			let originalItem = null; // Store the original item data
@@ -371,7 +402,7 @@
 			}
 
 			function addKitchenItem() {
-				const name = document.getElementById("input-item-name").innerHTML;
+				const name = document.getElementById("ItemName").value;
 				const calories = document.getElementById("Calories").value;
 				const foodType = document.getElementById("FoodType").value;
 				const quantity = document.getElementById("Quantity").value;
@@ -451,15 +482,6 @@
 					i.parentElement.insertBefore(t, i);
 				}
 			});
-
-			function toggleSidePanel() {
-				var x = document.getElementById("profile-panel");
-				if (x.style.display === "none") {
-					x.style.display = "block";
-				} else {
-					x.style.display = "none";
-				}
-			}
 
 			document.querySelectorAll('input[type="text"], input[type="number"], input[type="date"], textarea').forEach((input) => {
 				input.addEventListener("focus", () => {

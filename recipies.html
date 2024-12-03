@@ -69,34 +69,6 @@
 				</div>
 			</div>
 
-			<!-- Profile icon and page -->
-			<img class="profile-icon" onclick="toggleSidePanel()" height="75" src="resources/images/profile_icon.png" />
-			<div class="profile-panel" id="profile-panel" style="display: none">
-				<a class="profile-heading" href="profile.html" style="top: 10px">
-					<img style="position: absolute; height: 100px; left: 20px" src="resources/images/profile_icon.png" />
-					<b class="user-name">User's Name</b>
-					<small>View Profile</small>
-				</a>
-				<a href="settings.html" style="top: 150px">
-					<img class="panel-images" src="resources/images/settings_icon.png" />
-					<b>Settings</b>
-				</a>
-				<a href="" style="top: 225px">
-					<img class="panel-images" src="resources/images/plus_icon.png" />
-					<b>Add Users</b>
-				</a>
-				<a href="help.html" style="top: 300px">
-					<img class="panel-images" src="resources/images/question_icon.png" />
-					<b>Help</b>
-				</a>
-				<a href="" style="top: 375px">
-					<img class="panel-images" src="resources/images/logout_icon.png" />
-					<b>Log Out</b>
-				</a>
-				<img class="close-icon" onclick="toggleSidePanel()" height="50" src="resources/images/close_icon.png" />
-			</div>
-			<!-- End Profile side panel -->
-
 			<!-- Nav Bar html -->
 			<div class="icon-bar">
 				<a href="kitchen.html">
@@ -104,12 +76,12 @@
 					<br>
 					<span id = secondary-text>Kitchen</span>
 				</a>
-				<a href="lists_home.html" class="active">
+				<a href="lists_home.html">
 					<img src="resources/images/lists_icon.png" height="70" />
 					<br>
 					<span id = secondary-text>Lists</span>
 				</a>
-				<a href="recipies.html">
+				<a href="recipies.html" class="active">
 					<img src="resources/images/recipies_icon.png" height="70" />
 					<br>
 					<span id = secondary-text>Recipies</span>
@@ -760,11 +732,6 @@
 			function handleSearch() {
 				const title = document.getElementById("searchRecipeTitle").value;
 				searchRecipes(title);
-			}
-
-			function toggleSidePanel() {
-				const profilePanel = document.getElementById("profile-panel");
-				profilePanel.style.display = profilePanel.style.display === "block" ? "none" : "block";
 			}
 
 			document.querySelectorAll('input[type="text"], input[type="number"], input[type="date"], textarea').forEach((input) => {

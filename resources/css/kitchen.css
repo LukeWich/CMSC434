@@ -3,7 +3,24 @@
 	justify-content: center;
 	align-items: center;
 	margin-top: 10px;
+	column-gap: 20px;
 }
+
+#add-section {
+	height: 64px;
+	padding: 8px 16px;
+	font-size: 18px;
+	background-color: #90d883;
+	color: rgb(0, 0, 0);
+	border-radius: 4px;
+	cursor: pointer;
+	border: 2px solid #ccc;
+}
+
+#add-section:hover {
+	background-color: #87ad81;
+}
+
 
 .edit-button {
 	height: 40px;
@@ -51,10 +68,43 @@
 
 #list-container {
 	position: inherit;
-	bottom: 2%;
-	height: 590px;
+	height: 675px;
 	width: 550px;
 	overflow-y: auto;
+}
+
+.close {
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 12px 16px 12px 16px;
+}
+
+.close:hover {
+	background-color: #f44336;
+	color: white;
+}
+
+.add {
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 13px 16px 13px 16px;
+}
+
+.add:hover {
+	background-color: #36f44c;
+	color: white;
+}
+
+#new-section-input {
+	width: 250px;
+	height: 20px;
+	padding: 7px;
+	font-size: 20px;
+	border: 2px solid #000000;
+	border-radius: 5px;
+	margin-right: 10px;
 }
 
 /* ------------------------------------------------------------ */
