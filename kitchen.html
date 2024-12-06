@@ -60,6 +60,15 @@
 			</div>
 			<!-- END OF LIST -->
 
+			<!-- REMOVE ITEM POPUP -->
+			<div id="remove-list-background" style="display: none">
+                <h2 id="remove-list-text" style="text-align: center"></h1>
+                <img class="upper-right-icon" onclick="closeRemoveListPopup()" height="50" src="resources/images/close_icon.png">
+                <button id="remove-list-button">Delete Item</button>
+                <button id="dont-remove-list-button" onclick="closeRemoveListPopup()">Cancel</button>
+             </div>
+			 <!-- END REMOVE ITEM POPUP -->
+
 			<!-- EDIT SECTIONS pop up -->
 			<div id="edit-section-background" class="popup-background" style="display: none">
 				<p id="input-item-name">Edit Sections</p>
@@ -93,6 +102,7 @@
 					</li>
 				</ul>
 			</div>
+			<!-- END EDIT SECTIONS pop up -->
 
 			<!-- ADD ITEM pop up -->
 			<div id="add-item-background" class="popup-background" style="display: none">
@@ -172,8 +182,9 @@
 					<button onclick="addKitchenItem()" id="add-item-button" class="item-popup-button">Add Item</button>
 				</form>
 			</div>
-			<!-- END ADD ITEM POP UP-->
+			<!-- END ADD ITEM POP UP -->
 
+			<!-- START EDIT ITEM POP UP -->
 			<div id="edit-item-background" style="display: none">
 				<p id="input-item-name"></p>
 
@@ -313,6 +324,21 @@
 				createList();
 			};
 
+			// Remove list popup
+			function createRemoveListPopup(idx) {
+				const storage = JSON.parse(localStorage.getItem("foodStuffs"));
+				itemToRemove = storage[idx];
+				console.warn(storage[idx]);
+
+				document.getElementById('remove-list-background').style.display = 'block';
+				document.getElementById('remove-list-text').innerHTML = 'Are you sure you want to delete ' + String(itemToRemove.name) + '?';
+				document.getElementById('remove-list-button').onclick = function () { removeKitchenItem(idx); };
+			}
+
+			function closeRemoveListPopup() {
+				document.getElementById('remove-list-background').style.display = 'none';
+			}
+
 			function addSectionPopup() {
 				document.getElementById("edit-section-background").style.display = "block";
 				document.getElementById("item-background").style.display = "none";
@@ -386,7 +412,7 @@
                 <p id="item-text">${item.name} | Amount: ${item.quantity} ${item.unit}
                 <ul>Calories: ${item.calories} | Expiration Date: ${item.expirationDate}</ul></p>
                 <button class="edit-button" onclick="editKitchenItem(${index})">Edit</button>
-                <button class="remove-button" onclick="removeKitchenItem(${index})">Remove</button>`;
+                <button class="remove-button" onClick='createRemoveListPopup(${index});>Remove</button>`;
 
 					const itemList = document.getElementById(item.foodType.toLowerCase() + "-food-list");
 					itemList.appendChild(itemElement);
@@ -441,6 +467,7 @@
 			}
 
 			function removeKitchenItem(itemIndex) {
+				closeRemoveListPopup();
 				const storage = JSON.parse(localStorage.getItem("foodStuffs"));
 				storage.splice(itemIndex, 1); // Remove the item at the specified index
 				localStorage.setItem("foodStuffs", JSON.stringify(storage));
@@ -464,7 +491,7 @@
                 <p id="item-text">${x.name} | Amount: ${x.quantity} ${x.unit}
                 <ul>Calories: ${x.calories} | Expiration Date: ${x.expirationDate}</ul></p>
                 <button class="edit-button" onclick="editKitchenItem(${index})">Edit</button>
-                <button class="remove-button" onclick="removeKitchenItem(${index})">Remove</button>`;
+                <button class="remove-button" onclick="createRemoveListPopup(${index})">Remove</button>`;
 
 					const itemList = document.getElementById(x.foodType.toLowerCase() + "-food-list");
 					itemList.appendChild(itemElement);
