@@ -41,13 +41,25 @@
 
 #list-container {
 	position: inherit;
-	bottom: 13%;
+	bottom: 8%;
 	height: 500px;
 	width: 550px;
 	overflow-y: auto;
 }
 
 /* Style the close button */
+.add {
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 16px 16px 16px 16px;
+}
+
+.add:hover {
+	background-color: #36f44c;
+	color: white;
+}
+
 .close {
 	position: absolute;
 	right: 0;
@@ -58,6 +70,68 @@
 .close:hover {
 	background-color: #f44336;
 	color: white;
+}
+
+.close-big {
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 18px 16px 18px 16px;
+}
+
+.close-big:hover {
+	background-color: #f44336;
+	color: white;
+}
+
+#food-list, #list-of-lists, #add-item-list {
+	border: 3px solid #000000;
+    border-radius: 5px;
+}
+
+/* style the quantity for the lists */
+#new-item-container, #list-container {
+	font-weight: bold;
+    font-size: larger;
+}
+
+#new-item-input {
+	width: 175px;
+    height: 23px;
+    padding: 7px;
+    font-size: 20px;
+    border: 2px solid #000000;
+    border-radius: 5px;
+}
+
+.list-quantity {
+	width: 65px;
+    height: 23px;
+    padding: 7px;
+    font-size: 20px;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    margin-left: 50px;
+}
+
+.list-quantity-input {
+	width: 65px;
+    height: 23px;
+    padding: 7px;
+    font-size: 20px;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    margin-left: 15px;
+}
+
+.list-input-select {
+	width: 100px;
+	height: 39px;
+	padding: 1px;
+	font-size: 20px;
+	border: 2px solid #000000;
+	border-radius: 5px;
+	margin-left: -7px;
 }
 
 /* style the checked off items */

@@ -10,10 +10,51 @@
 	<body>
 		<div class="device">
 			<div id="header">Shopping List</div>
+
 			<div id="item-background">
-				<div id="item-list">
-					<input type="text" id="input-item" placeholder="Add a new item..." />
-					<button id="add-button" onclick="addTask()">Add</button>
+				<div id="new-item-container">
+					Add New Item
+					<ul id="add-item-list">
+						<li id="input-list">
+							<input type="text" id="new-item-input" placeholder="Item Name..." />
+							<input type="number" class="list-quantity-input" id="Quantity" placeholder="Quantity" value="1" min="1" onclick="event.stopPropagation();">
+							<select id="list-unit" class="list-input-select">
+								<!-- Weight Units -->
+								<optgroup label="Weight">
+									<option value="grams">Grams (g)</option>
+									<option value="kilograms">Kilograms (kg)</option>
+									<option value="pounds">Pounds (lb)</option>
+									<option value="ounces">Ounces (oz)</option>
+								</optgroup>
+								<!-- Volume Units -->
+								<optgroup label="Volume">
+									<option value="milliliters">Milliliters (mL)</option>
+									<option value="liters">Liters (L)</option>
+									<option value="cups">Cups</option>
+									<option value="pints">Pints</option>
+									<option value="quarts">Quarts</option>
+									<option value="gallons">Gallons</option>
+								</optgroup>
+								<!-- Quantity Units -->
+								<optgroup label="Quantity">
+									<option value="pieces">Pieces</option>
+									<option value="dozen">Dozen</option>
+									<option value="units">Units</option>
+								</optgroup>
+								<!-- Miscellaneous Units -->
+								<optgroup label="Other">
+									<option value="units" selected="">Units</option>
+									<option value="bags">Cans</option>
+									<option value="bags">Containers</option>
+									<option value="bags">Bags</option>
+									<option value="teaspoons">Teaspoons (tsp)</option>
+									<option value="tablespoons">Tablespoons (tbsp)</option>
+									<option value="dash">Dash</option>
+									<option value="pinch">Pinch</option>
+								</optgroup>
+							</select>
+							<span class="add">✔</span>
+					</ul>
 				</div>
 
 				<div id="list-container">
@@ -54,13 +95,40 @@
 
 					<div id="form-sub">
 						<p id="secondary-text">Unit:</p>
-						<select class="input-select" id="Unit">
-							<option value="Cans">Cans</option>
-							<option value="Bags">Bags</option>
-							<option value="Pounds">Pounds</option>
-							<option value="Boxes">Boxes</option>
-							<option value="Bottles">Bottles</option>
-							<option value="Packages">Packages</option>
+						<select id="Unit" class="input-select">
+							<!-- Weight Units -->
+							<optgroup label="Weight">
+								<option value="grams">Grams (g)</option>
+								<option value="kilograms">Kilograms (kg)</option>
+								<option value="pounds">Pounds (lb)</option>
+								<option value="ounces">Ounces (oz)</option>
+							</optgroup>
+							<!-- Volume Units -->
+							<optgroup label="Volume">
+								<option value="milliliters">Milliliters (mL)</option>
+								<option value="liters">Liters (L)</option>
+								<option value="cups">Cups</option>
+								<option value="pints">Pints</option>
+								<option value="quarts">Quarts</option>
+								<option value="gallons">Gallons</option>
+							</optgroup>
+							<!-- Quantity Units -->
+							<optgroup label="Quantity">
+								<option value="pieces">Pieces</option>
+								<option value="dozen">Dozen</option>
+								<option value="units">Units</option>
+							</optgroup>
+							<!-- Miscellaneous Units -->
+							<optgroup label="Other">
+								<option value="units">Units</option>
+								<option value="bags">Cans</option>
+								<option value="bags">Containers</option>
+								<option value="bags">Bags</option>
+								<option value="teaspoons">Teaspoons (tsp)</option>
+								<option value="tablespoons">Tablespoons (tbsp)</option>
+								<option value="dash">Dash</option>
+								<option value="pinch">Pinch</option>
+							</optgroup>
 						</select>
 					</div>
 
@@ -169,6 +237,42 @@
 		var url_string = window.location;
 		var url = new URL(url_string);
 		var listName = url.searchParams.get("list");
+		const dropdownHTML = `
+		<select id="list-unit" class="list-input-select">
+			<!-- Weight Units -->
+			<optgroup label="Weight">
+				<option value="grams">Grams (g)</option>
+				<option value="kilograms">Kilograms (kg)</option>
+				<option value="pounds">Pounds (lb)</option>
+				<option value="ounces">Ounces (oz)</option>
+			</optgroup>
+			<!-- Volume Units -->
+			<optgroup label="Volume">
+				<option value="milliliters">Milliliters (mL)</option>
+				<option value="liters">Liters (L)</option>
+				<option value="cups">Cups</option>
+				<option value="pints">Pints</option>
+				<option value="quarts">Quarts</option>
+				<option value="gallons">Gallons</option>
+			</optgroup>
+			<!-- Quantity Units -->
+			<optgroup label="Quantity">
+				<option value="pieces">Pieces</option>
+				<option value="dozen">Dozen</option>
+				<option value="units">Units</option>
+			</optgroup>
+			<!-- Miscellaneous Units -->
+			<optgroup label="Other">
+				<option value="units" selected>Units</option>
+				<option value="bags">Cans</option>
+				<option value="bags">Containers</option>
+				<option value="bags">Bags</option>
+				<option value="teaspoons">Teaspoons (tsp)</option>
+				<option value="tablespoons">Tablespoons (tbsp)</option>
+				<option value="dash">Dash</option>
+				<option value="pinch">Pinch</option>
+			</optgroup>
+		</select>`;
 
 		window.onload = function () {
 			if (!localStorage.getItem("listContents")) {
@@ -192,6 +296,9 @@
 			// title of the page
 			var listTitle = document.getElementById("header");
 			listTitle.innerHTML = listName + " List";
+
+			var list_container = document.getElementById("list-container");
+			list_container.innerHTML = listName + " List" + list_container.innerHTML;
 		};
 
 		// create the html for list
@@ -199,7 +306,9 @@
 			var taskList = document.getElementById("food-list");
 			var li = document.createElement("li");
 			li.setAttribute("id", name);
-			li.innerHTML = name + " <span class='close' onClick='deleteTask(this); event.stopPropagation();'>x</span>";
+			li.innerHTML = name + "<input type='number' class='list-quantity' id='Quantity' placeholder='Quantity' value='1' min='1' onClick='event.stopPropagation();'/><!--" 
+								+ "-->" + dropdownHTML
+								+ "<span class='close-big' onClick='deleteTask(this); event.stopPropagation();'>x</span>";
 			li.onclick = function () {
 				li.classList.toggle("done");
 				// update the local storage

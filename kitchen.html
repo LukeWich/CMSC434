@@ -110,12 +110,12 @@
 				<img class="upper-right-icon" onclick="closeNewItem()" height="60" src="resources/images/close_icon.png" />
 				<form>
 					<div id="form-sub">
-						<p id="secondary-text">Name:</p>
+						<p class="required-field" id="secondary-text">Name:</p>
 						<input type="text" class="input-text" id="ItemName" placeholder="Item Name" />
 					</div>
 
 					<div id="form-sub">
-						<p id="secondary-text">Food Type:</p>
+						<p class="required-field" id="secondary-text">Food Type:</p>
 						<select class="input-select" id="FoodType">
 							<option value="Empty" style="display: none">Select one</option>
 							<option value="Dairy">Dairy</option>
@@ -135,7 +135,7 @@
 					</div>
 
 					<div id="form-sub">
-						<p id="secondary-text">Quantity:</p>
+						<p class="required-field" id="secondary-text">Quantity:</p>
 						<input type="number" class="input-numbers" id="Quantity" placeholder="Number of Items" min=".1" value="1" step=".1" />
 						<select id="Unit" class="input-select">
 							<!-- Weight Units -->
